@@ -828,3 +828,20 @@ F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\BusinessLayer\bin\De
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\BusinessLayer\obj\Debug\BusinessLayer.csprojResolveAssemblyReference.cache
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\BusinessLayer\obj\Debug\BusinessLayer.dll
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll.config
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.pdb

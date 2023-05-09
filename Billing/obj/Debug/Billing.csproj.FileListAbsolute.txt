@@ -1117,3 +1117,23 @@ F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\Billing\bin\Newtonso
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\Billing\obj\Debug\Billing.csprojResolveAssemblyReference.cache
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\Billing\obj\Debug\Billing.dll
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\Billing\obj\Debug\Billing.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Billing.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Billing.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\CommonLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.Dmf.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.RegSvrEnum.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.dll.config
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\CommonLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.dll.config
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DocumentFormat.OpenXml.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Newtonsoft.Json.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.AssemblyReference.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.CoreCompileInputs.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.CopyComplete
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.pdb

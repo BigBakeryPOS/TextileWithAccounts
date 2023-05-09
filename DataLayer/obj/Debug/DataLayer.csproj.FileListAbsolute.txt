@@ -424,3 +424,15 @@ F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\DataLayer\bin\Debug\
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\DataLayer\bin\Debug\Newtonsoft.Json.xml
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\DataLayer\obj\Debug\DataLayer.dll
 F:\Priya_Working\Janarthanan\Terminal - Ramkumar\Affordable\DataLayer\obj\Debug\DataLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\DataLayer.dll.config
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\DataLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\DataLayer.pdb
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\obj\Debug\DataLayer.csproj.AssemblyReference.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\obj\Debug\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\obj\Debug\DataLayer.csproj.CopyComplete
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\obj\Debug\DataLayer.dll
+C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\DataLayer\obj\Debug\DataLayer.pdb

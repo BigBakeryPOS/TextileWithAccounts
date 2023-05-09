@@ -41,7 +41,7 @@ namespace Billing.HeaderMaster
                     if (screen == "companymaster")
                     {
                         MMaster.Visible = true;
-                        companymaster.Visible = true;
+                        //companymaster.Visible = true;
                     }
 
                     else if (screen == "godownmaster")
@@ -145,8 +145,8 @@ namespace Billing.HeaderMaster
                     #region PRocess Screen
                     else if (screen == "Leadgenerate")
                     {
-                        //MMaster.Visible = true;
-                        Leadgenerate.Visible = true;
+                        MMaster.Visible = true;
+                        //Leadgenerate.Visible = true;
                     }
 
                     else if (screen == "ItemMasterGroup")
@@ -171,14 +171,14 @@ namespace Billing.HeaderMaster
                     #region TIcket Process
                     else if (screen == "RaiseTicket")
                     {
-                        Mticket.Visible = true;
-                        RaiseTicket.Visible = true;
+                        //Mticket.Visible = true;
+                        //RaiseTicket.Visible = true;
                     }
 
                     else if (screen == "TicketAdmin")
                     {
-                        Mticket.Visible = true;
-                        TicketAdmin.Visible = true;
+                        //Mticket.Visible = true;
+                        //TicketAdmin.Visible = true;
                     }
 
                     #endregion
@@ -192,8 +192,8 @@ namespace Billing.HeaderMaster
 
                     else if (screen == "costingapproval")
                     {
-                        Mapproval.Visible = true;
-                        costingapproval.Visible = true;
+                        //Mapproval.Visible = true;
+                        //costingapproval.Visible = true;
                     }
 
                     #endregion
@@ -202,14 +202,14 @@ namespace Billing.HeaderMaster
 
                     else if (screen == "BuyerOrderMaster")
                     {
-                        MorderProcess.Visible = true;
-                        BuyerOrderMaster.Visible = true;
+                        //MorderProcess.Visible = true;
+                        //BuyerOrderMaster.Visible = true;
                     }
 
                     else if (screen == "requirementsheet")
                     {
-                        MorderProcess.Visible = true;
-                        requirementsheet.Visible = true;
+                        //MorderProcess.Visible = true;
+                        //requirementsheet.Visible = true;
                     }
 
                     #endregion
@@ -218,14 +218,14 @@ namespace Billing.HeaderMaster
 
                     else if (screen == "MaterialOpstock")
                     {
-                        Mopstock.Visible = true;
-                        MaterialOpstock.Visible = true;
+                        //Mopstock.Visible = true;
+                        //MaterialOpstock.Visible = true;
                     }
 
                     else if (screen == "ExcOpstock")
                     {
-                        Mopstock.Visible = true;
-                        ExcOpstock.Visible = true;
+                        //Mopstock.Visible = true;
+                        //ExcOpstock.Visible = true;
                     }
 
                     #endregion
@@ -250,19 +250,19 @@ namespace Billing.HeaderMaster
 
                     else if (screen == "StockTransfer")
                     {
-                        Mitemprocess.Visible = true;
-                        StockTransfer.Visible = true;
+                        //Mitemprocess.Visible = true;
+                        //StockTransfer.Visible = true;
                     }
                     else if (screen == "Itemissue")
                     {
-                        Mitemprocess.Visible = true;
-                        Itemissue.Visible = true;
+                        //Mitemprocess.Visible = true;
+                        //Itemissue.Visible = true;
                     }
 
                     else if (screen == "Itemreceive")
                     {
-                        Mitemprocess.Visible = true;
-                        Itemreceive.Visible = true;
+                        //Mitemprocess.Visible = true;
+                        //Itemreceive.Visible = true;
                     }
 
                     #endregion
@@ -279,7 +279,7 @@ namespace Billing.HeaderMaster
                         McuttingProcess.Visible = true;
                         mastercutting.Visible = true;
                     }
-                    else if (screen == "processentry")
+                    else if (screen == "precutting")
                     {
                         ProductionOrder.Visible = true;
                         processentry.Visible = true;
@@ -296,7 +296,7 @@ namespace Billing.HeaderMaster
 
                     else if (screen == "BuyerOrderSales")
                     {
-                        BuyerOrderSales.Visible = true;
+                        //BuyerOrderSales.Visible = true;
                     }
 
                     #endregion REPORTS

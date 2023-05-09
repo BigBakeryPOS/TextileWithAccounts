@@ -47,49 +47,111 @@
     </div>
     <div id='cssmenu'>
         <ul>
-            <li id="dashboard" runat="server" visible="false"><a href="../Accountsbootstrap/Home_Page.aspx">
-                dashboard</a> </li>
+           <li id="dashboard" runat="server" visible="false"><a href="../Accountsbootstrap/Home_Page.aspx">dashboard</a> </li>
             <li style="float: left" runat="server" visible="false" id="MMaster"><a href='#'>Master</a>
                 <ul>
-                    <li runat="server" visible="false" id="companymaster"><a href="../Accountsbootstrap/CompanyGrid.aspx">
-                        Company Master</a></li>
-                    <li runat="server" id="godownmaster" visible="false"><a href="../Accountsbootstrap/GodownMaster.aspx">
-                        Go down Master</a></li>
-                    <li runat="server" visible="false" id="itemhead"><a href="../Accountsbootstrap/categorygrid.aspx">
-                        Item Head</a></li>
-                    <li runat="server" visible="false" id="itemgroup"><a href="../Accountsbootstrap/Itemgroup.aspx">
-                        Item Group</a></li>
-                    <li runat="server" visible="false" id="itemtype"><a href="../Accountsbootstrap/ItemType.aspx">
-                        ItemType</a></li>
-                    <li runat="server" visible="false" id="measurement"><a href="../Accountsbootstrap/UOM.aspx">
-                        Measurement Type</a></li>
-                    <li runat="server" id="color" visible="false"><a href="../Accountsbootstrap/Color.aspx">
-                        Color</a></li>
-                    <li runat="server" id="size" visible="false"><a href="../Accountsbootstrap/Size.aspx">
-                        Size</a></li>
-                    <li runat="server" id="sizerange" visible="false"><a href="../Accountsbootstrap/SizeRange.aspx">
-                        SizeRange</a></li>
-                    <li runat="server" id="process" visible="false"><a href="../Accountsbootstrap/Process.aspx">
-                        Process</a></li>
-                    <li runat="server" id="partytype" visible="false"><a href="../Accountsbootstrap/PartyType.aspx">
-                        PartyType</a></li>
-                    <li runat="server" id="partymaster" visible="false"><a href="../Accountsbootstrap/PartyMasterGrid.aspx">
-                        Party Master</a></li>
-                    <li runat="server" id="Category" visible="false"><a href="../Accountsbootstrap/Category.aspx">
-                        Category Master</a></li>
-                    <li runat="server" id="CurrencyMaster" visible="false"><a href="../Accountsbootstrap/CurrencyMaster.aspx">
-                        Currency Master</a></li>
-                    <li runat="server" visible="false" id="deptmaster"><a href="../Accountsbootstrap/Dept_Master.aspx">
-                        Department Master</a></li>
-                    <li runat="server" visible="false" id="desg"><a href="../Accountsbootstrap/Dillo_Designation.aspx">
-                        Designation Master</a></li>
-                    <li runat="server" visible="false" id="empmaster"><a href="../Accountsbootstrap/Emp_gird.aspx">
-                        Employee Master</a></li>
+                    <li runat="server" visible="false"  id="itemhead"><a href="../Accountsbootstrap/CompanyGrid.aspx">Product Master</a>
+                        <ul>
+                           
+                            <li runat="server" id="godownmaster" visible="false"><a href="../Accountsbootstrap/unitmaster.aspx">Unit Master</a></li>
+                            <li runat="server" id="Category" visible="false"><a href="../Accountsbootstrap/Category.aspx">Category Master</a></li>
+                            <li runat="server" visible="true"><a href="../Accountsbootstrap/categorygrid.aspx">Item Head</a></li>
+                            <li runat="server" visible="false" id="itemgroup"><a href="../Accountsbootstrap/Itemgroup.aspx">Item Group</a></li>
+                            <li runat="server" visible="false" id="itemtype"><a href="../Accountsbootstrap/ItemType.aspx">ItemType</a></li>
+                            <li runat="server" visible="false" id="measurement"><a href="../Accountsbootstrap/UOM.aspx">Measurement Type</a></li>
+                            <li runat="server" id="color" visible="false"><a href="../Accountsbootstrap/Color.aspx">Color</a></li>
+                            <li runat="server" id="size" visible="false"><a href="../Accountsbootstrap/Size.aspx">Size</a></li>
+                            <li runat="server" id="sizerange" visible="false"><a href="../Accountsbootstrap/SizeRange.aspx">SizeRange</a></li>
+                            <li runat="server" id="process" visible="false"><a href="../Accountsbootstrap/Process.aspx">Process</a></li>
+                             <li runat="server" id="SubProcess" visible="false"><a href="../Accountsbootstrap/SubProcess.aspx">Sub Process</a></li>
+                        </ul>
+
+
+                    </li>
+
+                    <li runat="server" visible="false" id="partytype"><a href="../Accountsbootstrap/CompanyGrid.aspx">Contact Master</a>
+                        <ul>
+
+                            <li runat="server"  visible="true"><a href="../Accountsbootstrap/PartyType.aspx">PartyType</a></li>
+                            <li runat="server" id="partymaster" visible="false"><a href="../Accountsbootstrap/PartyMasterGrid.aspx">Party Master</a></li>
+
+                            <li runat="server" id="CurrencyMaster" visible="false"><a href="../Accountsbootstrap/CurrencyMaster.aspx">Currency Master</a></li>
+                            <li runat="server" visible="false" id="deptmaster"><a href="../Accountsbootstrap/Dept_Master.aspx">Department Master</a></li>
+                            <li runat="server" visible="false" id="desg"><a href="../Accountsbootstrap/Dillo_Designation.aspx">Designation Master</a></li>
+                            <li runat="server" visible="false" id="empmaster"><a href="../Accountsbootstrap/Emp_gird.aspx">Employee Master</a></li>
+                            <li runat="server" visible="true" id="machine"><a href="../Accountsbootstrap/mechineNoMaster.aspx">Machine Master</a></li>
+                            <li runat="server" visible="false" id="Li20"><a href="../Accountsbootstrap/BarCodeGrid.aspx">Barcode Master</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
-            <li runat="server" visible="false" id="Leadgenerate"><a href="../Accountsbootstrap/LeadGrid.aspx">
-                Lead Generate</a></li>
-            <li style="float: left" runat="server" visible="false" id="Msampandcost"><a href='#'>
+            
+            <%--<li runat="server" visible="false" id="Leadgenerate"><a href="../Accountsbootstrap/LeadGrid.aspx">
+                Lead Generate</a></li>--%>
+
+            <li style="float: left" runat="server" visible="true" id="Li21"><a href='#'>Process</a>
+          
+                <ul>
+
+                    <li style="float: left" runat="server" visible="true" id="Msampandcost"><a href='#'>Sampling/Costing/CAD Process</a>
+                        <ul>
+                            <li runat="server" id="ItemMasterGroup" visible="true"><a href="../Accountsbootstrap/ItemMasterGroupGrid.aspx">Item Master</a></li>
+                            <li runat="server" id="SamplingandCosting" visible="true"><a href="../Accountsbootstrap/SamplingandCostingGrid.aspx">Sampling & Costing </a></li>
+                            <li runat="server" id="cadentry" visible="true"><a href="../Accountsbootstrap/CAD_Entry_Grid.aspx">CAD Entry </a></li>
+                        </ul>
+                    </li>
+
+                    <li style="float: left" runat="server" visible="true" id="Li29"><a href='#'>Buyer Order/Req.Process</a>
+                        <ul>
+                            <li runat="server" id="Li30" visible="true"><a href="../Accountsbootstrap/BuyerOrderMasterGrid.aspx">BuyerOrder Master</a></li>
+                            <li runat="server" id="Li31" visible="true"><a href="../Accountsbootstrap/RequirementSheetGrid.aspx">RequirementSheet </a></li>
+                            <li id="Li32" runat="server" visible="true"><a href="../Accountsbootstrap/BuyerOrderSalesGrid.aspx">BuyerOrder Sales</a> </li>
+                        </ul>
+                    </li>
+
+                    <li style="float: left" runat="server" visible="true" id="Mitemprocess"><a href='#'>Item Process </a>
+                        <ul>
+                            <li runat="server" id="StockTransfer" visible="true"><a href="../Accountsbootstrap/StockTransferGrid.aspx">Stock Transfer </a></li>
+                            <li runat="server" id="Li1" visible="true"><a href="../Accountsbootstrap/ItemProcessOrderEntryGrid.aspx">Item Process Order </a></li>
+                            <li runat="server" id="Itemissue" visible="true"><a href="../Accountsbootstrap/ItemProcessOrderGrid.aspx">Item Process Issue </a></li>
+                            <li runat="server" id="Itemreceive" visible="false"><a href="../Accountsbootstrap/ItemProcessReceiveGrid.aspx">Item Process Receive </a></li>
+                        </ul>
+                    </li>
+
+                    <li style="float: left" runat="server" visible="false" id="McuttingProcess"><a href='#'>Cutting/Production Process </a>
+                        <ul>
+                            <li runat="server" id="precutting" visible="false"><a href="../Accountsbootstrap/BuyerOrderCuttingGrid.aspx">Pre Cutting Process </a></li>
+                            <li runat="server" id="mastercutting" visible="false"><a href="../Accountsbootstrap/BuyerOrderMasterCuttingGrid.aspx">Master Cutting Process </a></li>
+                            <li runat="server" id="MaterialsIssue" visible="false"><a href="../Accountsbootstrap/MaterialsIssueGrid.aspx">Materials Issue</a></li>
+                        </ul>
+                    </li>
+
+                    <li style="float: left" runat="server" visible="true" id="ProductionOrder"><a href='#'>Production Process </a>
+                        <ul>
+                            <li runat="server" id="processentry" visible="true"><a href="../Accountsbootstrap/CuttingProcessEntryGrid.aspx">Process Entry</a></li>
+                        </ul>
+                    </li>
+
+                    </ul>
+             </li>
+
+            <li style="float: left" runat="server" visible="true" id="Mapproval"><a href='#'>Approval Screen</a>
+                <ul>
+                    <li runat="server" id="partyapproval" visible="true"><a href="../Accountsbootstrap/PArtyMaster_Approval.aspx">Party Master Approval </a></li>
+                    <li runat="server" id="costingapproval" visible="true"><a href="../Accountsbootstrap/SamplingCosting_Approval.aspx">Sampling And Costing Approval </a></li>
+                </ul>
+            </li>
+
+
+            <li style="float: left" runat="server" visible="true" id="Mopstock"><a href='#'>Opening
+                Stock </a>
+                <ul>
+                    <li runat="server" id="MaterialOpstock" visible="true"><a href="../Accountsbootstrap/MaterialOpeningStockGrid.aspx">Material OpeningStock </a></li>
+                    <li runat="server" id="ExcOpstock" visible="true"><a href="../Accountsbootstrap/ExcOpeningStockGrid.aspx">ExcNo Stock OpeningStock </a></li>
+                </ul>
+            </li>
+
+            <%--<li style="float: left" runat="server" visible="false" id="Msampandcost"><a href='#'>
                 Sampling/Costing/CAD Process</a>
                 <ul>
                     <li runat="server" id="ItemMasterGroup" visible="false"><a href="../Accountsbootstrap/ItemMasterGroupGrid.aspx">
@@ -137,7 +199,7 @@
                     <li runat="server" id="ExcOpstock" visible="false"><a href="../Accountsbootstrap/ExcOpeningStockGrid.aspx">
                         ExcNo Stock OpeningStock </a></li>
                 </ul>
-            </li>
+            </li>--%>
             <li style="float: left" runat="server" visible="false" id="Mposcreen"><a href='#'>PO
                 and GRN </a>
                 <ul>
@@ -147,7 +209,7 @@
                         Purchase GRN </a></li>
                 </ul>
             </li>
-            <li style="float: left" runat="server" visible="false" id="Mitemprocess"><a href='#'>
+            <%--<li style="float: left" runat="server" visible="false" id="Mitemprocess"><a href='#'>
                 Item Process </a>
                 <ul>
                     <li runat="server" id="StockTransfer" visible="true"><a href="../Accountsbootstrap/StockTransferGrid.aspx">
@@ -159,8 +221,8 @@
                     <li runat="server" id="Itemreceive" visible="false"><a href="../Accountsbootstrap/ItemProcessReceiveGrid.aspx">
                         Item Process Receive </a></li>
                 </ul>
-            </li>
-            <li style="float: left" runat="server" visible="false" id="McuttingProcess"><a href='#'>
+            </li>--%>
+            <%--<li style="float: left" runat="server" visible="false" id="McuttingProcess"><a href='#'>
                 Cutting/Production Process </a>
                 <ul>
                     <li runat="server" id="precutting" visible="false"><a href="../Accountsbootstrap/BuyerOrderCuttingGrid.aspx">
@@ -170,21 +232,21 @@
                     <li runat="server" id="MaterialsIssue" visible="false"><a href="../Accountsbootstrap/MaterialsIssueGrid.aspx">
                         Materials Issue</a></li>
                 </ul>
-            </li>
-            <li style="float: left" runat="server" visible="false" id="ProductionOrder"><a href='#'>
+            </li>--%>
+            <%--<li style="float: left" runat="server" visible="false" id="ProductionOrder"><a href='#'>
                 Production Process </a>
                 <ul>
                     <li runat="server" id="processentry" visible="false"><a href="../Accountsbootstrap/CuttingProcessEntryGrid.aspx">
                         Process Entry</a></li>
                 </ul>
-            </li>
+            </li>--%>
 
-            <li id="BuyerOrderSales" runat="server" visible="false"><a href="../Accountsbootstrap/BuyerOrderSalesGrid.aspx">
+            <%--<li id="BuyerOrderSales" runat="server" visible="false"><a href="../Accountsbootstrap/BuyerOrderSalesGrid.aspx">
                 BuyerOrder Sales</a> </li>
             <li id="Li6" runat="server" visible="true"><a href="../Accountsbootstrap/ViewReceipts.aspx">
                 Receipt</a> </li>
             <li id="Li7" runat="server" visible="true"><a href="../Accountsbootstrap/Paymentnew.aspx">
-                Payment</a> </li>
+                Payment</a> </li>--%>
 
             <li style="float: left" runat="server"  visible="true" id="Maccounts"><a href='#'>Accounts </a>
                 <ul>
@@ -247,8 +309,6 @@
                                 GST Portal Report</a></li>
                         </ul>
                     </li>
-
-
 
 
                     <li runat="server" visible="false" id="Rcostingreport"><a href="../Accountsbootstrap/SamplingandCostingReport.aspx">

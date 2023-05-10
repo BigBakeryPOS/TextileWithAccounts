@@ -1137,3 +1137,22 @@ C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\D
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.CopyComplete
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.dll
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Billing.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Billing.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\CommonLayer.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.Dmf.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.ServiceBrokerEnum.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Microsoft.SqlServer.RegSvrEnum.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\BusinessLayer.dll.config
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\CommonLayer.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.dll.config
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.AssemblyReference.cache
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.CoreCompileInputs.cache
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.csproj.CopyComplete
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.dll
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Debug\Billing.pdb
+C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Billing.dll.config

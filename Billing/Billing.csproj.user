@@ -11,6 +11,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NameOfLastUsedPublishProfile>C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\Properties\PublishProfiles\IISProfile5.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

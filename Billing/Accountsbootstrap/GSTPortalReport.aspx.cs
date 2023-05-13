@@ -14,6 +14,8 @@ using System.Data.OleDb;
 using System.Data.Common;
 using Newtonsoft;
 using Newtonsoft.Json;
+using System.Security.Cryptography;
+
 namespace Billing.Accountsbootstrap
 {
     public partial class GSTPortalReport : System.Web.UI.Page
@@ -36,7 +38,7 @@ namespace Billing.Accountsbootstrap
             {
                 string super = Session["IsSuperAdmin"].ToString();
                 //string sTableName = Session["User"].ToString();
-
+                string CompanyId = Session["CmpyId"].ToString();
                 if (super == "1")
                 {
                     ddloutlet.Enabled = true;
@@ -60,9 +62,10 @@ namespace Billing.Accountsbootstrap
 
                 DataSet dsbranchNew = new DataSet();
                 dsbranchNew = objBs.Branchfrom(sTableName);
-                if (dsbranchNew.Tables[0].Rows.Count > 0)
+                DataSet dsCompanyDetails = objBs.GetSelectLedgerDetails(Convert.ToInt32(CompanyId));
+                if (dsCompanyDetails.Tables[0].Rows.Count > 0)
                 {
-                    txtGSTNo.Text = dsbranchNew.Tables[0].Rows[0]["cstno"].ToString();
+                    txtGSTNo.Text = dsCompanyDetails.Tables[0].Rows[0]["cst"].ToString();
                 }
 
                 //ddloutlet.Enabled = true;
@@ -224,8 +227,8 @@ namespace Billing.Accountsbootstrap
                         DataRow dr_export = dtB2B.NewRow();
                         dr_export["GSTIN/UIN of Recipient"] = dr["GSTINNo"];
                         dr_export["Receiver Name"] = "";
-                        dr_export["INVOICE NUMBER"] = dr["FullBillNo"];
-                        dr_export["INVOICE DATE"] = Convert.ToDateTime(dr["BillDate"]).ToString("dd-MMM-yy");
+                        dr_export["INVOICE NUMBER"] = dr["FullInvoiceNo"];
+                        dr_export["INVOICE DATE"] = Convert.ToDateTime(dr["InvoiceDate"]).ToString("dd-MMM-yy");
                         dr_export["INVOICE VALUE"] = Convert.ToDouble(dr["RoundOff"]).ToString("F2");
                         dr_export["PLACE OF SUPPLY"] = dr["PlaceOfSupply"];
                         dr_export["REVERSE CHARGE"] = dr["ReverseCharge"];
@@ -234,7 +237,7 @@ namespace Billing.Accountsbootstrap
                         dr_export["E-Commerce GSTIN"] = "";
                         //dr_export["SERIAL NUMBER"] = dr["SerialNo"];
                         dr_export["RATE"] = dr["Rate"];
-                        DataSet dscnt = objBs.gstcountreportB2B(ddloutlet.SelectedValue, dr["FullBillNo"].ToString());
+                        DataSet dscnt = objBs.gstcountreportB2B(ddloutlet.SelectedValue, dr["FullInvoiceNo"].ToString());
                         if (dscnt.Tables[0].Rows.Count > 0)
                         {
                             // dr_export["TAXABLE VALUE"] = Convert.ToDouble(Convert.ToDouble(dr["RoundOff"]) - Convert.ToDouble(Convert.ToDouble(dr["TotalTax"]) / Convert.ToDouble(dscnt.Tables[0].Rows[0]["count"]))).ToString("F2");
@@ -384,8 +387,8 @@ namespace Billing.Accountsbootstrap
                     foreach (DataRow dr1 in ds1.Tables[0].Rows)
                     {
                         DataRow dr_export1 = dt1.NewRow();
-                        dr_export1["INVOICE NUMBER"] = dr1["FullBillNo"];
-                        dr_export1["INVOICE DATE"] = Convert.ToDateTime(dr1["BillDate"]).ToString("dd-MMM-yy");
+                        dr_export1["INVOICE NUMBER"] = dr1["FullInvoiceNo"];
+                        dr_export1["INVOICE DATE"] = Convert.ToDateTime(dr1["InvoiceDate"]).ToString("dd-MMM-yy");
                         dr_export1["INVOICE VALUE"] = Convert.ToDouble(dr1["RoundOff"]).ToString("F2");
                         dr_export1["PLACE OF SUPPLY"] = dr1["PlaceOfSupply"];
                         dr_export1["APPLICABLE % OF TAX RATE"] = dr1["ApplicablePer"];
@@ -508,7 +511,7 @@ namespace Billing.Accountsbootstrap
                         ////dr_export2["SUPPLY TYPE"] = "";
                         dr_export2["APPLICABLE % OF TAX RATE"] = "";
                         dr_export2["RATE"] = dr1["Rate"];
-                        DataSet dscnt = objBs.gstcountreportB2B(ddloutlet.SelectedValue, dr1["FullBillNo"].ToString());
+                        DataSet dscnt = objBs.gstcountreportB2B(ddloutlet.SelectedValue, dr1["FullInvoiceNo"].ToString());
                         if (dscnt.Tables[0].Rows.Count > 0)
                         {
                             //dr_export2["TAXABLE VALUE"] = Convert.ToDouble(Convert.ToDouble(dr1["RoundOff"]) - Convert.ToDouble(Convert.ToDouble(dr1["TotalTax"]) / Convert.ToDouble(dscnt.Tables[0].Rows[0]["count"]))).ToString("F2");
@@ -940,7 +943,14 @@ namespace Billing.Accountsbootstrap
                         dr_export9["DESCRIPTION"] = dr13["Description"];
                         dr_export9["UQC"] = dr13["UQC"];
                         dr_export9["TOTAL QUANTITY"] = dr13["TotalQuantity"];
-                        dr_export9["TOTAL VALUE"] = Convert.ToDouble(dr13["TotalAmount"]).ToString("F2");
+                        if (dr13["TotalAmount"].ToString() == "" || dr13["TotalAmount"].ToString() == null)
+                        {
+                            dr_export9["TOTAL VALUE"] = 0;
+                        }
+                        else
+                        {
+                            dr_export9["TOTAL VALUE"] = Convert.ToDouble(dr13["TotalAmount"]).ToString("F2");
+                        }
                         dr_export9["TAXABLE VALUE"] = Convert.ToDouble(dr13["TaxableAmount"]).ToString("F2");
                         if (dr13["igst"].ToString() == "")
                         {
@@ -1055,8 +1065,8 @@ namespace Billing.Accountsbootstrap
                     //{
                     DataRow dr_export10 = dt10.NewRow();
                     dr_export10["NATURE OF DOCUMENT"] = "Invoices for outward supply";
-                    dr_export10["Sr. No. From"] = ds14.Tables[0].Rows[0]["fullbillno"].ToString();
-                    dr_export10["Sr. No. To"] = ds14.Tables[0].Rows[ds14.Tables[0].Rows.Count - 1]["fullbillno"].ToString();
+                    dr_export10["Sr. No. From"] = ds14.Tables[0].Rows[0]["fullInvoiceno"].ToString();
+                    dr_export10["Sr. No. To"] = ds14.Tables[0].Rows[ds14.Tables[0].Rows.Count - 1]["fullInvoiceno"].ToString();
                     dr_export10["TOTAL NUMBER"] = ds14.Tables[0].Rows.Count;
                     dr_export10["CANCELLED"] = "0";
                     dt10.Rows.Add(dr_export10);

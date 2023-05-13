@@ -96,6 +96,15 @@ namespace Billing.Accountsbootstrap
         protected global::System.Web.UI.WebControls.TextBox txtGSTNo;
 
         /// <summary>
+        /// year control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl year;
+
+        /// <summary>
         /// txtFileYear control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Billing.Accountsbootstrap
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFileYear;
+
+        /// <summary>
+        /// company control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl company;
 
         /// <summary>
         /// ddloutlet control.
@@ -141,6 +159,15 @@ namespace Billing.Accountsbootstrap
         protected global::System.Web.UI.WebControls.Button btnCSV;
 
         /// <summary>
+        /// doc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl doc;
+
+        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>
@@ -166,6 +193,15 @@ namespace Billing.Accountsbootstrap
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDoc;
+
+        /// <summary>
+        /// r3b control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl r3b;
 
         /// <summary>
         /// Button2 control.

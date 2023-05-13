@@ -28,7 +28,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <center>
-        <asp:Label ID="lblTitle" runat="server" Text="Nandhini Nighties & Inskirts" Style="font-size: x-large;
+        <asp:Label ID="lblTitle" runat="server"  Style="font-size: x-large;
             font-weight: bold; color: #336699"></asp:Label>
     </center>
     <div class="col-lg-12">

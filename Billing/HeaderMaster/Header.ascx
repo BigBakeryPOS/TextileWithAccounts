@@ -23,7 +23,7 @@
                 <td style="width: 15%">
                     <div class="container-fluid" style="background-color: #336699; padding-left: 51px">
                         <a href="../Accountsbootstrap/Home_Page.aspx">
-                            <img style="width: 110px; height: 45px" src="../images/ae_logo.png" alt="logo" /></a>
+                            <img style="width: 110px; height: 45px" id="imglogo" runat="server"  alt="logo" /></a>
                     </div>
                 </td>
                 <td style="width: 58%" align="center">
@@ -256,6 +256,10 @@
                     Receipt</a></li>
                     <li runat="server" visible="true" id="journal"><a href="../Accountsbootstrap/viewjournals.aspx">
                     Journal</a></li>
+                     <li runat="server" visible="true" id="CreditNote"><a href="../Accountsbootstrap/CreditNoteGrid.aspx">
+                    Credit Note</a></li>
+                     <li runat="server" visible="true" id="DebitNote"><a href="../Accountsbootstrap/DebitNoteGrid.aspx">
+                    Debit Note</a></li>
                     <li runat="server" visible="true" id="cheque"><a href="../Accountsbootstrap/viewcheques.aspx">
                     Cheque Book</a></li>
                 </ul>

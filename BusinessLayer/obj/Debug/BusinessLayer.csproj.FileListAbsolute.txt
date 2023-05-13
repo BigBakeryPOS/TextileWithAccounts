@@ -862,3 +862,5 @@ C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\D
 C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.pdb
+C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache

@@ -53,6 +53,7 @@
     <asp:Label runat="server" ID="lblWelcome" ForeColor="White" CssClass="label">Welcome : </asp:Label>
     <asp:Label runat="server" ID="lblUser" ForeColor="White" CssClass="label"> </asp:Label>
     <asp:Label runat="server" ID="lblUserID" ForeColor="White" CssClass="label" Visible="false"> </asp:Label>
+ 
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header" style="text-align: center; color: #fe0002;">
@@ -68,6 +69,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <form id="Form1" runat="server">
+                               <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:ValidationSummary runat="server" HeaderText="Validation Messages" ValidationGroup="val1"
                             ID="val1" ShowMessageBox="true" ShowSummary="false" />
                         <div class="col-lg-3">
@@ -181,6 +183,30 @@
                                 <asp:DropDownList ID="ddlCity" class="form-control" Width="100%" runat="server" CssClass="chzn-select">
                                 </asp:DropDownList>
                             </div>
+
+                               <div class="form-grop">
+                                    <label>
+                                        Logo Upload:
+                                    </label>
+                                    <asp:Image ID="img_Photo" runat="server" class="img-fluid" Height="100px" Width="100px" />
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <label>
+                                                Image Upload</label>
+                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                                            <br />
+                                            <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary"
+                                                OnClick="btnUpload_Clickimg" Width="100px" />
+                                        
+                                            <asp:Label ID="lblFile_Path" runat="server" Visible="false"></asp:Label>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:PostBackTrigger ControlID="btnUpload" />
+                                          
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                </div>
+
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                         <div class="col-lg-3">
@@ -231,8 +257,10 @@
                             <%--<asp:Button ID="btnedit" runat="server" class="btn btn-warning" Text="Edit/Delete" OnClick="Edit_Click" />--%>
                         </div>
                         <div class="col-lg-5">
+                            <br />
                         </div>
                         <div class="col-lg-5">
+                            <br />
                             <div style="text-align: center" align="center">
                                 <asp:Label ID="lblerror" runat="server" Style="color: Red"></asp:Label>
                                 <asp:Button ID="btnadd" runat="server" class="btn btn-success" Text="Save" OnClick="Add_Click"

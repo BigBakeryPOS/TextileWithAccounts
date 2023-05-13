@@ -8,6 +8,7 @@ using BusinessLayer;
 using System.Data;
 using System.Text;
 using CommonLayer;
+using System.IO;
 
 
 namespace Billing.Accountsbootstrap
@@ -77,6 +78,16 @@ namespace Billing.Accountsbootstrap
                         txttin.Text = ds.Tables[0].Rows[0]["Tin"].ToString();
                         txtcst.Text = ds.Tables[0].Rows[0]["cst"].ToString();
                         txtpan.Text = ds.Tables[0].Rows[0]["pan"].ToString();
+                        if (ds.Tables[0].Rows[0]["ImagePath"].ToString() != "")
+                        {
+                            lblFile_Path.Text = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+                            img_Photo.ImageUrl = ds.Tables[0].Rows[0]["ImagePath"].ToString();
+                        }
+                        else
+                        {
+                            lblFile_Path.Text ="";
+                            img_Photo.ImageUrl = "";
+                        }
                         ddlCountry.SelectedValue = ds.Tables[0].Rows[0]["country"].ToString();
                         DataSet dsDistrict = objBs.GetAllCountryState(Convert.ToInt32(ddlCountry.SelectedValue));
                         if (dsDistrict.Tables[0].Rows.Count > 0)
@@ -224,6 +235,16 @@ namespace Billing.Accountsbootstrap
 
             if (btnadd.Text == "Save")
             {
+                //string Imagepath = string.Empty;
+
+                //if (lblFile_Path.Text == "" || lblFile_Path.Text == null)
+                //{
+                //    Imagepath = "../images/NoImage.png";
+                //}
+                //else
+                //{
+                //    Imagepath = lblFile_Path.Text;
+                //}
                 if (txtcompanycode.Text != "")
                 {
                     DataSet ds = objBs.EmailID_CompanyDetails(txtcompanycode.Text);
@@ -237,7 +258,7 @@ namespace Billing.Accountsbootstrap
 
                     else
                     {
-                        int iStatus = objBs.CompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, txttin.Text,txtcst.Text,txtpan.Text,txtcompanycode.Text,ddlCountry.SelectedValue,ddlState.SelectedValue);
+                        int iStatus = objBs.CompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, txttin.Text,txtcst.Text,txtpan.Text,txtcompanycode.Text,ddlCountry.SelectedValue,ddlState.SelectedValue,lblFile_Path.Text );
                     }
 
                 }
@@ -245,7 +266,7 @@ namespace Billing.Accountsbootstrap
 
             else
             {
-                int iStatus = objBs.EditCompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, Convert.ToInt32(txtcompanyID.Text), txttin.Text, txtcst.Text, txtpan.Text, txtcompanycode.Text, ddlCountry.SelectedValue, ddlState.SelectedValue);
+                int iStatus = objBs.EditCompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, Convert.ToInt32(txtcompanyID.Text), txttin.Text, txtcst.Text, txtpan.Text, txtcompanycode.Text, ddlCountry.SelectedValue, ddlState.SelectedValue,lblFile_Path.Text );
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Sucessfully Updated ');", true);
             }
@@ -272,6 +293,17 @@ namespace Billing.Accountsbootstrap
         {
             Response.Redirect("CompanyGrid.aspx");
         }
-           
+        protected void btnUpload_Clickimg(object sender, EventArgs e)
+        {
+            if (FileUpload1.HasFile)
+            {
+                string fileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
+                FileUpload1.PostedFile.SaveAs(Server.MapPath("../Images/") + fileName);
+                lblFile_Path.Text = "../Images/" + FileUpload1.PostedFile.FileName;
+                img_Photo.ImageUrl = "../Images/" + FileUpload1.PostedFile.FileName;
+            }
+        }
+
+
     }
 }

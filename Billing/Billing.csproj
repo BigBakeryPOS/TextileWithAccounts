@@ -62,7 +62,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Dillo\DEMO_BillingSingle _stock\Billing\bin\ASPSnippets.SmsAPI.dll</HintPath>
     </Reference>
-    <Reference Include="BusinessLayer">
+    <Reference Include="BusinessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BusinessLayer\bin\Release\BusinessLayer.dll</HintPath>
     </Reference>
     <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">

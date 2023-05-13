@@ -34,6 +34,7 @@ namespace Billing.Accountsbootstrap
             if (!IsPostBack)
             {
                 DataSet ds = objBs.getSalesInvoiceNo();
+               
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     ddlInvoiceno.DataSource = ds;

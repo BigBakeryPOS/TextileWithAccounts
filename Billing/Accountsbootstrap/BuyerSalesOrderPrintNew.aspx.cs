@@ -58,7 +58,7 @@ namespace Billing.Accountsbootstrap
                         lblArea.Text = ds.Tables[0].Rows[0]["Area"].ToString();
 
                         lblphoneno.Text = ds.Tables[0].Rows[0]["PhoneNo"].ToString();
-                        lblGST.Text = ds.Tables[0].Rows[0]["GSTIN"].ToString();
+                        lblGST.Text = ds.Tables[0].Rows[0]["GSTINNo"].ToString();
 
                         lblProcessOrderNo.Text = ds.Tables[0].Rows[0]["FullInvoiceNo"].ToString();
                         lblOrderDate.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["InvoiceDate"]).ToString("dd/MM/yyyy");

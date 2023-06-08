@@ -389,17 +389,6 @@ C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\o
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.CopyComplete
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.dll
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\DocumentFormat.OpenXml.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\Newtonsoft.Json.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\DocumentFormat.OpenXml.xml
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\Newtonsoft.Json.xml
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.AssemblyReference.cache
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.CoreCompileInputs.cache
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.CopyComplete
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.pdb
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.dll
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.pdb
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\DocumentFormat.OpenXml.dll
@@ -408,3 +397,14 @@ C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Deb
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.dll
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.pdb
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\CommonLayer.pdb
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.AssemblyReference.cache
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.CoreCompileInputs.cache
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.csproj.CopyComplete
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\CommonLayer\obj\Debug\CommonLayer.pdb

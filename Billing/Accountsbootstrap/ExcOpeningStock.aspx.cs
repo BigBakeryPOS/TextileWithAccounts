@@ -650,13 +650,13 @@ namespace Billing.Accountsbootstrap
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Fill Data.')", true);
                 return;
             }
-            DataSet dsExcNo = objBs.CheckExcNoforOP(txtExcNo.Text);
-            if (dsExcNo.Tables[0].Rows.Count > 0)
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('This ExcNo was Already Exists.')", true);
-                txtExcNo.Focus();
-                return;
-            }
+            //DataSet dsExcNo = objBs.CheckExcNoforOP(txtExcNo.Text);
+            //if (dsExcNo.Tables[0].Rows.Count > 0)
+            //{
+            //    ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('This ExcNo was Already Exists.')", true);
+            //    txtExcNo.Focus();
+            //    return;
+            //}
 
             HttpCookie nameCookie = Request.Cookies["Name"];
             string MaxRowId = nameCookie != null ? nameCookie.Value.Split('=')[1] : "undefined";

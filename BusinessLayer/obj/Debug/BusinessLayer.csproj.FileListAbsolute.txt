@@ -845,23 +845,6 @@ C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.dll
 C:\Users\My Computer\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll.config
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.pdb
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll.config
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.xml
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.xml
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.dll
-C:\Users\intel\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.pdb
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll.config
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll
 C:\Users\ADMIN\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.pdb
@@ -879,3 +862,20 @@ C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\D
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll.config
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\BusinessLayer.pdb
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\CommonLayer.pdb
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.pdb
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DataLayer.dll.config
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.csproj.CopyComplete
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.dll
+C:\Users\intel\source\repos\BigBakeryPOS\TextileWithAccounts\BusinessLayer\obj\Debug\BusinessLayer.pdb

@@ -82,14 +82,14 @@
                     <asp:TextBox CssClass="form-control" ID="txtGSTNo" runat="server" Enabled="false"></asp:TextBox>
                 </div>               
             </div>  
-             <div class="col-lg-2">
+             <div class="col-lg-2" runat="server" visible="false" id="year">
                 <div class="form-group">
                     <label>
                         File Year</label>
                     <asp:TextBox CssClass="form-control" ID="txtFileYear" runat="server" placeholder="Ex: 032021"></asp:TextBox>
                 </div>               
             </div>          
-            <div class="col-lg-2">
+            <div class="col-lg-2" runat="server" visible="false" id="company" >
                 <div class="form-group">
                     <label>
                         Select Company</label>
@@ -113,7 +113,7 @@
                     Style="width: 160px;" OnClick="btnreport_Click" />
             </div>
         </div>
-        <div class="col-lg-2" runat="server" visible="false">
+        <div class="col-lg-2" runat="server" visible="false" >
             <div class="form-group">
                 <asp:Button ID="btnJSON" runat="server" class="btn btn-info" Text="Generate JSON"
                     Style="width: 160px;" OnClick="btnJSON_Click" />
@@ -125,13 +125,13 @@
                     Style="width: 160px;" OnClick="btnCSV_Click" />
             </div>
         </div>
-         <div class="col-lg-2">
+         <div class="col-lg-2" runat="server" id="doc" visible="false" >
                 <asp:FileUpload ID="FileUpload1" runat="server" />
                 <asp:Button ID="Button1" Style="width: 200px;" runat="server" CssClass="btn btn-success"
                     Text="Generate GSTR1 JSON" OnClick="btnUpload123_Click" />
                 <asp:TextBox ID="txtDoc" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2" runat="server" visible="false" id="r3b" >
             <div class="form-group">
                 <asp:Button ID="Button2" runat="server" class="btn btn-info" Text="Generate GSTR3B Json"
                     Style="width: 160px;" OnClick="btnGSTR3B_Click" />

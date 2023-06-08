@@ -25,6 +25,13 @@ namespace Billing.Accountsbootstrap
 
             if (!IsPostBack)
             {
+               
+                DataSet ds1 = objBs.GetSelectLedgerDetails(Convert.ToInt32(Companyid));
+                if (ds1.Tables[0].Rows.Count > 0)
+                {
+                    lblTitle.Text = ds1.Tables[0].Rows[0]["CompanyName"].ToString();
+                    
+                }
                 DataSet dsOrderDetails = objBs.GetOrderDetails(Request.Cookies["userInfo"]["YearCode"].ToString());
                 if (dsOrderDetails.Tables[0].Rows.Count > 0)
                 {

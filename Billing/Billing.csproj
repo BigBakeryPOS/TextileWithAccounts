@@ -68,7 +68,7 @@
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bigdbiz TradingPOS - Aathira boutique\Billing\bin\DocumentFormat.OpenXml.dll</HintPath>
+      <HintPath>D:\SNP Diary\Billing\bin\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\itextsharp.dll</HintPath>
@@ -156,9 +156,15 @@
     <Content Include="Accountsbootstrap\BuyerOrderMasterCuttingGrid.aspx" />
     <Content Include="Accountsbootstrap\BuyerOrderMasterGrid.aspx" />
     <Content Include="Accountsbootstrap\BuyerOrderPendingReport.aspx" />
+    <Content Include="Accountsbootstrap\BuyerOrderExportPrint.aspx" />
     <Content Include="Accountsbootstrap\BuyerOrderReport.aspx" />
     <Content Include="Accountsbootstrap\BuyerOrderSales.aspx" />
+    <Content Include="Accountsbootstrap\BuyerOrderSalesExport.aspx" />
     <Content Include="Accountsbootstrap\BuyerOrderSalesGrid.aspx" />
+    <Content Include="Accountsbootstrap\BuyerOrderSalesReport.aspx" />
+    <Content Include="Accountsbootstrap\BuyerSalesOrderPrint.aspx" />
+    <Content Include="Accountsbootstrap\BuyerSalesOrderPrintNew.aspx" />
+    <Content Include="Accountsbootstrap\CreditNote.aspx" />
     <Content Include="Accountsbootstrap\CAD_Entry.aspx" />
     <Content Include="Accountsbootstrap\CAD_Entry_Grid.aspx" />
     <Content Include="Accountsbootstrap\CashAccount.aspx" />
@@ -180,6 +186,7 @@
     <Content Include="Accountsbootstrap\ConsaiGrid.aspx" />
     <Content Include="Accountsbootstrap\CostingDetails.aspx" />
     <Content Include="Accountsbootstrap\CostingDetailsNew.aspx" />
+    <Content Include="Accountsbootstrap\CreditNoteGrid.aspx" />
     <Content Include="Accountsbootstrap\CurrencyMaster.aspx" />
     <Content Include="Accountsbootstrap\Customerlabelprint.aspx" />
     <Content Include="Accountsbootstrap\customermaster.aspx" />
@@ -205,6 +212,8 @@
     <Content Include="Accountsbootstrap\dash.aspx" />
     <Content Include="Accountsbootstrap\DateWiseReport.aspx" />
     <Content Include="Accountsbootstrap\DayBook.aspx" />
+    <Content Include="Accountsbootstrap\DebitNote.aspx" />
+    <Content Include="Accountsbootstrap\DebitNoteGrid.aspx" />
     <Content Include="Accountsbootstrap\Default.aspx" />
     <Content Include="Accountsbootstrap\Dept_Master.aspx" />
     <Content Include="Accountsbootstrap\DescriptionGrid.aspx" />
@@ -212,6 +221,8 @@
     <Content Include="Accountsbootstrap\DespatchPrint.aspx" />
     <Content Include="Accountsbootstrap\DespatchReturn.aspx" />
     <Content Include="Accountsbootstrap\DespatchReturnGrid.aspx" />
+    <Content Include="Accountsbootstrap\DespatchSales.aspx" />
+    <Content Include="Accountsbootstrap\DespatchSalesGrid.aspx" />
     <Content Include="Accountsbootstrap\DespatchStock.aspx" />
     <Content Include="Accountsbootstrap\DilloMultiLotGrid.aspx" />
     <Content Include="Accountsbootstrap\DilloMultiLotPrint.aspx" />
@@ -721,6 +732,7 @@
     <Content Include="images1\bg.jpg" />
     <Content Include="images1\tick.png" />
     <Content Include="images\01-progress.gif" />
+    <Content Include="images\ae_logo.png" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\blogo.png" />
     <Content Include="images\body.png" />
@@ -1042,6 +1054,13 @@
     <Compile Include="Accountsbootstrap\BuyerOrderPendingReport.aspx.designer.cs">
       <DependentUpon>BuyerOrderPendingReport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderExportPrint.aspx.cs">
+      <DependentUpon>BuyerOrderExportPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderExportPrint.aspx.designer.cs">
+      <DependentUpon>BuyerOrderExportPrint.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Accountsbootstrap\BuyerOrderReport.aspx.cs">
       <DependentUpon>BuyerOrderReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1056,12 +1075,47 @@
     <Compile Include="Accountsbootstrap\BuyerOrderSales.aspx.designer.cs">
       <DependentUpon>BuyerOrderSales.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderSalesExport.aspx.cs">
+      <DependentUpon>BuyerOrderSalesExport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderSalesExport.aspx.designer.cs">
+      <DependentUpon>BuyerOrderSalesExport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Accountsbootstrap\BuyerOrderSalesGrid.aspx.cs">
       <DependentUpon>BuyerOrderSalesGrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Accountsbootstrap\BuyerOrderSalesGrid.aspx.designer.cs">
       <DependentUpon>BuyerOrderSalesGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderSalesReport.aspx.cs">
+      <DependentUpon>BuyerOrderSalesReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerOrderSalesReport.aspx.designer.cs">
+      <DependentUpon>BuyerOrderSalesReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerSalesOrderPrint.aspx.cs">
+      <DependentUpon>BuyerSalesOrderPrint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerSalesOrderPrint.aspx.designer.cs">
+      <DependentUpon>BuyerSalesOrderPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerSalesOrderPrintNew.aspx.cs">
+      <DependentUpon>BuyerSalesOrderPrintNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\BuyerSalesOrderPrintNew.aspx.designer.cs">
+      <DependentUpon>BuyerSalesOrderPrintNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\CreditNote.aspx.cs">
+      <DependentUpon>CreditNote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\CreditNote.aspx.designer.cs">
+      <DependentUpon>CreditNote.aspx</DependentUpon>
     </Compile>
     <Compile Include="Accountsbootstrap\CAD_Entry.aspx.cs">
       <DependentUpon>CAD_Entry.aspx</DependentUpon>
@@ -1209,6 +1263,13 @@
     </Compile>
     <Compile Include="Accountsbootstrap\CostingDetailsNew.aspx.designer.cs">
       <DependentUpon>CostingDetailsNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\CreditNoteGrid.aspx.cs">
+      <DependentUpon>CreditNoteGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\CreditNoteGrid.aspx.designer.cs">
+      <DependentUpon>CreditNoteGrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="Accountsbootstrap\CurrencyMaster.aspx.cs">
       <DependentUpon>CurrencyMaster.aspx</DependentUpon>
@@ -1390,6 +1451,20 @@
     <Compile Include="Accountsbootstrap\DayBook.aspx.designer.cs">
       <DependentUpon>DayBook.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Accountsbootstrap\DebitNote.aspx.cs">
+      <DependentUpon>DebitNote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DebitNote.aspx.designer.cs">
+      <DependentUpon>DebitNote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DebitNoteGrid.aspx.cs">
+      <DependentUpon>DebitNoteGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DebitNoteGrid.aspx.designer.cs">
+      <DependentUpon>DebitNoteGrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Accountsbootstrap\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1438,6 +1513,20 @@
     </Compile>
     <Compile Include="Accountsbootstrap\DespatchReturnGrid.aspx.designer.cs">
       <DependentUpon>DespatchReturnGrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DespatchSales.aspx.cs">
+      <DependentUpon>DespatchSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DespatchSales.aspx.designer.cs">
+      <DependentUpon>DespatchSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DespatchSalesGrid.aspx.cs">
+      <DependentUpon>DespatchSalesGrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Accountsbootstrap\DespatchSalesGrid.aspx.designer.cs">
+      <DependentUpon>DespatchSalesGrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="Accountsbootstrap\DespatchStock.aspx.cs">
       <DependentUpon>DespatchStock.aspx</DependentUpon>
@@ -3650,7 +3739,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52794</DevelopmentServerPort>
+          <DevelopmentServerPort>3122</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

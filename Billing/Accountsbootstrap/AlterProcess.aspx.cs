@@ -14,7 +14,9 @@ namespace Billing.Accountsbootstrap
     public partial class AlterProcess : System.Web.UI.Page
     {
         BSClass objbs = new BSClass();
+        
         DataSet ds = new DataSet();
+
         string empid = "";
 
         double Q30F = 0; double Q32F = 0; double Q34F = 0; double Q36F = 0;

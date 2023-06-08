@@ -45,51 +45,52 @@ namespace Billing.Accountsbootstrap
             }
         }
 
-        protected void Add_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("SamplingandCosting.aspx");
+       
 
-        }
+        //protected void Page_Change(object sender, GridViewPageEventArgs e)
+        //{
+        //    DataSet ds = new DataSet();
+        //    if (ddlfilter.SelectedValue == "0")
+        //    {
+        //        ds = objBs.selectcustomerDet(1, 1);
+        //    }
+        //    else
+        //    {
+        //        ds = objBs.searchCustomerMaster(txtsearch.Text, Convert.ToInt32(ddlfilter.SelectedValue), 1, 2);
+        //    }
 
-        protected void Page_Change(object sender, GridViewPageEventArgs e)
-        {
-            DataSet ds = new DataSet();
-            if (ddlfilter.SelectedValue == "0")
-            {
-                ds = objBs.selectcustomerDet(1, 1);
-            }
-            else
-            {
-                ds = objBs.searchCustomerMaster(txtsearch.Text, Convert.ToInt32(ddlfilter.SelectedValue), 1, 2);
-            }
+        //    if (ds != null)
+        //    {
+        //        if (ds.Tables[0].Rows.Count > 0)
+        //        {
+        //            GVSamplingandCosting.DataSource = ds;
+        //            GVSamplingandCosting.PageIndex = e.NewPageIndex;
+        //            GVSamplingandCosting.DataBind();
+        //        }
 
-            if (ds != null)
-            {
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    GVSamplingandCosting.DataSource = ds;
-                    GVSamplingandCosting.PageIndex = e.NewPageIndex;
-                    GVSamplingandCosting.DataBind();
-                }
+        //        else
+        //        {
+        //            GVSamplingandCosting.DataSource = null;
+        //            GVSamplingandCosting.DataBind();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        GVSamplingandCosting.DataSource = null;
+        //        GVSamplingandCosting.DataBind();
+        //    }
 
-                else
-                {
-                    GVSamplingandCosting.DataSource = null;
-                    GVSamplingandCosting.DataBind();
-                }
-            }
-            else
-            {
-                GVSamplingandCosting.DataSource = null;
-                GVSamplingandCosting.DataBind();
-            }
-
-        }
+        //}
 
         protected void refresh_Click(object sender, EventArgs e)
         {
 
             Response.Redirect("../Accountsbootstrap/viewcustomer.aspx");
+
+        }
+        protected void Add_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("SamplingandCosting.aspx");
 
         }
         protected void Search_Click(object sender, EventArgs e)

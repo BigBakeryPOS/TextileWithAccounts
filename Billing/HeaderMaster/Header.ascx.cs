@@ -16,12 +16,29 @@ namespace Billing.HeaderMaster
         protected void Page_Load(object sender, EventArgs e)
         {
             BSClass objbs = new BSClass();
-
+            string Companyid = "";
             string sUserChk = Session["IsSuperAdmin"].ToString();
 
             lblUser.Text = "WELCOME : " + " "+Session["UserName"].ToString();
             lblUserID.Text = Session["UserID"].ToString();
             Label1.Text = "DATE : " + DateTime.Now.ToString("dd/MM/yyyy");
+
+
+            Companyid = Session["CmpyId"].ToString();
+           
+            DataSet ds1 = objbs.GetSelectLedgerDetails(Convert.ToInt32(Companyid));
+            if (ds1.Tables[0].Rows.Count > 0)
+            {
+                if (ds1.Tables[0].Rows[0]["ImagePath"].ToString() != "")
+                {
+                    imglogo.Src = ds1.Tables[0].Rows[0]["ImagePath"].ToString();
+                }
+                else
+                {
+                    imglogo.Src = "";
+                }
+           
+            }
 
             DataSet ds = objbs.getuseraccess(lblUserID.Text);
             if (ds.Tables[0].Rows.Count > 0)
@@ -314,6 +331,18 @@ namespace Billing.HeaderMaster
                         Maccounts.Visible = true;
                         cheque.Visible = true;
                     }
+
+                    //else if (screen == "CreditNote")
+                    //{
+                    //    Maccounts.Visible = true;
+                    //    CreditNote.Visible = true;
+                    //}
+
+                    //else if (screen == "DebitNote")
+                    //{
+                    //    Maccounts.Visible = true;
+                    //    DebitNote.Visible = true;
+                    //}
 
                     #endregion ACCOUNTS
 

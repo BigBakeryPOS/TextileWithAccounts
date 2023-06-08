@@ -335,6 +335,11 @@
                                                 Payment Mode</label>
                                             <asp:TextBox CssClass="form-control" ID="txtPaymentMode" runat="server"></asp:TextBox>
                                         </div>
+                                        <div class="form-group">
+                                            <label>
+                                                GSTIN NO</label>
+                                            <asp:TextBox CssClass="form-control" ID="txtgstno" runat="server"></asp:TextBox>
+                                        </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">

@@ -39,7 +39,7 @@ namespace Billing.Accountsbootstrap
                 txtInvNo.Text = " INV -  " + InvoiceNo + " / " + YearCode;
                 txtInvDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
-                DataSet dsset = objBs.getLedger_New(lblContactTypeId.Text);
+                DataSet dsset = objBs.getLedger_New1(lblContactTypeId.Text,Convert.ToInt32(rdbselect.SelectedValue));
                 if (dsset.Tables[0].Rows.Count > 0)
                 {
                     ddlPartyCode.DataSource = dsset.Tables[0];
@@ -242,44 +242,57 @@ namespace Billing.Accountsbootstrap
 
         protected void ddlPartyCode_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            ViewState["CurrentTable1"] = null;
-            ViewState["CurrentTable2"] = null;
-            GVItem.DataSource = null;
-            GVItem.DataBind();
-            GVSizes.DataSource = null;
-            GVSizes.DataBind();
+           
+                divexec.Visible = true;
+                ViewState["CurrentTable1"] = null;
+                ViewState["CurrentTable2"] = null;
+                GVItem.DataSource = null;
+                GVItem.DataBind();
+                GVSizes.DataSource = null;
+                GVSizes.DataBind();
 
-            if (ddlPartyCode.SelectedValue != "" && ddlPartyCode.SelectedValue != "0" && ddlPartyCode.SelectedValue != "PartyCode")
-            {
-                DataSet dsDetails = objBs.GetLedgerCheck(Convert.ToInt32(ddlPartyCode.SelectedValue));
-                if (dsDetails.Tables[0].Rows.Count > 0)
+                if (ddlPartyCode.SelectedValue != "" && ddlPartyCode.SelectedValue != "0" && ddlPartyCode.SelectedValue != "PartyCode")
                 {
-                    ddlProvince.SelectedValue = dsDetails.Tables[0].Rows[0]["province"].ToString();
-                    drpGSTType.SelectedValue = dsDetails.Tables[0].Rows[0]["GSTType"].ToString();
-                }
+                    DataSet dsDetails = objBs.GetLedgerCheck(Convert.ToInt32(ddlPartyCode.SelectedValue));
+                    if (dsDetails.Tables[0].Rows.Count > 0)
+                    {
+                        ddlProvince.SelectedValue = dsDetails.Tables[0].Rows[0]["province"].ToString();
+                        drpGSTType.SelectedValue = dsDetails.Tables[0].Rows[0]["GSTType"].ToString();
+                    }
 
 
-                DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue));
-                if (dsExc.Tables[0].Rows.Count > 0)
-                {
-                    chkExcNo.DataSource = dsExc;
-                    chkExcNo.DataTextField = "ExcNo";
-                    chkExcNo.DataValueField = "BuyerOrderMasterCuttingId";
-                    chkExcNo.DataBind();
+                    DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue),Convert.ToInt32(rdbselect.SelectedValue));
+                    if (dsExc.Tables[0].Rows.Count > 0)
+                    {
+                        chkExcNo.DataSource = dsExc;
+                        chkExcNo.DataTextField = "ExcNo";
+                        chkExcNo.DataValueField = "BuyerOrderMasterCuttingId";
+                        chkExcNo.DataBind();
+                    }
+                    else
+                    {
+                        chkExcNo.Items.Clear();
+                    }
                 }
                 else
                 {
                     chkExcNo.Items.Clear();
                 }
-            }
-            else
-            {
-                chkExcNo.Items.Clear();
-            }
-            txtExcNo.Focus();
-
+                txtExcNo.Focus();
+          
         }
-        protected void btnSearch_OnClick(object sender, EventArgs e)
+        protected void rdbselect_SelectedIdexChanged(object sender, EventArgs e)
+        {
+            if (rdbselect.SelectedValue == "1")
+            {
+               
+            }
+            else if (rdbselect.SelectedValue == "2")
+            {
+               
+            }
+        }
+            protected void btnSearch_OnClick(object sender, EventArgs e)
         {
             GVSizes.DataSource = null;
             GVSizes.DataBind();
@@ -298,20 +311,35 @@ namespace Billing.Accountsbootstrap
                 {
                     if (IsFirst == "Yes")
                     {
-                        Ids = listItem.Value;
-                        IsFirst = "No";
+                        if (rdbselect.SelectedValue == "1")
+                        {
+                            Ids = "'"+listItem.Text+"'";
+                            IsFirst = "No";
+                        }
+                        else
+                        {
+                            Ids = listItem.Value;
+                            IsFirst = "No";
+                        }
                     }
                     else
                     {
-                        Ids = Ids + "," + listItem.Value;
+                        if (rdbselect.SelectedValue == "1")
+                        {
+                            Ids =Ids + "," +"'"+ listItem.Text+"'";
+                        }
+                        else
+                        {
+                            Ids = Ids + "," + listItem.Value;
+                        }
                     }
                 }
             }
 
-            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids);
+            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids,Convert.ToInt32(rdbselect.SelectedValue));
             if (dsExcStyle.Tables[0].Rows.Count > 0)
             {
-                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids);
+                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids, Convert.ToInt32(rdbselect.SelectedValue));
 
                 DataSet dstd = new DataSet();
                 DataTable dtddd = new DataTable();
@@ -378,10 +406,16 @@ namespace Billing.Accountsbootstrap
                     drNew["SGST"] = "0";
                     drNew["IGST"] = "0";
                     drNew["BeforeTAX"] = "0";
-
-                    DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["BuyerOrderMasterCuttingId"] + "' and RowId='" + Dr["RowId"] + "' ");
-                    drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
-
+                    if (rdbselect.SelectedValue == "1")
+                    {
+                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["Excno"] + "' and RowId='" + Dr["RowId"] + "' ");
+                        drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
+                    }
+                    else
+                    {
+                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["BuyerOrderMasterCuttingId"] + "' and RowId='" + Dr["RowId"] + "' ");
+                        drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
+                    }
                     drNew["Amount"] = 0;
 
                     dstd.Tables[0].Rows.Add(drNew);
@@ -394,7 +428,7 @@ namespace Billing.Accountsbootstrap
                 GVItem.DataSource = dtddd;
                 GVItem.DataBind();
 
-                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids);
+                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids,Convert.ToInt32(rdbselect.SelectedValue));
 
                 DataSet dstd1 = new DataSet();
                 DataTable dtddd1 = new DataTable();
@@ -474,98 +508,262 @@ namespace Billing.Accountsbootstrap
                 if (e.CommandArgument.ToString() != "")
                 {
                     string[] Ids = e.CommandArgument.ToString().Split('#');
-
+                    
                     #region
-
-                    DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
-                    DataRow[] RowsStyleQty = DTStyle.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
-
-                    AllID.Text = RowsStyleQty[0]["AllID"].ToString();
-                    BuyerOrderMasterCuttingId.Text = RowsStyleQty[0]["BuyerOrderMasterCuttingId"].ToString();
-                    RowId.Text = RowsStyleQty[0]["RowId"].ToString();
-
-                    ExcNo.Text = RowsStyleQty[0]["ExcNo"].ToString();
-                    StyleNo.Text = RowsStyleQty[0]["StyleNo"].ToString();
-                    Color.Text = RowsStyleQty[0]["Color"].ToString();
-                    Range.Text = RowsStyleQty[0]["Range"].ToString();
-                    Qty.Text = RowsStyleQty[0]["Qty"].ToString();
-                    IssueQty.Text = RowsStyleQty[0]["IssueQty"].ToString();
-                    Rate.Text = RowsStyleQty[0]["Rate"].ToString();
-                    Amount.Text = RowsStyleQty[0]["Amount"].ToString();
-
-                    HSNCode.Text = RowsStyleQty[0]["HSNCode"].ToString();
-                    Tax.Text = RowsStyleQty[0]["Tax"].ToString();
-                    TaxID.Text = RowsStyleQty[0]["TaxID"].ToString();
-
-                    CGST.Text = RowsStyleQty[0]["CGST"].ToString();
-                    SGST.Text = RowsStyleQty[0]["SGST"].ToString();
-                    IGST.Text = RowsStyleQty[0]["IGST"].ToString();
-                    BeforeTAX.Text = RowsStyleQty[0]["BeforeTAX"].ToString();
-
-                    #endregion
-
-                    #region
-
-                    DataSet dstd1 = new DataSet();
-                    DataTable dtddd1 = new DataTable();
-
-                    DataRow drNew1;
-                    DataColumn dct1;
-
-                    DataTable dttt1 = new DataTable();
-
-                    dct1 = new DataColumn("ExcStockId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("StyleId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("ColorId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("SizeId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("Qty");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("BuyerOrderMasterCuttingId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("RangeId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("RowId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("TransSizeId");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("Size");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("IssueQty");
-                    dttt1.Columns.Add(dct1);
-                    dct1 = new DataColumn("Rate");
-                    dttt1.Columns.Add(dct1);
-                    dstd1.Tables.Add(dttt1);
-
-                    DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
-                    DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
-
-                    for (int i = 0; i < RowsSizeQty.Length; i++)
+                    if (rdbselect.SelectedValue=="1")
                     {
-                        drNew1 = dttt1.NewRow();
-                        drNew1["ExcStockId"] = RowsSizeQty[i]["ExcStockId"].ToString();
-                        drNew1["StyleId"] = RowsSizeQty[i]["StyleId"].ToString();
-                        drNew1["ColorId"] = RowsSizeQty[i]["ColorId"].ToString();
-                        drNew1["SizeId"] = RowsSizeQty[i]["SizeId"].ToString();
-                        drNew1["Qty"] = RowsSizeQty[i]["Qty"].ToString();
-                        drNew1["BuyerOrderMasterCuttingId"] = RowsSizeQty[i]["BuyerOrderMasterCuttingId"].ToString();
-                        drNew1["RangeId"] = RowsSizeQty[i]["RangeId"].ToString();
-                        drNew1["RowId"] = RowsSizeQty[i]["RowId"].ToString();
-                        drNew1["TransSizeId"] = RowsSizeQty[i]["TransSizeId"].ToString();
-                        drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
-                        drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
-                        drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
-                        dstd1.Tables[0].Rows.Add(drNew1);
-                        dtddd1 = dstd1.Tables[0];
+                        DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
+                        DataRow[] RowsStyleQty = DTStyle.Select("Excno='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+                        AllID.Text = RowsStyleQty[0]["AllID"].ToString();
+                        BuyerOrderMasterCuttingId.Text = RowsStyleQty[0]["BuyerOrderMasterCuttingId"].ToString();
+                        RowId.Text = RowsStyleQty[0]["RowId"].ToString();
+
+                        ExcNo.Text = RowsStyleQty[0]["ExcNo"].ToString();
+                        StyleNo.Text = RowsStyleQty[0]["StyleNo"].ToString();
+                        Color.Text = RowsStyleQty[0]["Color"].ToString();
+                        Range.Text = RowsStyleQty[0]["Range"].ToString();
+                        Qty.Text = RowsStyleQty[0]["Qty"].ToString();
+                        IssueQty.Text = RowsStyleQty[0]["IssueQty"].ToString();
+                        Rate.Text = RowsStyleQty[0]["Rate"].ToString();
+                        Amount.Text = RowsStyleQty[0]["Amount"].ToString();
+
+                        HSNCode.Text = RowsStyleQty[0]["HSNCode"].ToString();
+                        Tax.Text = RowsStyleQty[0]["Tax"].ToString();
+                        TaxID.Text = RowsStyleQty[0]["TaxID"].ToString();
+
+                        CGST.Text = RowsStyleQty[0]["CGST"].ToString();
+                        SGST.Text = RowsStyleQty[0]["SGST"].ToString();
+                        IGST.Text = RowsStyleQty[0]["IGST"].ToString();
+                        BeforeTAX.Text = RowsStyleQty[0]["BeforeTAX"].ToString();
+                        #region
+
+                        DataSet dstd1 = new DataSet();
+                        DataTable dtddd1 = new DataTable();
+
+                        DataRow drNew1;
+                        DataColumn dct1;
+
+                        DataTable dttt1 = new DataTable();
+
+                        dct1 = new DataColumn("ExcStockId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("StyleId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("ColorId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("SizeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Qty");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("BuyerOrderMasterCuttingId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("RangeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("RowId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("TransSizeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Size");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("IssueQty");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Rate");
+                        dttt1.Columns.Add(dct1);
+                        dstd1.Tables.Add(dttt1);
+
+                        DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
+
+                        DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+
+                        for (int i = 0; i < RowsSizeQty.Length; i++)
+                        {
+                            drNew1 = dttt1.NewRow();
+                            drNew1["ExcStockId"] = RowsSizeQty[i]["ExcStockId"].ToString();
+                            drNew1["StyleId"] = RowsSizeQty[i]["StyleId"].ToString();
+                            drNew1["ColorId"] = RowsSizeQty[i]["ColorId"].ToString();
+                            drNew1["SizeId"] = RowsSizeQty[i]["SizeId"].ToString();
+                            drNew1["Qty"] = RowsSizeQty[i]["Qty"].ToString();
+                            drNew1["BuyerOrderMasterCuttingId"] = RowsSizeQty[i]["BuyerOrderMasterCuttingId"].ToString();
+                            drNew1["RangeId"] = RowsSizeQty[i]["RangeId"].ToString();
+                            drNew1["RowId"] = RowsSizeQty[i]["RowId"].ToString();
+                            drNew1["TransSizeId"] = RowsSizeQty[i]["TransSizeId"].ToString();
+                            drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
+                            drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
+                            drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
+                            dstd1.Tables[0].Rows.Add(drNew1);
+                            dtddd1 = dstd1.Tables[0];
+                        }
+
+
+
+                        GVSizes.DataSource = dstd1;
+                        GVSizes.DataBind();
+
+                        #endregion
+
+                    }
+                    else
+                    {
+                        DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
+                        DataRow[] RowsStyleQty = DTStyle.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+                        AllID.Text = RowsStyleQty[0]["AllID"].ToString();
+                        BuyerOrderMasterCuttingId.Text = RowsStyleQty[0]["BuyerOrderMasterCuttingId"].ToString();
+                        RowId.Text = RowsStyleQty[0]["RowId"].ToString();
+
+                        ExcNo.Text = RowsStyleQty[0]["ExcNo"].ToString();
+                        StyleNo.Text = RowsStyleQty[0]["StyleNo"].ToString();
+                        Color.Text = RowsStyleQty[0]["Color"].ToString();
+                        Range.Text = RowsStyleQty[0]["Range"].ToString();
+                        Qty.Text = RowsStyleQty[0]["Qty"].ToString();
+                        IssueQty.Text = RowsStyleQty[0]["IssueQty"].ToString();
+                        Rate.Text = RowsStyleQty[0]["Rate"].ToString();
+                        Amount.Text = RowsStyleQty[0]["Amount"].ToString();
+
+                        HSNCode.Text = RowsStyleQty[0]["HSNCode"].ToString();
+                        Tax.Text = RowsStyleQty[0]["Tax"].ToString();
+                        TaxID.Text = RowsStyleQty[0]["TaxID"].ToString();
+
+                        CGST.Text = RowsStyleQty[0]["CGST"].ToString();
+                        SGST.Text = RowsStyleQty[0]["SGST"].ToString();
+                        IGST.Text = RowsStyleQty[0]["IGST"].ToString();
+                        BeforeTAX.Text = RowsStyleQty[0]["BeforeTAX"].ToString();
+                        #region
+
+                        DataSet dstd1 = new DataSet();
+                        DataTable dtddd1 = new DataTable();
+
+                        DataRow drNew1;
+                        DataColumn dct1;
+
+                        DataTable dttt1 = new DataTable();
+
+                        dct1 = new DataColumn("ExcStockId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("StyleId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("ColorId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("SizeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Qty");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("BuyerOrderMasterCuttingId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("RangeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("RowId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("TransSizeId");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Size");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("IssueQty");
+                        dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Rate");
+                        dttt1.Columns.Add(dct1);
+                        dstd1.Tables.Add(dttt1);
+
+                        DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
+
+                        DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+
+                        for (int i = 0; i < RowsSizeQty.Length; i++)
+                        {
+                            drNew1 = dttt1.NewRow();
+                            drNew1["ExcStockId"] = RowsSizeQty[i]["ExcStockId"].ToString();
+                            drNew1["StyleId"] = RowsSizeQty[i]["StyleId"].ToString();
+                            drNew1["ColorId"] = RowsSizeQty[i]["ColorId"].ToString();
+                            drNew1["SizeId"] = RowsSizeQty[i]["SizeId"].ToString();
+                            drNew1["Qty"] = RowsSizeQty[i]["Qty"].ToString();
+                            drNew1["BuyerOrderMasterCuttingId"] = RowsSizeQty[i]["BuyerOrderMasterCuttingId"].ToString();
+                            drNew1["RangeId"] = RowsSizeQty[i]["RangeId"].ToString();
+                            drNew1["RowId"] = RowsSizeQty[i]["RowId"].ToString();
+                            drNew1["TransSizeId"] = RowsSizeQty[i]["TransSizeId"].ToString();
+                            drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
+                            drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
+                            drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
+                            dstd1.Tables[0].Rows.Add(drNew1);
+                            dtddd1 = dstd1.Tables[0];
+                        }
+
+
+
+                        GVSizes.DataSource = dstd1;
+                        GVSizes.DataBind();
+
+                        #endregion
+
                     }
 
-                    GVSizes.DataSource = dstd1;
-                    GVSizes.DataBind();
+
 
                     #endregion
+
+                    //#region  shanthi 24 may 2023
+
+                    //DataSet dstd1 = new DataSet();
+                    //DataTable dtddd1 = new DataTable();
+
+                    //DataRow drNew1;
+                    //DataColumn dct1;
+
+                    //DataTable dttt1 = new DataTable();
+
+                    //dct1 = new DataColumn("ExcStockId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("StyleId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("ColorId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("SizeId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("Qty");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("BuyerOrderMasterCuttingId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("RangeId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("RowId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("TransSizeId");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("Size");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("IssueQty");
+                    //dttt1.Columns.Add(dct1);
+                    //dct1 = new DataColumn("Rate");
+                    //dttt1.Columns.Add(dct1);
+                    //dstd1.Tables.Add(dttt1);
+
+                    //DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
+                   
+                    //    DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+
+                    //    for (int i = 0; i < RowsSizeQty.Length; i++)
+                    //    {
+                    //        drNew1 = dttt1.NewRow();
+                    //        drNew1["ExcStockId"] = RowsSizeQty[i]["ExcStockId"].ToString();
+                    //        drNew1["StyleId"] = RowsSizeQty[i]["StyleId"].ToString();
+                    //        drNew1["ColorId"] = RowsSizeQty[i]["ColorId"].ToString();
+                    //        drNew1["SizeId"] = RowsSizeQty[i]["SizeId"].ToString();
+                    //        drNew1["Qty"] = RowsSizeQty[i]["Qty"].ToString();
+                    //        drNew1["BuyerOrderMasterCuttingId"] = RowsSizeQty[i]["BuyerOrderMasterCuttingId"].ToString();
+                    //        drNew1["RangeId"] = RowsSizeQty[i]["RangeId"].ToString();
+                    //        drNew1["RowId"] = RowsSizeQty[i]["RowId"].ToString();
+                    //        drNew1["TransSizeId"] = RowsSizeQty[i]["TransSizeId"].ToString();
+                    //        drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
+                    //        drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
+                    //        drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
+                    //        dstd1.Tables[0].Rows.Add(drNew1);
+                    //        dtddd1 = dstd1.Tables[0];
+                    //    }
+                   
+                    
+
+                    //GVSizes.DataSource = dstd1;
+                    //GVSizes.DataBind();
+
+                    //#endregion
                 }
             }
         }
@@ -922,7 +1120,8 @@ namespace Billing.Accountsbootstrap
 
             //
             //
-            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text),Convert.ToInt32(ddlProvince.SelectedValue),Convert.ToInt32(drpGSTType.SelectedValue),Convert.ToDouble(txtTotCGST.Text),Convert.ToDouble(txtTotSGST.Text),Convert.ToDouble(txtTotIGST.Text),Convert.ToDouble(txtTotBeforeTAX.Text),Convert.ToDouble(txtRoundoff.Text));
+            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text), Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue), Convert.ToDouble(txtTotCGST.Text), Convert.ToDouble(txtTotSGST.Text), Convert.ToDouble(txtTotIGST.Text), Convert.ToDouble(txtTotBeforeTAX.Text), Convert.ToDouble(txtRoundoff.Text), Convert.ToInt32(rdbselect.SelectedValue));
+
 
             Response.Redirect("BuyerOrderSalesGrid.aspx");
         }

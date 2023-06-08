@@ -65,6 +65,7 @@
     <Compile Include="B2Bctin.cs" />
     <Compile Include="B2BItems.cs" />
     <Compile Include="B2BParent.cs" />
+    <Compile Include="BLayer.cs" />
     <Compile Include="BSClass.cs" />
     <Compile Include="CreditDebitReport.cs" />
     <Compile Include="DeliveryNoteINReportcs.cs" />

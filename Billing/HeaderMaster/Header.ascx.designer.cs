@@ -330,6 +330,15 @@ namespace Billing.HeaderMaster
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li32;
 
         /// <summary>
+        /// Despatch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Despatch;
+
+        /// <summary>
         /// Mitemprocess control.
         /// </summary>
         /// <remarks>
@@ -688,6 +697,15 @@ namespace Billing.HeaderMaster
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl BuyerOrderBookingStyles;
+
+        /// <summary>
+        /// Buyerordersales control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Buyerordersales;
 
         /// <summary>
         /// GstReport control.

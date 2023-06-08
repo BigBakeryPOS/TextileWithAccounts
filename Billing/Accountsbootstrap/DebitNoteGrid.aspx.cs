@@ -34,6 +34,7 @@ namespace Billing.Accountsbootstrap
             //sTableName = Session["User"].ToString();
             if (!IsPostBack)
             {
+               
                 ds = objBs.selectCreditdebitnewdebit("tblCreditDebitNote_" + sTableName, sTableName);
                 if (ds != null)
                 {
@@ -43,6 +44,7 @@ namespace Billing.Accountsbootstrap
                         CreditDebitGrid.DataSource = ds;
                         CreditDebitGrid.DataBind();
                         Table1.Visible = false;
+                        CreditDebitGrid.HeaderRow.Visible = true;
                     }
                     else
                     {
@@ -110,6 +112,7 @@ namespace Billing.Accountsbootstrap
                     //    CreditDebitGrid.Columns[8].Visible = false;
                     //}
                 }
+                 
             }
         }
 
@@ -120,7 +123,7 @@ namespace Billing.Accountsbootstrap
 
         protected void btnsearch_Click(object sender, EventArgs e)
         {
-            DataSet ds = objBs.searchCreditmasternew("tblCreditDebitNote_" + sTableName, txtsearch.Text, Convert.ToInt32(ddlfilter.SelectedValue), sTableName);
+          DataSet ds = objBs.searchCreditmasternew("tblCreditDebitNote_" + sTableName, txtsearch.Text, Convert.ToInt32(ddlfilter.SelectedValue), sTableName);
 
             if (ds != null)
             {
@@ -140,6 +143,7 @@ namespace Billing.Accountsbootstrap
                 CreditDebitGrid.DataSource = null;
                 CreditDebitGrid.DataBind();
             }
+          
 
         }
 
@@ -160,14 +164,16 @@ namespace Billing.Accountsbootstrap
 
             else if (e.CommandName == "delete")
             {
-                int iSucess = objBs.Creditdebitmasternew("tblCreditDebitNote_" + sTableName, e.CommandArgument.ToString(), "tblDaybook_" + sTableName, "tblTransReceipt_" + sTableName, "tblTransPayment_" + sTableName, "tblAuditMaster_" + sTableName, lblUser.Text, sTableName);
+                 int iSucess = objBs.Creditdebitmasternew("tblCreditDebitNote_" + sTableName, e.CommandArgument.ToString(), "tblDaybook_" + sTableName, "tblTransReceipt_" + sTableName, "tblTransPayment_" + sTableName, "tblAuditMaster_" + sTableName, lblUser.Text, sTableName);
                 Response.Redirect("DebitNoteGrid.aspx");
+                
             }
         }
 
         protected void CreditDebitGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            ds = objBs.selectCreditdebitnew("tblCreditDebitNote_" + sTableName, sTableName);
+        
+           ds = objBs.selectCreditdebitnew("tblCreditDebitNote_" + sTableName, sTableName);
             if (ds != null)
             {
                 if (ds.Tables[0].Rows.Count > 0)
@@ -188,6 +194,7 @@ namespace Billing.Accountsbootstrap
                 CreditDebitGrid.DataSource = null;
                 CreditDebitGrid.DataBind();
             }
+           
         }
     }
 }

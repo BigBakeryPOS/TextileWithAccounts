@@ -25,6 +25,7 @@ namespace Billing.HeaderMaster
 
 
             Companyid = Session["CmpyId"].ToString();
+           
             DataSet ds1 = objbs.GetSelectLedgerDetails(Convert.ToInt32(Companyid));
             if (ds1.Tables[0].Rows.Count > 0)
             {
@@ -36,7 +37,7 @@ namespace Billing.HeaderMaster
                 {
                     imglogo.Src = "";
                 }
-
+           
             }
 
             DataSet ds = objbs.getuseraccess(lblUserID.Text);

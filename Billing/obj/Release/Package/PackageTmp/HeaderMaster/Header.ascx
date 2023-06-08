@@ -23,7 +23,7 @@
                 <td style="width: 15%">
                     <div class="container-fluid" style="background-color: #336699; padding-left: 51px">
                         <a href="../Accountsbootstrap/Home_Page.aspx">
-                            <img style="width: 110px; height: 45px" src="../images/ae_logo.png" alt="logo" /></a>
+                            <img style="width: 110px; height: 45px" id="imglogo" runat="server"  alt="logo" /></a>
                     </div>
                 </td>
                 <td style="width: 58%" align="center">
@@ -106,6 +106,7 @@
                             <li runat="server" id="Li30" visible="true"><a href="../Accountsbootstrap/BuyerOrderMasterGrid.aspx">BuyerOrder Master</a></li>
                             <li runat="server" id="Li31" visible="true"><a href="../Accountsbootstrap/RequirementSheetGrid.aspx">RequirementSheet </a></li>
                             <li id="Li32" runat="server" visible="true"><a href="../Accountsbootstrap/BuyerOrderSalesGrid.aspx">BuyerOrder Sales</a> </li>
+                              <li id="Despatch" runat="server" visible="true"><a href="../Accountsbootstrap/DespatchSalesGrid.aspx">Despatch Sales</a> </li>
                         </ul>
                     </li>
 
@@ -256,6 +257,10 @@
                     Receipt</a></li>
                     <li runat="server" visible="true" id="journal"><a href="../Accountsbootstrap/viewjournals.aspx">
                     Journal</a></li>
+                     <li runat="server" visible="true" id="CreditNote"><a href="../Accountsbootstrap/CreditNoteGrid.aspx">
+                    Credit Note</a></li>
+                     <li runat="server" visible="true" id="DebitNote"><a href="../Accountsbootstrap/DebitNoteGrid.aspx">
+                    Debit Note</a></li>
                     <li runat="server" visible="true" id="cheque"><a href="../Accountsbootstrap/viewcheques.aspx">
                     Cheque Book</a></li>
                 </ul>
@@ -305,6 +310,8 @@
                                 BuyerOrder BookingStyles </a></li>
                         </ul>
                     </li>
+                     <li runat="server" visible="true" id="Buyerordersales"><a href="../Accountsbootstrap/BuyerOrderSalesReport.aspx">
+                                BuyerOrderSales Report</a></li>
 
                     <li id="GstReport" visible="true" runat="server"><a href="#">GST Portal Report</a>
                         <ul>

@@ -251,7 +251,7 @@ fieldset{
                     </div>
                     <!-- end login -->
                     <div class="logo" style="padding-top: 26px;">
-                        <asp:Image ID="log" ImageUrl="../images/ae_logo.png" Style="width: 11pc;" runat="server" />
+                        <asp:Image ID="log" ImageUrl="~/images/ae_logo.png" Style="width: 11pc;" runat="server" />
                         <div class="clearfix">
                         </div>
                     </div>

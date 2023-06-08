@@ -106,6 +106,7 @@
                             <li runat="server" id="Li30" visible="true"><a href="../Accountsbootstrap/BuyerOrderMasterGrid.aspx">BuyerOrder Master</a></li>
                             <li runat="server" id="Li31" visible="true"><a href="../Accountsbootstrap/RequirementSheetGrid.aspx">RequirementSheet </a></li>
                             <li id="Li32" runat="server" visible="true"><a href="../Accountsbootstrap/BuyerOrderSalesGrid.aspx">BuyerOrder Sales</a> </li>
+                              <li id="Despatch" runat="server" visible="true"><a href="../Accountsbootstrap/DespatchSalesGrid.aspx">Despatch Sales</a> </li>
                         </ul>
                     </li>
 
@@ -309,6 +310,8 @@
                                 BuyerOrder BookingStyles </a></li>
                         </ul>
                     </li>
+                     <li runat="server" visible="true" id="Buyerordersales"><a href="../Accountsbootstrap/BuyerOrderSalesReport.aspx">
+                                BuyerOrderSales Report</a></li>
 
                     <li id="GstReport" visible="true" runat="server"><a href="#">GST Portal Report</a>
                         <ul>

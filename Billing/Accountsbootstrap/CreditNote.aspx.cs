@@ -63,7 +63,7 @@ namespace Billing.Accountsbootstrap
                     txtDCDate.Enabled = false;
                 }
 
-
+               
                 ds = objBs.Getcustomers4Credit(sTableName);
                 if (ds != null)
                 {
@@ -84,7 +84,7 @@ namespace Billing.Accountsbootstrap
                 {
                     ddlLname.Items.Insert(0, "Select Ledger");
                 }
-
+                
                 string DayBookID = Request.QueryString.Get("DayBook_ID");
                 if (DayBookID != "" || DayBookID != null)
                 {
@@ -95,6 +95,7 @@ namespace Billing.Accountsbootstrap
                     //string sTableName1 = Session["currentbranch"].ToString();
 
                     DataSet ds1 = objBs.getCreditDebitmaster("tblCreditDebitNote_" + sTableName, DayBookID);
+                  
                     if (ds1 != null)
                     {
                         if (ds1.Tables[0].Rows.Count > 0)
@@ -227,6 +228,7 @@ namespace Billing.Accountsbootstrap
 
         protected void btnadd_Click(object sender, EventArgs e)
         {
+            
             DateTime recdate;
             string DayBookID = Request.QueryString.Get("DayBook_ID");
             if (btnadd.Text == "Save")

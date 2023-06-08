@@ -33,6 +33,7 @@ namespace Billing.Accountsbootstrap
             EmpId = Convert.ToInt32(Session["EmpId"].ToString());
             if (!IsPostBack)
             {
+               
                 ds = objBs.selectCreditdebit1("tblCreditDebitNote_" + sTableName, sTableName);
                 if (ds != null)
                 {
@@ -54,7 +55,7 @@ namespace Billing.Accountsbootstrap
                     CreditDebitGrid.DataSource = null;
                     CreditDebitGrid.DataBind();
                 }
-
+                
                 DataSet dacess = new DataSet();
                 dacess = objBs.getuseraccessscreen(Session["EmpId"].ToString(), "crdrnote");
                 if (dacess.Tables[0].Rows.Count > 0)
@@ -119,6 +120,7 @@ namespace Billing.Accountsbootstrap
 
         protected void btnsearch_Click(object sender, EventArgs e)
         {
+            
             DataSet ds = objBs.searchCreditmaster1("tblCreditDebitNote_" + sTableName, txtsearch.Text, Convert.ToInt32(ddlfilter.SelectedValue), sTableName);
 
             if (ds != null)
@@ -168,6 +170,7 @@ namespace Billing.Accountsbootstrap
 
         protected void CreditDebitGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+           
             ds = objBs.selectCreditdebitnew("tblCreditDebitNote_" + sTableName, sTableName);
             if (ds != null)
             {

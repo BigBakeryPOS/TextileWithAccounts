@@ -66,7 +66,7 @@ namespace Billing.Accountsbootstrap
             {
                 if (e.CommandArgument.ToString() != "")
                 {
-                    Response.Redirect("BuyerSalesOrderPrint.aspx?BuyerOrderSalesId=" + e.CommandArgument.ToString());
+                    Response.Redirect("BuyerSalesOrderPrintNew.aspx?BuyerOrderSalesId=" + e.CommandArgument.ToString());
                 }
             }
             else if (e.CommandName == "delete1")

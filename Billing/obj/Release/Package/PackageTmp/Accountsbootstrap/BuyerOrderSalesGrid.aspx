@@ -153,6 +153,15 @@
                                                     <asp:ImageButton ID="imgdisable" ImageUrl="~/images/edit.png" runat="server" Visible="false"
                                                         Enabled="false" ToolTip="Not Allow To Delete" />
                                                 </ItemTemplate>
+                                              
+                                            </asp:TemplateField>
+
+                                              <asp:TemplateField HeaderText="Print" ItemStyle-HorizontalAlign="Center" Visible="true">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="btnPrint" runat="server" CommandArgument='<%#Eval("BuyerOrderSalesId") %>'
+                                                        CommandName="Print">
+                                                        <asp:Image ID="imgPrint" runat="server" ImageUrl="~/images/Print_Icon.jpg" /></asp:LinkButton>
+                                                </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Delete" ItemStyle-HorizontalAlign="Center" Visible="false">
                                                 <ItemTemplate>

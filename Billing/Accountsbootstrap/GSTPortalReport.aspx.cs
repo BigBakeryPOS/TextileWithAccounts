@@ -62,12 +62,13 @@ namespace Billing.Accountsbootstrap
 
                 DataSet dsbranchNew = new DataSet();
                 dsbranchNew = objBs.Branchfrom(sTableName);
+                 
                 DataSet dsCompanyDetails = objBs.GetSelectLedgerDetails(Convert.ToInt32(CompanyId));
                 if (dsCompanyDetails.Tables[0].Rows.Count > 0)
                 {
                     txtGSTNo.Text = dsCompanyDetails.Tables[0].Rows[0]["cst"].ToString();
                 }
-
+               
                 //ddloutlet.Enabled = true;
                 //DataSet dsbranchto = objBs.Branchto();
                 //ddloutlet.DataSource = dsbranchto.Tables[0];

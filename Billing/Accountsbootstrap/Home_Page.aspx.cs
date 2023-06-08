@@ -25,6 +25,7 @@ namespace Billing.Accountsbootstrap
 
             if (!IsPostBack)
             {
+               
                 DataSet ds1 = objBs.GetSelectLedgerDetails(Convert.ToInt32(Companyid));
                 if (ds1.Tables[0].Rows.Count > 0)
                 {

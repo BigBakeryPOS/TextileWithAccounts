@@ -32,7 +32,7 @@ namespace Billing.Accountsbootstrap
             lblUserID.Text = Session["UserID"].ToString();
             //sTableName = Session["User"].ToString();
             EmpId = Convert.ToInt32(Session["EmpId"].ToString());
-        
+
 
             if (!IsPostBack)
             {
@@ -61,7 +61,7 @@ namespace Billing.Accountsbootstrap
                 {
                     txtDCDate.Enabled = false;
                 }
-
+                
                 ds = objBs.Getcustomers4Debit(sTableName);
                 if (ds != null)
                 {
@@ -82,7 +82,7 @@ namespace Billing.Accountsbootstrap
                 {
                     ddlLname.Items.Insert(0, "Select Ledger");
                 }
-
+               
                 string DayBookID = Request.QueryString.Get("DayBook_ID");
                 if (DayBookID != "" || DayBookID != null)
                 {
@@ -125,95 +125,98 @@ namespace Billing.Accountsbootstrap
 
                             string Ledger = ledgerid.Tables[0].Rows[0]["GroupID"].ToString();
 
-                            if (Convert.ToInt32(Ledger) == 1)
-                            {
-                                TransPaymentGrid.Visible = false;
-                                gvledgrid.Visible = true;
+                           
+                              if (Convert.ToInt32(Ledger) == 1)
+                              {
+                                  TransPaymentGrid.Visible = false;
+                                  gvledgrid.Visible = true;
+                                 
+                                  DataSet dstt = objBs.selecttransReceipt(Convert.ToInt32(DayBookID), "tblTransReceipt_" + sTableName);
+                                  if (dstt.Tables[0].Rows.Count > 0)
+                                  {
+                                      gvledgrid.DataSource = dstt;
+                                      gvledgrid.DataBind();
+                                  }
+                                  else
+                                  {
+                                      gvledgrid.DataSource = null;
+                                      gvledgrid.DataBind();
+                                  }
+                              }
+                              if (Convert.ToInt32(Ledger) == 2)
+                              {
+                                  TransPaymentGrid.Visible = true;
+                                  gvledgrid.Visible = false;
 
-                                DataSet dstt = objBs.selecttransReceipt(Convert.ToInt32(DayBookID), "tblTransReceipt_" + sTableName);
-                                if (dstt.Tables[0].Rows.Count > 0)
-                                {
-                                    gvledgrid.DataSource = dstt;
-                                    gvledgrid.DataBind();
-                                }
-                                else
-                                {
-                                    gvledgrid.DataSource = null;
-                                    gvledgrid.DataBind();
-                                }
-                            }
-                            if (Convert.ToInt32(Ledger) == 2)
-                            {
-                                TransPaymentGrid.Visible = true;
-                                gvledgrid.Visible = false;
+                                  DataSet dsTransPayment = objBs.getTransPaymentdet("tblTransPayment_" + sTableName, Convert.ToInt32(DayBookID));
+                                  if (dsTransPayment != null)
+                                  {
+                                      if (dsTransPayment.Tables[0].Rows.Count > 0)
+                                      {
+                                          DataTable dttt;
+                                          DataRow drNew;
+                                          DataColumn dct;
+                                          DataSet dstd = new DataSet();
+                                          dttt = new DataTable();
 
-                                DataSet dsTransPayment = objBs.getTransPaymentdet("tblTransPayment_" + sTableName, Convert.ToInt32(DayBookID));
-                                if (dsTransPayment != null)
-                                {
-                                    if (dsTransPayment.Tables[0].Rows.Count > 0)
-                                    {
-                                        DataTable dttt;
-                                        DataRow drNew;
-                                        DataColumn dct;
-                                        DataSet dstd = new DataSet();
-                                        dttt = new DataTable();
+                                          dct = new DataColumn("DC_NO");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("DC_NO");
-                                        dttt.Columns.Add(dct);
+                                          dct = new DataColumn("Bill_NO");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("Bill_NO");
-                                        dttt.Columns.Add(dct);
+                                          dct = new DataColumn("Amount");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("Amount");
-                                        dttt.Columns.Add(dct);
+                                          dct = new DataColumn("DC_Date");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("DC_Date");
-                                        dttt.Columns.Add(dct);
+                                          dct = new DataColumn("Balance");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("Balance");
-                                        dttt.Columns.Add(dct);
+                                          dct = new DataColumn("BillAmount");
+                                          dttt.Columns.Add(dct);
 
-                                        dct = new DataColumn("BillAmount");
-                                        dttt.Columns.Add(dct);
+                                          dstd.Tables.Add(dttt);
 
-                                        dstd.Tables.Add(dttt);
+                                          if (dsTransPayment != null)
+                                          {
+                                              if (dsTransPayment.Tables[0].Rows.Count > 0)
+                                              {
+                                                  for (int i = 0; i < dsTransPayment.Tables[0].Rows.Count; i++)
+                                                  {
+                                                      drNew = dttt.NewRow();
+                                                      drNew["DC_NO"] = Convert.ToInt32(dsTransPayment.Tables[0].Rows[i]["Invoice_No"]);
+                                                      drNew["DC_Date"] = Convert.ToDateTime(dsTransPayment.Tables[0].Rows[i]["BillDate"]).ToString("dd/MM/yyyy");
+                                                      drNew["Bill_NO"] = Convert.ToInt32(dsTransPayment.Tables[0].Rows[i]["BillNo"]);
+                                                      drNew["BillAmount"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["BillAmount"]);
+                                                      drNew["Balance"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["Balance"]);
+                                                      drNew["Amount"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["Amount"]); ;
+                                                      dstd.Tables[0].Rows.Add(drNew);
+                                                  }
+                                              }
+                                          }
 
-                                        if (dsTransPayment != null)
-                                        {
-                                            if (dsTransPayment.Tables[0].Rows.Count > 0)
-                                            {
-                                                for (int i = 0; i < dsTransPayment.Tables[0].Rows.Count; i++)
-                                                {
-                                                    drNew = dttt.NewRow();
-                                                    drNew["DC_NO"] = Convert.ToInt32(dsTransPayment.Tables[0].Rows[i]["Invoice_No"]);
-                                                    drNew["DC_Date"] = Convert.ToDateTime(dsTransPayment.Tables[0].Rows[i]["BillDate"]).ToString("dd/MM/yyyy");
-                                                    drNew["Bill_NO"] = Convert.ToInt32(dsTransPayment.Tables[0].Rows[i]["BillNo"]);
-                                                    drNew["BillAmount"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["BillAmount"]);
-                                                    drNew["Balance"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["Balance"]);
-                                                    drNew["Amount"] = Convert.ToDouble(dsTransPayment.Tables[0].Rows[i]["Amount"]); ;
-                                                    dstd.Tables[0].Rows.Add(drNew);
-                                                }
-                                            }
-                                        }
-
-                                        TransPaymentGrid.DataSource = dstd.Tables[0];
-                                        TransPaymentGrid.DataBind();
-                                    }
-                                    else
-                                    {
-                                        TransPaymentGrid.DataSource = null;
-                                        TransPaymentGrid.DataBind();
-                                    }
-                                }
-                            }
-                            txtAmount.Text = Convert.ToDouble(ds1.Tables[0].Rows[0]["Amount"]).ToString("0.00");
-                            txtNar.Text = ds1.Tables[0].Rows[0]["Narration"].ToString();
-                        }
-                    }
-                }
-                ddlLname.Focus();
-            }
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "$('.chzn-select').chosen(); $('.chzn-select-deselect').chosen({ allow_single_deselect: true });", true);
+                                          TransPaymentGrid.DataSource = dstd.Tables[0];
+                                          TransPaymentGrid.DataBind();
+                                      }
+                                      else
+                                      {
+                                          TransPaymentGrid.DataSource = null;
+                                          TransPaymentGrid.DataBind();
+                                      }
+                                  }
+                              }
+                              txtAmount.Text = Convert.ToDouble(ds1.Tables[0].Rows[0]["Amount"]).ToString("0.00");
+                              txtNar.Text = ds1.Tables[0].Rows[0]["Narration"].ToString();
+                          }
+                      }
+                  }
+                  ddlLname.Focus();
+              }
+              ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "$('.chzn-select').chosen(); $('.chzn-select-deselect').chosen({ allow_single_deselect: true });", true);
+        
+            
         }
 
 
@@ -319,323 +322,323 @@ namespace Billing.Accountsbootstrap
 
 
                         DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                      
+                                                if (RbtnCD.SelectedValue == "Credit Note")
+                                                {
+                                                    int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(0), Convert.ToInt32(ddlLname.SelectedValue), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
+                                                    Response.Redirect("DebitNoteGrid.aspx");
+
+                                                }
+                                                else
+                                                {
+                                                    int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(ddlLname.SelectedValue), Convert.ToInt32(0), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
+                                                    Response.Redirect("DebitNoteGrid.aspx");
+                                                }
+
+                                            }
+                                            else if (Convert.ToInt32(Ledger) == 2)
+                                            {
+                                                gvledgrid.Visible = false;
+                                                TransPaymentGrid.Visible = true;
+
+
+                                                DataTable dttt;
+                                                DataRow dr;
+                                                DataColumn dct;
+                                                DataSet dstd = new DataSet();
+                                                dttt = new DataTable();
+                                                dct = new DataColumn("DC_NO");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Bill_NO");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("DC_Date");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("BillAmount");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Balance");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Amount");
+                                                dttt.Columns.Add(dct);
+                                                dstd.Tables.Add(dttt);
+
+                                                for (int vLoop = 0; vLoop < TransPaymentGrid.Rows.Count; vLoop++)
+                                                {
+                                                    Label txttt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtDCNo");
+                                                    Label txttt1 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillno");
+                                                    // Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                                    Label txttd = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillAmount");
+                                                    Label txttd123 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBalance");
+                                                    TextBox txttdtt = (TextBox)TransPaymentGrid.Rows[vLoop].FindControl("txtAmount");
+
+                                                    dr = dttt.NewRow();
+                                                    dr["DC_NO"] = txttt.Text;
+                                                    dr["Bill_NO"] = txttt1.Text;
+                                                    dr["BillAmount"] = txttd.Text;
+                                                    dr["Balance"] = txttd123.Text;
+                                                    dr["DC_Date"] = recdate;
+                                                    dr["Amount"] = Convert.ToDouble(txttdtt.Text);
+                                                    //dr["Balance"] = Convert.ToDouble(txttd123.Text) - Convert.ToDouble(txttdtt.Text);
+                                                    if (Convert.ToDouble(txttdtt.Text) > 0)
+                                                    {
+                                                        dstd.Tables[0].Rows.Add(dr);
+                                                    }
+
+                                                    //dstd.Tables[0].Rows.Add(dr);
+
+                                                    decimal amount;
+                                                    decimal balance;
+                                                    decimal dTotal = 0;
+                                                    decimal Dtotal = 0;
+
+                                                    amount = Convert.ToDecimal(txttdtt.Text);
+                                                    balance = Convert.ToDecimal(txttd123.Text);
+
+                                                    if (amount > balance)
+                                                    {
+                                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
+                                                        return;
+                                                    }
+
+                                                    if (dstd.Tables[0].Rows.Count > 0)
+                                                    {
+
+                                                        for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
+                                                        {
+                                                            dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
+                                                        }
+                                                        Dtotal = dTotal;
+                                                        if (Dtotal > Convert.ToDecimal(txtAmount.Text))
+                                                        {
+                                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
+                                                            return;
+                                                        }
+                                                    }
+
+                                                }
+
 
-                        if (RbtnCD.SelectedValue == "Credit Note")
-                        {
-                            int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(0), Convert.ToInt32(ddlLname.SelectedValue), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
-                            Response.Redirect("DebitNoteGrid.aspx");
-
-                        }
-                        else
-                        {
-                            int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(ddlLname.SelectedValue), Convert.ToInt32(0), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
-                            Response.Redirect("DebitNoteGrid.aspx");
-                        }
-
-                    }
-                    else if (Convert.ToInt32(Ledger) == 2)
-                    {
-                        gvledgrid.Visible = false;
-                        TransPaymentGrid.Visible = true;
-
-
-                        DataTable dttt;
-                        DataRow dr;
-                        DataColumn dct;
-                        DataSet dstd = new DataSet();
-                        dttt = new DataTable();
-                        dct = new DataColumn("DC_NO");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Bill_NO");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("DC_Date");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("BillAmount");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Balance");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Amount");
-                        dttt.Columns.Add(dct);
-                        dstd.Tables.Add(dttt);
-
-                        for (int vLoop = 0; vLoop < TransPaymentGrid.Rows.Count; vLoop++)
-                        {
-                            Label txttt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtDCNo");
-                            Label txttt1 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillno");
-                            // Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
-                            Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
-                            recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                            Label txttd = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillAmount");
-                            Label txttd123 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBalance");
-                            TextBox txttdtt = (TextBox)TransPaymentGrid.Rows[vLoop].FindControl("txtAmount");
-
-                            dr = dttt.NewRow();
-                            dr["DC_NO"] = txttt.Text;
-                            dr["Bill_NO"] = txttt1.Text;
-                            dr["BillAmount"] = txttd.Text;
-                            dr["Balance"] = txttd123.Text;
-                            dr["DC_Date"] = recdate;
-                            dr["Amount"] = Convert.ToDouble(txttdtt.Text);
-                            //dr["Balance"] = Convert.ToDouble(txttd123.Text) - Convert.ToDouble(txttdtt.Text);
-                            if (Convert.ToDouble(txttdtt.Text) > 0)
-                            {
-                                dstd.Tables[0].Rows.Add(dr);
-                            }
-
-                            //dstd.Tables[0].Rows.Add(dr);
-
-                            decimal amount;
-                            decimal balance;
-                            decimal dTotal = 0;
-                            decimal Dtotal = 0;
-
-                            amount = Convert.ToDecimal(txttdtt.Text);
-                            balance = Convert.ToDecimal(txttd123.Text);
-
-                            if (amount > balance)
-                            {
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
-                                return;
-                            }
-
-                            if (dstd.Tables[0].Rows.Count > 0)
-                            {
-
-                                for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
-                                {
-                                    dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
-                                }
-                                Dtotal = dTotal;
-                                if (Dtotal > Convert.ToDecimal(txtAmount.Text))
-                                {
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
-                                    return;
-                                }
-                            }
-
-                        }
-
+                                                DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                                                if (RbtnCD.SelectedValue == "Credit Note")
+                                                {
+                                                    int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(0), Convert.ToInt32(ddlLname.SelectedValue), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
+                                                    Response.Redirect("DebitNoteGrid.aspx");
+
+                                                }
+                                                else
+                                                {
+                                                    int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(ddlLname.SelectedValue), Convert.ToInt32(0), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
+                                                    Response.Redirect("DebitNoteGrid.aspx");
+                                                }
+                                            }
+
+                                        }
+
+                                    }
+                                    else if (btnadd.Text == "Update")
+                                    {
+                                        if (ddlLname.SelectedItem.Text != "Select Ledger")
+                                        {
+                                            DataSet ledgerid = objBs.getledgerdet(Convert.ToInt32(ddlLname.SelectedValue), sTableName);
+
+                                            string Ledger = ledgerid.Tables[0].Rows[0]["GroupID"].ToString();
+
+                                            if (Convert.ToInt32(Ledger) == 1)
+                                            {
+                                                TransPaymentGrid.Visible = false;
+                                                gvledgrid.Visible = true;
+
+
+                                                DataTable dttt;
+                                                DataRow drNew;
+                                                DataColumn dct;
+                                                DataSet dstd = new DataSet();
+                                                dttt = new DataTable();
+
+                                                dct = new DataColumn("SalesID");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Billno");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Amount");
+                                                dttt.Columns.Add(dct);
 
-                        DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-                        if (RbtnCD.SelectedValue == "Credit Note")
-                        {
-                            int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(0), Convert.ToInt32(ddlLname.SelectedValue), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
-                            Response.Redirect("DebitNoteGrid.aspx");
-
-                        }
-                        else
-                        {
-                            int j = objBs.insertDayBook("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, txtdate, Convert.ToInt32(ddlLname.SelectedValue), Convert.ToInt32(0), txtNar.Text, txtxNoteno.Text, RbtnCD.SelectedValue, Convert.ToDecimal(txtAmount.Text), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), sTableName, dstd, Ledger);
-                            Response.Redirect("DebitNoteGrid.aspx");
-                        }
-                    }
-
-                }
-
-            }
-            else if (btnadd.Text == "Update")
-            {
-                if (ddlLname.SelectedItem.Text != "Select Ledger")
-                {
-                    DataSet ledgerid = objBs.getledgerdet(Convert.ToInt32(ddlLname.SelectedValue), sTableName);
-
-                    string Ledger = ledgerid.Tables[0].Rows[0]["GroupID"].ToString();
-
-                    if (Convert.ToInt32(Ledger) == 1)
-                    {
-                        TransPaymentGrid.Visible = false;
-                        gvledgrid.Visible = true;
-
-
-                        DataTable dttt;
-                        DataRow drNew;
-                        DataColumn dct;
-                        DataSet dstd = new DataSet();
-                        dttt = new DataTable();
-
-                        dct = new DataColumn("SalesID");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Billno");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Amount");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("BillDate");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("BillAmount");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Balance");
-                        dttt.Columns.Add(dct);
-
-                        dstd.Tables.Add(dttt);
-
-                        for (int vLoop = 0; vLoop < gvledgrid.Rows.Count; vLoop++)
-                        {
-                            Label txtd = (Label)gvledgrid.Rows[vLoop].FindControl("txtSalesid");
-                            Label txttt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillno");
-                            //  Label txt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillDate");
-                            Label txt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillDate");
-                            recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                            Label txttd = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillAmount");
-                            Label txttd123 = (Label)gvledgrid.Rows[vLoop].FindControl("txtBalance");
-                            TextBox txttdtt = (TextBox)gvledgrid.Rows[vLoop].FindControl("txtAmount");
-
-                            drNew = dttt.NewRow();
-                            drNew["SalesID"] = txtd.Text;
-                            drNew["Billno"] = txttt.Text;
-                            drNew["BillAmount"] = txttd.Text;
-                            drNew["Balance"] = txttd123.Text;
-                            drNew["BillDate"] = recdate;
-                            drNew["Amount"] = Convert.ToDouble(txttdtt.Text);
-                            if (Convert.ToDouble(txttdtt.Text) > 0)
-                            {
-                                dstd.Tables[0].Rows.Add(drNew);
-                            }
-                            decimal amount;
-                            decimal balance;
-                            decimal dTotal = 0;
-                            decimal Dtotal = 0;
-
-                            amount = Convert.ToDecimal(txttdtt.Text);
-                            balance = Convert.ToDecimal(txttd123.Text);
-
-                            if (amount > balance)
-                            {
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
-
-                                return;
-                            }
-
-                            if (dstd.Tables[0].Rows.Count > 0)
-                            {
-
-                                for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
-                                {
-                                    dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
-                                }
-                                Dtotal = dTotal;
-                                if (Dtotal > Convert.ToDecimal(txtAmount.Text))
-                                {
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
-                                    return;
-                                }
-                            }
-
-                        }
-
-
-                        DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-                        int j = objBs.CreditDebitupdate("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, ddlLname.SelectedValue, Convert.ToDecimal(txtAmount.Text), txtdate, RbtnCD.SelectedValue, txtNar.Text, Convert.ToInt32(txtxNoteno.Text), Convert.ToInt32(DayBookID), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), dstd, Ledger);
-                        Response.Redirect("DebitNoteGrid.aspx");
-
-
-                    }
-                    else if (Convert.ToInt32(Ledger) == 2)
-                    {
-                        gvledgrid.Visible = false;
-                        TransPaymentGrid.Visible = true;
-
-
-                        DataTable dttt;
-                        DataRow dr;
-                        DataColumn dct;
-                        DataSet dstd = new DataSet();
-                        dttt = new DataTable();
-                        dct = new DataColumn("DC_NO");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Bill_NO");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("DC_Date");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("BillAmount");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Balance");
-                        dttt.Columns.Add(dct);
-
-                        dct = new DataColumn("Amount");
-                        dttt.Columns.Add(dct);
-                        dstd.Tables.Add(dttt);
-
-                        for (int vLoop = 0; vLoop < TransPaymentGrid.Rows.Count; vLoop++)
-                        {
-                            Label txttt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtDCNo");
-                            Label txttt1 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillno");
-                            // Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
-                            Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
-                            recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                            Label txttd = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillAmount");
-                            Label txttd123 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBalance");
-                            TextBox txttdtt = (TextBox)TransPaymentGrid.Rows[vLoop].FindControl("txtAmount");
-
-                            dr = dttt.NewRow();
-                            dr["DC_NO"] = txttt.Text;
-                            dr["Bill_NO"] = txttt1.Text;
-                            dr["BillAmount"] = txttd.Text;
-                            dr["Balance"] = txttd123.Text;
-                            dr["DC_Date"] = recdate;
-                            dr["Amount"] = Convert.ToDouble(txttdtt.Text);
-                            //dr["Balance"] = Convert.ToDouble(txttd123.Text) - Convert.ToDouble(txttdtt.Text);
-                            if (Convert.ToDouble(txttdtt.Text) > 0)
-                            {
-                                dstd.Tables[0].Rows.Add(dr);
-                            }
-
-                            //dstd.Tables[0].Rows.Add(dr);
-
-                            decimal amount;
-                            decimal balance;
-                            decimal dTotal = 0;
-                            decimal Dtotal = 0;
-
-                            amount = Convert.ToDecimal(txttdtt.Text);
-                            balance = Convert.ToDecimal(txttd123.Text);
-
-                            if (amount > balance)
-                            {
-                                ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
-                                return;
-                            }
-
-                            if (dstd.Tables[0].Rows.Count > 0)
-                            {
-
-                                for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
-                                {
-                                    dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
-                                }
-                                Dtotal = dTotal;
-                                if (Dtotal > Convert.ToDecimal(txtAmount.Text))
-                                {
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
-                                    return;
-                                }
-                            }
-
-                        }
-
-                        DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-                        int j = objBs.CreditDebitupdate("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, ddlLname.SelectedValue, Convert.ToDecimal(txtAmount.Text), txtdate, RbtnCD.SelectedValue, txtNar.Text, Convert.ToInt32(txtxNoteno.Text), Convert.ToInt32(DayBookID), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), dstd, Ledger);
-                        Response.Redirect("DebitNoteGrid.aspx");
-
-                    }
-
-                }
+                                                dct = new DataColumn("BillDate");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("BillAmount");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Balance");
+                                                dttt.Columns.Add(dct);
+
+                                                dstd.Tables.Add(dttt);
+
+                                                for (int vLoop = 0; vLoop < gvledgrid.Rows.Count; vLoop++)
+                                                {
+                                                    Label txtd = (Label)gvledgrid.Rows[vLoop].FindControl("txtSalesid");
+                                                    Label txttt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillno");
+                                                    //  Label txt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    Label txt = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                                    Label txttd = (Label)gvledgrid.Rows[vLoop].FindControl("txtBillAmount");
+                                                    Label txttd123 = (Label)gvledgrid.Rows[vLoop].FindControl("txtBalance");
+                                                    TextBox txttdtt = (TextBox)gvledgrid.Rows[vLoop].FindControl("txtAmount");
+
+                                                    drNew = dttt.NewRow();
+                                                    drNew["SalesID"] = txtd.Text;
+                                                    drNew["Billno"] = txttt.Text;
+                                                    drNew["BillAmount"] = txttd.Text;
+                                                    drNew["Balance"] = txttd123.Text;
+                                                    drNew["BillDate"] = recdate;
+                                                    drNew["Amount"] = Convert.ToDouble(txttdtt.Text);
+                                                    if (Convert.ToDouble(txttdtt.Text) > 0)
+                                                    {
+                                                        dstd.Tables[0].Rows.Add(drNew);
+                                                    }
+                                                    decimal amount;
+                                                    decimal balance;
+                                                    decimal dTotal = 0;
+                                                    decimal Dtotal = 0;
+
+                                                    amount = Convert.ToDecimal(txttdtt.Text);
+                                                    balance = Convert.ToDecimal(txttd123.Text);
+
+                                                    if (amount > balance)
+                                                    {
+                                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
+
+                                                        return;
+                                                    }
+
+                                                    if (dstd.Tables[0].Rows.Count > 0)
+                                                    {
+
+                                                        for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
+                                                        {
+                                                            dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
+                                                        }
+                                                        Dtotal = dTotal;
+                                                        if (Dtotal > Convert.ToDecimal(txtAmount.Text))
+                                                        {
+                                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
+                                                            return;
+                                                        }
+                                                    }
+
+                                                }
+
+
+                                                DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                                                int j = objBs.CreditDebitupdate("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, ddlLname.SelectedValue, Convert.ToDecimal(txtAmount.Text), txtdate, RbtnCD.SelectedValue, txtNar.Text, Convert.ToInt32(txtxNoteno.Text), Convert.ToInt32(DayBookID), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), dstd, Ledger);
+                                                Response.Redirect("DebitNoteGrid.aspx");
+
+
+                                            }
+                                            else if (Convert.ToInt32(Ledger) == 2)
+                                            {
+                                                gvledgrid.Visible = false;
+                                                TransPaymentGrid.Visible = true;
+
+
+                                                DataTable dttt;
+                                                DataRow dr;
+                                                DataColumn dct;
+                                                DataSet dstd = new DataSet();
+                                                dttt = new DataTable();
+                                                dct = new DataColumn("DC_NO");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Bill_NO");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("DC_Date");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("BillAmount");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Balance");
+                                                dttt.Columns.Add(dct);
+
+                                                dct = new DataColumn("Amount");
+                                                dttt.Columns.Add(dct);
+                                                dstd.Tables.Add(dttt);
+
+                                                for (int vLoop = 0; vLoop < TransPaymentGrid.Rows.Count; vLoop++)
+                                                {
+                                                    Label txttt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtDCNo");
+                                                    Label txttt1 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillno");
+                                                    // Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    Label txt = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillDate");
+                                                    recdate = DateTime.ParseExact(txt.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                                                    Label txttd = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBillAmount");
+                                                    Label txttd123 = (Label)TransPaymentGrid.Rows[vLoop].FindControl("txtBalance");
+                                                    TextBox txttdtt = (TextBox)TransPaymentGrid.Rows[vLoop].FindControl("txtAmount");
+
+                                                    dr = dttt.NewRow();
+                                                    dr["DC_NO"] = txttt.Text;
+                                                    dr["Bill_NO"] = txttt1.Text;
+                                                    dr["BillAmount"] = txttd.Text;
+                                                    dr["Balance"] = txttd123.Text;
+                                                    dr["DC_Date"] = recdate;
+                                                    dr["Amount"] = Convert.ToDouble(txttdtt.Text);
+                                                    //dr["Balance"] = Convert.ToDouble(txttd123.Text) - Convert.ToDouble(txttdtt.Text);
+                                                    if (Convert.ToDouble(txttdtt.Text) > 0)
+                                                    {
+                                                        dstd.Tables[0].Rows.Add(dr);
+                                                    }
+
+                                                    //dstd.Tables[0].Rows.Add(dr);
+
+                                                    decimal amount;
+                                                    decimal balance;
+                                                    decimal dTotal = 0;
+                                                    decimal Dtotal = 0;
+
+                                                    amount = Convert.ToDecimal(txttdtt.Text);
+                                                    balance = Convert.ToDecimal(txttd123.Text);
+
+                                                    if (amount > balance)
+                                                    {
+                                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Amount is  greater-than  Balance!');", true);
+                                                        return;
+                                                    }
+
+                                                    if (dstd.Tables[0].Rows.Count > 0)
+                                                    {
+
+                                                        for (int i = 0; i < dstd.Tables[0].Rows.Count; i++)
+                                                        {
+                                                            dTotal += Convert.ToDecimal(dstd.Tables[0].Rows[i]["Amount"].ToString());
+                                                        }
+                                                        Dtotal = dTotal;
+                                                        if (Dtotal > Convert.ToDecimal(txtAmount.Text))
+                                                        {
+                                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Totalamount is  greater-than  Amount!');", true);
+                                                            return;
+                                                        }
+                                                    }
+
+                                                }
+
+                                                DateTime txtdate = DateTime.ParseExact(txtDCDate.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                                                int j = objBs.CreditDebitupdate("tblDayBook_" + sTableName, "tblCreditDebitNote_" + sTableName, "tblTransPayment_" + sTableName, "tblTransReceipt_" + sTableName, ddlLname.SelectedValue, Convert.ToDecimal(txtAmount.Text), txtdate, RbtnCD.SelectedValue, txtNar.Text, Convert.ToInt32(txtxNoteno.Text), Convert.ToInt32(DayBookID), ddlLname.SelectedItem.Text, "tblAuditMaster_" + sTableName, Convert.ToString(EmpId), dstd, Ledger);
+                                                Response.Redirect("DebitNoteGrid.aspx");
+
+                                            }
+
+                                        }
             }
         }
 
@@ -763,6 +766,7 @@ namespace Billing.Accountsbootstrap
                     }
 
                 }
+                    
                 else if (Convert.ToInt32(Ledger) == 2)
                 {
                     gvledgrid.Visible = false;

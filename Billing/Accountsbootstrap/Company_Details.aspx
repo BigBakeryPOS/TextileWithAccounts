@@ -103,14 +103,7 @@
                                     <asp:TextBox CssClass="form-control" ID="txtmobileno" MaxLength="10" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <%--<div class="form-group">
-                                            <label>Mobile No</label>
-                                            
-                                            <asp:TextBox CssClass="form-control" ID="txtmobileno" runat="server"></asp:TextBox>
-                                        </div>--%>
-                            <div class="form-group">
+                              <div class="form-group">
                                 <label>
                                     Phone No</label>
                                 <%--  <asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="phono" controltovalidate="txtphoneno" Text="*"  errormessage="Please enter Phone No" style="color:Red" />--%>
@@ -122,24 +115,18 @@
                                 <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
                                 <asp:TextBox CssClass="form-control" ID="txtaddress" MaxLength="150" runat="server"></asp:TextBox>
                             </div>
-                            <div class="form-group">
+                           
+                          
+
+                        </div>
+                      
+                        <div class="col-lg-3">
+                             <div class="form-group">
                                 <label>
                                     Area</label>
                                 <%-- <asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="area" controltovalidate="txtarea" Text="*"  errormessage="Please enter Area" style="color:Red" />--%>
                                 <asp:TextBox CssClass="form-control" ID="txtarea" MaxLength="30" runat="server"></asp:TextBox>
                             </div>
-                            <%--<label>Opening Balance</label>
-                                        <div class="form-group input-group">
-                                            <asp:TextBox CssClass="form-control" ID="txtblnce" runat="server" style="text-align:right" ></asp:TextBox>
-                                            
-                                        </div>--%>
-                            <%--<div class="form-group">
-                                            <label>Opening Balance</label>
-                                            <asp:TextBox CssClass="form-control" ID="txtblnce" placeholder="For Ex: 0.00" runat="server" style="text-align:right"></asp:TextBox>
-                                        </div>
-                            --%>
-                        </div>
-                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label>
                                     Country</label>
@@ -184,33 +171,7 @@
                                 </asp:DropDownList>
                             </div>
 
-                               <div class="form-grop">
-                                    <label>
-                                        Logo Upload:
-                                    </label>
-                                    <asp:Image ID="img_Photo" runat="server" class="img-fluid" Height="100px" Width="100px" />
-                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                        <ContentTemplate>
-                                            <label>
-                                                Image Upload</label>
-                                            <asp:FileUpload ID="FileUpload1" runat="server" />
-                                            <br />
-                                            <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary"
-                                                OnClick="btnUpload_Clickimg" Width="100px" />
-                                        
-                                            <asp:Label ID="lblFile_Path" runat="server" Visible="false"></asp:Label>
-                                        </ContentTemplate>
-                                        <Triggers>
-                                            <asp:PostBackTrigger ControlID="btnUpload" />
-                                          
-                                        </Triggers>
-                                    </asp:UpdatePanel>
-                                </div>
-
-                        </div>
-                        <!-- /.col-lg-6 (nested) -->
-                        <div class="col-lg-3">
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label>
                                     Pincode</label>
                                 <%--   <asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="pincode" controltovalidate="txtpincode" Text="*"  errormessage="Please enter Pin Cod!" style="color:Red" />--%>
@@ -219,7 +180,14 @@
                                     Style="color: Red" />
                                 <asp:TextBox CssClass="form-control" ID="txtpincode" MaxLength="6" runat="server"></asp:TextBox>
                             </div>
-                            <div class="form-group">
+                           
+
+                               
+
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+                        <div class="col-lg-3">
+                             <div class="form-group">
                                 <label>
                                     E-mail</label>
                                 <asp:RegularExpressionValidator runat="server" ID="RegularExpressionValidator2" ValidationGroup="val1"
@@ -228,6 +196,31 @@
                                 <asp:TextBox CssClass="form-control" ID="txtemail" placeholder="For Ex: test@gmail.com"
                                     runat="server"></asp:TextBox>
                             </div>
+                             <div class="form-group">
+                                <label>
+                                    BankName</label>
+                                <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
+                                <asp:TextBox CssClass="form-control" ID="txtbankname"  runat="server"></asp:TextBox>
+                            </div>
+                             <div class="form-group">
+                                <label>
+                                    Bank Address</label>
+                                <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
+                                <asp:TextBox CssClass="form-control" ID="txtbankAddress" TextMode="MultiLine" runat="server"></asp:TextBox>
+                            </div>
+                             <div class="form-group">
+                                <label>
+                                    Account Number</label>
+                                <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
+                                <asp:TextBox CssClass="form-control" ID="txtaccountnumber" runat="server"></asp:TextBox>
+                            </div>
+                             <div class="form-group">
+                                <label>
+                                    SwiftCode</label>
+                                <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
+                                <asp:TextBox CssClass="form-control" ID="txtswiftcode"  runat="server"></asp:TextBox>
+                            </div>
+                           
                         </div>
                         <div class="col-lg-3">
                             <%--<div class="form-group">
@@ -253,6 +246,28 @@
                                     PAN Number</label>
                                 <asp:TextBox CssClass="form-control" ID="txtpan" runat="server"></asp:TextBox>
                             </div>
+                            <div class="form-grop">
+                                    <label>
+                                        Logo Upload:
+                                    </label>
+                                    <asp:Image ID="img_Photo" runat="server" class="img-fluid" Height="100px" Width="100px" />
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate>
+                                            <label>
+                                                Image Upload</label>
+                                            <asp:FileUpload ID="FileUpload1" runat="server" />
+                                            <br />
+                                            <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btn btn-primary"
+                                                OnClick="btnUpload_Clickimg" Width="100px" />
+                                        
+                                            <asp:Label ID="lblFile_Path" runat="server" Visible="false"></asp:Label>
+                                        </ContentTemplate>
+                                        <Triggers>
+                                            <asp:PostBackTrigger ControlID="btnUpload" />
+                                          
+                                        </Triggers>
+                                    </asp:UpdatePanel>
+                                </div>
                             <%--<asp:Button ID="btnupdate" runat="server" class="btn btn-success" Text="Update" OnClick="Update_Click" />--%>
                             <%--<asp:Button ID="btnedit" runat="server" class="btn btn-warning" Text="Edit/Delete" OnClick="Edit_Click" />--%>
                         </div>

@@ -207,7 +207,7 @@ namespace Billing.Accountsbootstrap
                         ddlCurrency.SelectedValue = ds.Tables[0].Rows[0]["CurrencyId"].ToString();
                         ddlProvince.SelectedValue = ds.Tables[0].Rows[0]["Province"].ToString();
                         txtcontactpersonname.Text = ds.Tables[0].Rows[0]["ContacrPerson"].ToString();
-
+                        txtgstno.Text = ds.Tables[0].Rows[0]["GSTINNO"].ToString();
                         btnadd.Text = "Update";
 
                         #endregion
@@ -834,7 +834,7 @@ namespace Billing.Accountsbootstrap
                 }
                 else
                 {
-                    int ledgerID = objBs.insertLedger(Convert.ToInt32(ddlPartyType.SelectedValue), txtCompanyName.Text, txtCompanyCode.Text, txtPhone.Text, txtMobile.Text, txtaddress.Text, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlState.SelectedValue), Cityid, ddlState.SelectedItem.Text, City, txtpincode.Text, txtFax.Text, txtemail.Text, txtWebSite.Text, txtPaymentMode.Text, txtTerms.Text, txtDays.Text, txtNatureofContract.Text, txtStrength.Text, txtFinalDestination.Text, ddlShipmentMode.SelectedValue, txtACCode.Text, ddlIsActive.SelectedValue, ddlIsForeign.SelectedValue, Convert.ToInt32(ddlCurrency.SelectedValue), Convert.ToInt32(lblUserID.Text), txtcontactpersonname.Text, Status, ApprovedBy, Narration, EntryBy, my_String, drpfollowedby.SelectedValue, leadid, stus, Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(ddlGroup.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue));
+                    int ledgerID = objBs.insertLedger(Convert.ToInt32(ddlPartyType.SelectedValue), txtCompanyName.Text, txtCompanyCode.Text, txtPhone.Text, txtMobile.Text, txtaddress.Text, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlState.SelectedValue), Cityid, ddlState.SelectedItem.Text, City, txtpincode.Text, txtFax.Text, txtemail.Text, txtWebSite.Text, txtPaymentMode.Text, txtTerms.Text, txtDays.Text, txtNatureofContract.Text, txtStrength.Text, txtFinalDestination.Text, ddlShipmentMode.SelectedValue, txtACCode.Text, ddlIsActive.SelectedValue, ddlIsForeign.SelectedValue, Convert.ToInt32(ddlCurrency.SelectedValue), Convert.ToInt32(lblUserID.Text), txtcontactpersonname.Text, Status, ApprovedBy, Narration, EntryBy, my_String, drpfollowedby.SelectedValue, leadid, stus, Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(ddlGroup.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue),txtgstno.Text );
 
                     for (int vLoop = 0; vLoop < GVPerson.Rows.Count; vLoop++)
                     {
@@ -878,7 +878,7 @@ namespace Billing.Accountsbootstrap
                 }
                 else
                 {
-                    int UpLedgerID = objBs.UpdateLedgerNew(Convert.ToInt32(ddlPartyType.SelectedValue), txtCompanyName.Text, txtCompanyCode.Text, txtPhone.Text, txtMobile.Text, txtaddress.Text, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlState.SelectedValue), Cityid, ddlState.SelectedItem.Text, City, txtpincode.Text, txtFax.Text, txtemail.Text, txtWebSite.Text, txtPaymentMode.Text, txtTerms.Text, txtDays.Text, txtNatureofContract.Text, txtStrength.Text, txtFinalDestination.Text, ddlShipmentMode.SelectedValue, txtACCode.Text, ddlIsActive.SelectedValue, ddlIsForeign.SelectedValue, Convert.ToInt32(ddlCurrency.SelectedValue), Convert.ToInt32(lblUserID.Text), Convert.ToInt32(LedgerID), txtcontactpersonname.Text, my_String, drpfollowedby.SelectedValue,Convert.ToInt32(ddlProvince.SelectedValue),Convert.ToInt32(ddlGroup.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue));
+                    int UpLedgerID = objBs.UpdateLedgerNew(Convert.ToInt32(ddlPartyType.SelectedValue), txtCompanyName.Text, txtCompanyCode.Text, txtPhone.Text, txtMobile.Text, txtaddress.Text, Convert.ToInt32(ddlCountry.SelectedValue), Convert.ToInt32(ddlState.SelectedValue), Cityid, ddlState.SelectedItem.Text, City, txtpincode.Text, txtFax.Text, txtemail.Text, txtWebSite.Text, txtPaymentMode.Text, txtTerms.Text, txtDays.Text, txtNatureofContract.Text, txtStrength.Text, txtFinalDestination.Text, ddlShipmentMode.SelectedValue, txtACCode.Text, ddlIsActive.SelectedValue, ddlIsForeign.SelectedValue, Convert.ToInt32(ddlCurrency.SelectedValue), Convert.ToInt32(lblUserID.Text), Convert.ToInt32(LedgerID), txtcontactpersonname.Text, my_String, drpfollowedby.SelectedValue,Convert.ToInt32(ddlProvince.SelectedValue),Convert.ToInt32(ddlGroup.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue),txtgstno.Text );
 
                     for (int vLoop = 0; vLoop < GVPerson.Rows.Count; vLoop++)
                     {

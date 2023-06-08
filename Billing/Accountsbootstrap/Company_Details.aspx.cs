@@ -16,6 +16,7 @@ namespace Billing.Accountsbootstrap
     public partial class Pranav_Details : System.Web.UI.Page
     {
         BSClass objBs = new BSClass();
+        
         string sTableName = string.Empty;
         string comppany = string.Empty;
 
@@ -258,7 +259,7 @@ namespace Billing.Accountsbootstrap
 
                     else
                     {
-                        int iStatus = objBs.CompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, txttin.Text,txtcst.Text,txtpan.Text,txtcompanycode.Text,ddlCountry.SelectedValue,ddlState.SelectedValue,lblFile_Path.Text );
+                         int iStatus = objBs.CompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, txttin.Text,txtcst.Text,txtpan.Text,txtcompanycode.Text,ddlCountry.SelectedValue,ddlState.SelectedValue,lblFile_Path.Text,txtbankname.Text ,txtbankAddress.Text ,txtaccountnumber.Text,txtswiftcode.Text  );
                     }
 
                 }
@@ -266,7 +267,7 @@ namespace Billing.Accountsbootstrap
 
             else
             {
-                int iStatus = objBs.EditCompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, Convert.ToInt32(txtcompanyID.Text), txttin.Text, txtcst.Text, txtpan.Text, txtcompanycode.Text, ddlCountry.SelectedValue, ddlState.SelectedValue,lblFile_Path.Text );
+               int iStatus = objBs.EditCompanyDetails(txtcompanyname.Text, txtmobileno.Text, txtphoneno.Text, txtarea.Text, txtaddress.Text, ddlCity.SelectedValue, txtpincode.Text, txtemail.Text, Convert.ToInt32(txtcompanyID.Text), txttin.Text, txtcst.Text, txtpan.Text, txtcompanycode.Text, ddlCountry.SelectedValue, ddlState.SelectedValue,lblFile_Path.Text, txtbankname.Text, txtbankAddress.Text, txtaccountnumber.Text, txtswiftcode.Text);
 
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Sucessfully Updated ');", true);
             }

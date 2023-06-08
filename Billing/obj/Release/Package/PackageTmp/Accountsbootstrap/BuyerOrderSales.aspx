@@ -121,13 +121,25 @@
                         <div class="col-lg-12">
                             <div class="col-lg-2">
                                 <div class="form-group">
+                                    <br />
+                                    <asp:RadioButtonList ID="rdbselect" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="rdbselect_SelectedIdexChanged"  >
+                                        <asp:ListItem Value="1" Selected="True">Direct Sales</asp:ListItem>
+                                        <asp:ListItem Value="2">From Exec</asp:ListItem>
+
+                                    </asp:RadioButtonList>
+                                    </div>
+                                 <div class="form-group">
                                     <label>
                                         Inv. No. :</label>
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtInvNo"
                                         ValidationGroup="val1" Text="*" ErrorMessage="Please Enter Inv. No." Style="color: Red" />
                                     <asp:TextBox ID="txtInvNo" runat="server" CssClass="form-control center-block" Enabled="false"></asp:TextBox>
                                 </div>
-                                <div class="form-group">
+                              
+                                </div>
+                             <div class="col-lg-2">
+                                <div class="form-group" runat="server" visible="true">
+                                      <div class="form-group">
                                     <label>
                                         Inv. Date:</label>
                                     <asp:TextBox ID="txtInvDate" runat="server" CssClass="form-control"></asp:TextBox>
@@ -135,7 +147,6 @@
                                         EnabledOnClient="true" Format="dd/MM/yyyy" runat="server" CssClass="cal_Theme1">
                                     </ajaxToolkit:CalendarExtender>
                                 </div>
-                                <div class="form-group" runat="server" visible="true">
                                     <label>
                                         Province</label>
                                     <asp:CompareValidator ID="CompareValidator7" runat="server" ValidationGroup="val1"
@@ -148,8 +159,11 @@
                                         <asp:ListItem Text="Outer" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                            </div>
-                            <div class="col-lg-2">
+                          
+                           
+                                 </div>
+                             <div class="col-lg-2">
+                                 
                                 <div class="form-group">
                                     <label>
                                         Party Code:</label>
@@ -161,13 +175,20 @@
                                     </asp:DropDownList>
                                 </div>
                                 <div class="form-group">
+
                                     <label>
                                         Payment Mode</label>
                                     <asp:DropDownList ID="ddlPayMode" OnSelectedIndexChanged="ddlPayMode_SelectedIndexChanged"
                                         AutoPostBack="true" runat="server" CssClass="form-control">
                                     </asp:DropDownList>
+                                      <asp:CompareValidator ID="CompareValidator1" runat="server" ValidationGroup="val1"
+                                        Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlPayMode"
+                                        ValueToCompare="Select Paymode" Operator="NotEqual" Type="String" ErrorMessage="Please Select Pay Code."></asp:CompareValidator>
                                 </div>
-                                <div class="form-group">
+                               
+                            </div>
+                            <div class="col-lg-2"  >
+                                 <div class="form-group">
                                     <label>
                                         GST Type</label>
                                     <asp:DropDownList ID="drpGSTType" AutoPostBack="true" runat="server" CssClass="form-control">
@@ -175,8 +196,7 @@
                                         <asp:ListItem Text="Inclusive" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                            </div>
-                            <div class="col-lg-2">
+                                <div  id="divexec" runat="server" visible="false">
                                 <div class="form-group">
                                     <asp:TextBox ID="txtExcNo" runat="server" Width="100%" AutoComplete="off" placeholder="Find ExcNo"
                                         onkeyup="SearchEmployees(this,'#chkExcNo');"></asp:TextBox>
@@ -192,6 +212,7 @@
                                     <div class="col-lg-1">
                                         <asp:Button ID="btnSearch" runat="server" class="btn btn-success" Text="Search" OnClick="btnSearch_OnClick"
                                             Width="100px" />
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,6 +244,7 @@
                         </div>
                     </div>
                 </div>
+               
                 <div class="col-lg-12">
                     <div class="col-lg-10">
                         <div id="div2" runat="server" style="overflow: auto; height: 150px; width: 100%">

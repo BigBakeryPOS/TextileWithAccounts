@@ -9,13 +9,12 @@ using DataLayer;
 using CommonLayer;
 using System.Text;
 using System.Data;
-
 namespace Billing.Accountsbootstrap
 {
     public partial class BuyerSalesOrderPrint : System.Web.UI.Page
     {
         BSClass objBs = new BSClass();
-
+       
         double Qty = 0; double Amount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -29,8 +28,8 @@ namespace Billing.Accountsbootstrap
                     #region PurchaseOrder Print
 
 
-
                     DataSet ds = objBs.BuyerSalesOrderPrint(Convert.ToInt32(POId));
+                   
                     if (ds.Tables[0].Rows.Count > 0)
                     {
                         DataSet ds1 = objBs.Getcompanydetails();
@@ -69,8 +68,7 @@ namespace Billing.Accountsbootstrap
                         gvItemProcessOrder.DataBind();
 
                     }
-
-
+                  
                     #endregion
 
                 }
@@ -92,6 +90,10 @@ namespace Billing.Accountsbootstrap
             }
         }
 
+
+       
+
+      
         protected void btnexit_Click(object sender, EventArgs e)
         {
             Response.Redirect("BuyerOrderSalesGrid.aspx");

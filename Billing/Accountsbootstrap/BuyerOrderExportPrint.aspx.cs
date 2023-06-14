@@ -44,7 +44,7 @@ namespace Billing.Accountsbootstrap
                         lblbankaddress.Text = dsCompanyDetails.Tables[0].Rows[0]["BankAddress"].ToString();
                         lblaccountnumer.Text = dsCompanyDetails.Tables[0].Rows[0]["AccountNumber"].ToString();
                         lblswiftcode.Text = dsCompanyDetails.Tables[0].Rows[0]["Swiftcode"].ToString();
-                        lbldestination.Text = ds.Tables[0].Rows[0]["Finaldestination"].ToString();
+                        lbldestination.Text = ds.Tables[0].Rows[0]["Finaldestination1"].ToString();
                         // lblFAddress.Text = dsCompanyDetails.Tables[0].Rows[0]["Address"].ToString();
                         //lblFAreaandPincode.Text = dsCompanyDetails.Tables[0].Rows[0]["Area"].ToString() + " - " + dsCompanyDetails.Tables[0].Rows[0]["Pincode"].ToString();
                         // lblFGST.Text = dsCompanyDetails.Tables[0].Rows[0]["Tin"].ToString();
@@ -75,7 +75,7 @@ namespace Billing.Accountsbootstrap
                         lblprecarrierby.Text = ds.Tables[0].Rows[0]["precarriageby"].ToString();
                         lblplaceofcarrier.Text = ds.Tables[0].Rows[0]["placeofprecarrier1"].ToString();
                         lblorigin.Text = ds.Tables[0].Rows[0]["originplace"].ToString();
-                        lbldestination.Text = ds.Tables[0].Rows[0]["FinalDestination"].ToString();
+                       // lbldestination.Text = ds.Tables[0].Rows[0]["FinalDestination"].ToString();
                         lblloadingport.Text = ds.Tables[0].Rows[0]["Portofloading1"].ToString();
                         lbldischargeport.Text = ds.Tables[0].Rows[0]["portofdischarge1"].ToString();
                         lbldeliveryplace.Text = ds.Tables[0].Rows[0]["portofdelivery1"].ToString();

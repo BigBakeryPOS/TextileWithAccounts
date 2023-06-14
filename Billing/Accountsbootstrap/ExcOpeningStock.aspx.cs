@@ -87,6 +87,7 @@ namespace Billing.Accountsbootstrap
                         ddlCompany.Enabled = false;
 
                         txtExcNo.Text = dsOPExc.Tables[0].Rows[0]["ExcNo"].ToString();
+                       // txtExcNo.Text = "0";
                         txtExcNo.Enabled = false;
 
                         btnSave.Text = "Save";
@@ -640,10 +641,14 @@ namespace Billing.Accountsbootstrap
 
         protected void btnSave_OnClick(object sender, EventArgs e)
         {
-            if (txtExcNo.Text == "")
+            //if (txtExcNo.Text == "")
+            //{
+            //    ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Check ExcNo.')", true);
+            //    return;
+            //}
+            if(txtExcNo.Text =="")
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Check ExcNo.')", true);
-                return;
+                txtExcNo.Text = "0";  
             }
             if (GVItem.Rows.Count == 0)
             {
@@ -660,13 +665,16 @@ namespace Billing.Accountsbootstrap
 
             HttpCookie nameCookie = Request.Cookies["Name"];
             string MaxRowId = nameCookie != null ? nameCookie.Value.Split('=')[1] : "undefined";
+            int OPExcStockId;
+           
 
-            int OPExcStockId = objBs.InsertExcOpeningStockEntry(Convert.ToInt32(ddlCompany.SelectedValue), txtExcNo.Text, MaxRowId);
+                 OPExcStockId = objBs.InsertExcOpeningStockEntry(Convert.ToInt32(ddlCompany.SelectedValue), txtExcNo.Text, MaxRowId);
+           
 
             DataTable CurrentTable1 = (DataTable)ViewState["CurrentTable1"];
             int TransOPExcStockId = objBs.InsertTransExcOpeningStockEntryItems(OPExcStockId, CurrentTable1);
-
-            DataTable CurrentTable2 = (DataTable)ViewState["CurrentTable2"];
+           
+                DataTable CurrentTable2 = (DataTable)ViewState["CurrentTable2"];
             int TransOPExcStockSizeId = objBs.InsertTransExcOpeningStockEntrySize(txtExcNo.Text, Convert.ToInt32(ddlCompany.SelectedValue), OPExcStockId, CurrentTable2, CurrentTable1);
 
             Response.Redirect("ExcOpeningStockGrid.aspx");

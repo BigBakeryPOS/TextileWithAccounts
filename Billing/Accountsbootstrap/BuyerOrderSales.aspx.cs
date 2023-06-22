@@ -408,7 +408,7 @@ namespace Billing.Accountsbootstrap
                     drNew["BeforeTAX"] = "0";
                     if (rdbselect.SelectedValue == "1")
                     {
-                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["Excno"] + "' and RowId='" + Dr["RowId"] + "' ");
+                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["StyleNo"] + "' and RowId='" + Dr["RowId"] + "' ");
                         drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
                     }
                     else
@@ -513,7 +513,7 @@ namespace Billing.Accountsbootstrap
                     if (rdbselect.SelectedValue=="1")
                     {
                         DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
-                        DataRow[] RowsStyleQty = DTStyle.Select("Excno='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+                        DataRow[] RowsStyleQty = DTStyle.Select("styleno='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
                         AllID.Text = RowsStyleQty[0]["AllID"].ToString();
                         BuyerOrderMasterCuttingId.Text = RowsStyleQty[0]["BuyerOrderMasterCuttingId"].ToString();
                         RowId.Text = RowsStyleQty[0]["RowId"].ToString();

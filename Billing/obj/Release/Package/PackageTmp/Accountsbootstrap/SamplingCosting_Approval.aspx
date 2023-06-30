@@ -717,6 +717,33 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-3">
+                                            <asp:GridView ID="GVSizes" AutoGenerateColumns="False" GridLines="Both" runat="server">
+                                                <HeaderStyle BackColor="#59d3b4" BorderStyle="Solid" BorderWidth="1px" BorderColor="Black"
+                                                    Font-Names="arial" Font-Size="Smaller" HorizontalAlign="Center" />
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="SNo" HeaderStyle-Width="2%">
+                                                        <ItemTemplate>
+                                                            <%#Container.DataItemIndex+1 %>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Size" HeaderStyle-Width="100px" ItemStyle-Font-Size="Large"
+                                                        ItemStyle-Font-Bold="true">
+                                                        <ItemTemplate>
+                                                            <asp:HiddenField ID="hdSize" runat="server" Value='<%#Eval("SizeId") %>' />
+                                                            <asp:Label ID="lblSize" Height="30px" Width="100px" runat="server" Text='<%#Eval("Size")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Rate" HeaderStyle-Width="100px">
+                                                        <ItemTemplate>
+                                                            <asp:TextBox ID="txtQty" Height="30px" Width="100%" runat="server" Text='<%#Eval("Rate","{0:n}")%>'></asp:TextBox>
+                                                            <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender312fff" runat="server"
+                                                                TargetControlID="txtQty" FilterType="Custom,Numbers" ValidChars="." />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
                             </div>
                         </div>
                     </div>

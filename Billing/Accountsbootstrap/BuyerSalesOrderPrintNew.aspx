@@ -378,7 +378,7 @@
                                         <td>
                                             <b>
                                                 <label>
-                                                   <%-- Despatched By :--%>
+                                                    Dispatch Doc No :
                                                 </label>
                                             </b>
                                             <asp:Label ID="lblDespatchedBy" runat="server"></asp:Label>
@@ -386,7 +386,7 @@
                                         <td>
                                             <b>
                                                 <label>
-                                                    <%--Despatched Through :--%>
+                                                   Dispatched Through :
                                                 </label>
                                             </b>
                                             <asp:Label ID="lbldespatchthrogh" runat="server" Text=""></asp:Label>
@@ -396,10 +396,10 @@
                                         <td colspan="2">
                                             <b>
                                                 <label>
-                                                    <%--Terms Of Delivery :--%>
+                                                    Dispatch Date :
                                                 </label>
                                             </b>
-                                            <br />
+                                          
                                             <asp:Label ID="lbltermsofdelivery" runat="server" Text=""></asp:Label>
                                             <asp:Label ID="lblProvince" runat="server" Text="" Visible="false"></asp:Label>
                                         </td>
@@ -436,7 +436,7 @@
                                         <asp:TemplateField HeaderText="Description of Goods" ItemStyle-HorizontalAlign="left"
                                             ItemStyle-Width="47.9%">
                                             <ItemTemplate>
-                                                <asp:Label ID="lblProduct" runat="server" Text='<%#Eval("Salesfortype") %>' Style="text-align: left;"></asp:Label>
+                                                <asp:Label ID="lblProduct" runat="server" Text='<%#Eval("Styleno") %>' Style="text-align: left;"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                        
@@ -446,9 +446,9 @@
                                     <asp:Label ID="lblGST" runat="server" Text='<%#Eval("GST") %>' Style="text-align: Center;"></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>--%>
-                                         <asp:BoundField DataField="Styleno" Visible="true" HeaderText="Style" HeaderStyle-HorizontalAlign="Left" />
+                                         <asp:BoundField DataField="Styleno" Visible="false" HeaderText="Style" HeaderStyle-HorizontalAlign="Left" />
                          <asp:BoundField DataField="size" Visible="true" HeaderText="Size" HeaderStyle-HorizontalAlign="Left" />
-                        <asp:BoundField DataField="Color" HeaderText="Color" FooterStyle-HorizontalAlign="Right"
+                        <asp:BoundField DataField="Color" HeaderText="Color" Visible="false" FooterStyle-HorizontalAlign="Right"
                             FooterStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Left" />
                                         <asp:TemplateField HeaderText="Quantity" ItemStyle-HorizontalAlign="center" ItemStyle-Width="10%">
                                             <ItemTemplate>
@@ -468,7 +468,7 @@
                                         <asp:TemplateField HeaderText="GST" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="8%">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPer" runat="server" Text='<%#Eval("GST") %>' Style="text-align: Center;"></asp:Label><br />
-                                                <asp:Label ID="lbltax" runat="server" Text='<%#Eval("tax") %>'  Style="text-align: Center;"></asp:Label>
+                                                <asp:Label ID="lbltax" runat="server" Text='<%#Eval("tax","{0:n2}") %>'  Style="text-align: Center;"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                        

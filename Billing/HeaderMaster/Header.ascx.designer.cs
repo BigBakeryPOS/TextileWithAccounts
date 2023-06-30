@@ -249,6 +249,15 @@ namespace Billing.HeaderMaster
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li20;
 
         /// <summary>
+        /// CompanyMaster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CompanyMaster;
+
+        /// <summary>
         /// Li21 control.
         /// </summary>
         /// <remarks>

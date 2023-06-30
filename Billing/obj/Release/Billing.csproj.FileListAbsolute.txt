@@ -32,7 +32,6 @@ C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Busines
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\CommonLayer.pdb
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.pdb
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\DataLayer.dll.config
-C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\bin\Newtonsoft.Json.xml
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Release\Billing.csproj.AssemblyReference.cache
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Release\Billing.csproj.CoreCompileInputs.cache
 C:\Users\ADMIN\Source\Repos\BigBakeryPOS\TextileWithAccounts\Billing\obj\Release\Billing.csproj.CopyComplete

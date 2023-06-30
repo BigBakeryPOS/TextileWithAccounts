@@ -29,16 +29,33 @@ namespace Billing.Accountsbootstrap
                 if (POId != null && POId != "")
                 {
                     #region PurchaseOrder Print
+                    DataSet ds2 = objBs.BuyerSalesOrderPrintnew(Convert.ToInt32(POId));
+                    DataSet ds=new DataSet();
+                    DataSet ds3 = new DataSet();
+                    if (ds2.Tables[0].Rows.Count>0)
+                    {
+                        if (ds2.Tables[0].Rows[0]["BuyerorderMasterCuttingId"].ToString() == "0")
+                        {
+                            ds = objBs.BuyerSalesOrderPrintDirect(Convert.ToInt32(POId));
+                            ds3= objBs.BuyerSalesOrderPrintDirectdespatch(Convert.ToInt32(POId));
+                        }
+                        else
+                        {
 
+                            ds = objBs.BuyerSalesOrderPrint(Convert.ToInt32(POId));
+                        }
 
-                    DataSet ds = objBs.BuyerSalesOrderPrint(Convert.ToInt32(POId));
+                    }
+
                    
+                    
                     if (ds.Tables[0].Rows.Count > 0)
                     {
-                        DataSet ds1 = objBs.Getcompanydetails();
+                       
+                        //DataSet ds1 = objBs.Getcompanydetails();
 
                         //DataSet dsCompanyDetails = objBs.GetSelectLedgerDetails(Convert.ToInt32(ds.Tables[0].Rows[0]["buyerid"].ToString()));
-                        DataSet dsCompanyDetails = objBs.GetSelectLedgerDetails(Convert.ToInt32(ds1.Tables[0].Rows[0]["Comapanyid"].ToString()));
+                        DataSet dsCompanyDetails = objBs.GetSelectLedgerDetails(Convert.ToInt32(ds.Tables[0].Rows[0]["Companyid"].ToString()));
                         lblFCompany.Text = dsCompanyDetails.Tables[0].Rows[0]["CompanyName"].ToString();
                         //lblCoName.Text = dsCompanyDetails.Tables[0].Rows[0]["CompanyName"].ToString();
 
@@ -64,6 +81,29 @@ namespace Billing.Accountsbootstrap
                         lblOrderDate.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["InvoiceDate"]).ToString("dd/MM/yyyy");
                         imglogo.ImageUrl= dsCompanyDetails.Tables[0].Rows[0]["Imagepath"].ToString();
                         lbltermspayment.Text = ds.Tables[0].Rows[0]["payment_mode"].ToString();
+                        lblBrBank.Text = dsCompanyDetails.Tables[0].Rows[0]["BankName"].ToString();
+                        lblBrBranch.Text = dsCompanyDetails.Tables[0].Rows[0]["BankAddress"].ToString();
+                        lblBrAccNo.Text = dsCompanyDetails.Tables[0].Rows[0]["AccountNumber"].ToString();
+                        lblBrIFSC.Text = dsCompanyDetails.Tables[0].Rows[0]["IFSCCode"].ToString();
+                        if (ds.Tables[0].Rows[0]["Isdespatch"].ToString() == "N")
+                        {
+
+                            lblDespatchedBy.Text = "";
+                            lbldespatchthrogh.Text = "";
+                            //if (ds.Tables[0].Rows[0]["LRDate"].ToString() != "")
+                            //{
+                                lbltermsofdelivery.Text = "";
+                           // }
+                        }
+                        if (ds.Tables[0].Rows[0]["Isdespatch"].ToString() == "Y")
+                        {
+                            lblDespatchedBy.Text = ds3.Tables[0].Rows[0]["LRNo"].ToString();
+                            lbldespatchthrogh.Text = ds3.Tables[0].Rows[0]["Transport"].ToString();
+                            if (ds3.Tables[0].Rows[0]["LRDate"].ToString() != "")
+                            {
+                                lbltermsofdelivery.Text = Convert.ToDateTime(ds3.Tables[0].Rows[0]["LRDate"]).ToString("dd/MM/yyyy"); ;
+                            }
+                        }
                         // lblOrderDateBetween.Text = Convert.ToDateTime(ds.Tables[0].Rows[0]["FromDate"]).ToString("dd/MM/yyyy") + "  To  " + Convert.ToDateTime(ds.Tables[0].Rows[0]["ToDate"]).ToString("dd/MM/yyyy");
                         //lblDeliveryPlace.Text = ds.Tables[0].Rows[0]["DeliveryPlace"].ToString();
                         //lblProcessOn.Text = ds.Tables[0].Rows[0]["Category"].ToString();
@@ -71,9 +111,9 @@ namespace Billing.Accountsbootstrap
                         DataSet dsItem = objBs.TransBuyerSalesOrderPrint(Convert.ToInt32(POId));
                         gvItemProcessOrder.DataSource = dsItem;
                         gvItemProcessOrder.DataBind();
-                        double tee = Convert.ToDouble(ds.Tables[0].Rows[0]["roundoff"]);
+                      //  double tee = Convert.ToDouble(ds.Tables[0].Rows[0]["roundoff"]);
                         //lblRoundOff.Text = tee.ToString("f2");
-                        lblAmountinwords.Text = objBs.changeToWords(Convert.ToDouble(tee).ToString("f2"), true);// "INR " + objBs.changeToWords(Convert.ToDouble(tee).ToString("f2"), true);
+                        //lblAmountinwords.Text = objBs.changeToWords(Convert.ToDouble(tee).ToString("f2"), true);// "INR " + objBs.changeToWords(Convert.ToDouble(tee).ToString("f2"), true);
 
 
                         #region GSTGrid
@@ -243,7 +283,8 @@ namespace Billing.Accountsbootstrap
                 e.Row.Cells[4].Text = "Total :";
                 e.Row.Cells[5].Text = Qty.ToString("f2");
                 e.Row.Cells[7].Text = Amount.ToString("f2");
-                e.Row.Cells[9].Text = TotalAmount.ToString("f2");
+                e.Row.Cells[9].Text = Math.Round(TotalAmount).ToString("f2");
+                lblAmountinwords.Text = objBs.changeToWords(Convert.ToDouble(Math.Round(TotalAmount)).ToString("f2"), true);// "INR " + objBs.changeToWords(Convert.ToDouble(tee).ToString("f2"), true);
             }
             //double Cash = Convert.ToDouble(txtCashAmount.Text);
             //double Total = Convert.ToDouble(Amount);

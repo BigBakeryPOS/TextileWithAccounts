@@ -50,7 +50,7 @@
            <li id="dashboard" runat="server" visible="false"><a href="../Accountsbootstrap/Home_Page.aspx">dashboard</a> </li>
             <li style="float: left" runat="server" visible="false" id="MMaster"><a href='#'>Master</a>
                 <ul>
-                    <li runat="server" visible="false"  id="itemhead"><a href="../Accountsbootstrap/CompanyGrid.aspx">Product Master</a>
+                    <li runat="server" visible="false"  id="itemhead"><a href='#'>Product Master</a>
                         <ul>
                            
                             <li runat="server" id="godownmaster" visible="false"><a href="../Accountsbootstrap/unitmaster.aspx">Unit Master</a></li>
@@ -69,7 +69,7 @@
 
                     </li>
 
-                    <li runat="server" visible="false" id="partytype"><a href="../Accountsbootstrap/CompanyGrid.aspx">Contact Master</a>
+                    <li runat="server" visible="false" id="partytype"><a href='#'>Contact Master</a>
                         <ul>
 
                             <li runat="server"  visible="true"><a href="../Accountsbootstrap/PartyType.aspx">PartyType</a></li>
@@ -81,6 +81,8 @@
                             <li runat="server" visible="false" id="empmaster"><a href="../Accountsbootstrap/Emp_gird.aspx">Employee Master</a></li>
                             <li runat="server" visible="true" id="machine"><a href="../Accountsbootstrap/mechineNoMaster.aspx">Machine Master</a></li>
                             <li runat="server" visible="false" id="Li20"><a href="../Accountsbootstrap/BarCodeGrid.aspx">Barcode Master</a></li>
+                             <li runat="server" visible="true" id="CompanyMaster"><a href="../Accountsbootstrap/CompanyGrid.aspx">Company Master</a></li>
+                            
                         </ul>
                     </li>
                 </ul>

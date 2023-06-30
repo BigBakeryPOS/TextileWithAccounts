@@ -34,10 +34,8 @@ namespace Billing.Accountsbootstrap
             YearCode = Request.Cookies["userInfo"]["YearCode"].ToString();
             if (!IsPostBack)
             {
-                DataSet dsInvNo = objBs.BuyerOrderSalesInv(YearCode);
-                string InvoiceNo = dsInvNo.Tables[0].Rows[0]["InvoiceNo"].ToString().PadLeft(4, '0');
-                txtInvNo.Text = " INV -  " + InvoiceNo + " / " + YearCode;
-                txtInvDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                //DataSet dsInvNo = objBs.BuyerOrderSalesInv(YearCode);
+               
 
                 DataSet dsset = objBs.getLedger_New1(lblContactTypeId.Text,Convert.ToInt32(rdbselect.SelectedValue));
                 if (dsset.Tables[0].Rows.Count > 0)
@@ -59,6 +57,27 @@ namespace Billing.Accountsbootstrap
                     ddlPayMode.Items.Insert(0, "Select Paymode");
                 }
 
+                DataSet dsCompany = objBs.GetCompanyDetails();
+                if (dsCompany.Tables[0].Rows.Count > 0)
+                {
+                    ddlCompany.DataSource = dsCompany.Tables[0];
+                    ddlCompany.DataTextField = "CompanyName";
+                    ddlCompany.DataValueField = "ComapanyID";
+                    ddlCompany.DataBind();
+                    //ddlCompany.Items.Insert(0, "CompanyName");
+                }
+                DataSet dsInvNo = objBs.BuyerOrderSalesInvwithcompany(YearCode, ddlCompany.SelectedValue);
+                string InvoiceNo = dsInvNo.Tables[0].Rows[0]["InvoiceNo"].ToString().PadLeft(4, '0');
+                if(ddlCompany.SelectedItem.Text== "NANDHINI FASHIONS")
+                {
+                    txtInvNo.Text = " N -  " + InvoiceNo + " / " + YearCode;
+                }
+                if (ddlCompany.SelectedItem.Text == "Nandhini Fab")
+                {
+                    txtInvNo.Text = " P -  " + InvoiceNo + " / " + YearCode;
+                }
+                txtInvDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
                 DataSet dsb = objBs.GetLedgers(4, sTableName);
                 if (dsb != null)
                 {
@@ -71,6 +90,8 @@ namespace Billing.Accountsbootstrap
                         ddlBank.Items.Insert(0, "Select Bank Name");
                     }
                 }
+
+               
 
                 string BuyerOrderSalesId = Request.QueryString.Get("BuyerOrderSalesId");
                 if (BuyerOrderSalesId != "" && BuyerOrderSalesId != null)
@@ -86,6 +107,7 @@ namespace Billing.Accountsbootstrap
                         txtInvDate.Text = Convert.ToDateTime(dsBOS.Tables[0].Rows[0]["InvoiceDate"]).ToString("dd/MM/yyyy");
                         ddlPartyCode.SelectedValue = dsBOS.Tables[0].Rows[0]["BuyerId"].ToString();
                         txtNarration.Text = dsBOS.Tables[0].Rows[0]["Narrations"].ToString();
+                        ddlCompany.SelectedValue = dsBOS.Tables[0].Rows[0]["CompanyId"].ToString();
 
                         DataSet dsExcStyle = objBs.BuyerOrderSalesStyles1(BuyerOrderSalesId);
 
@@ -134,8 +156,8 @@ namespace Billing.Accountsbootstrap
                             drNew["RowId"] = Dr["RowId"];
                             drNew["IssueQty"] = Dr["IssueQty"];
                             drNew["Rate"] = Dr["Rate"];
-                            drNew["Amount"] = (Convert.ToDouble(Dr["Qty"]) * Convert.ToDouble(Dr["Rate"])).ToString("f2");
-
+                            //drNew["Amount"] = (Convert.ToDouble(Dr["Qty"]) * Convert.ToDouble(Dr["Rate"])).ToString("f2");
+                            drNew["Amount"] = ( Convert.ToDouble(Dr["Rate"])).ToString("f2");
                             dstd.Tables[0].Rows.Add(drNew);
                             dtddd = dstd.Tables[0];
                         }
@@ -180,6 +202,8 @@ namespace Billing.Accountsbootstrap
                         dttt1.Columns.Add(dct1);
                         dct1 = new DataColumn("Rate");
                         dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Taxid");
+                        dttt1.Columns.Add(dct1);
                         dstd1.Tables.Add(dttt1);
 
                         foreach (DataRow Dr in dsExcStyleSize.Tables[0].Rows)
@@ -198,6 +222,7 @@ namespace Billing.Accountsbootstrap
                             drNew1["Size"] = Dr["Size"];
                             drNew1["IssueQty"] = Dr["IssueQty"];
                             drNew1["Rate"] = 0;
+                            drNew1["Taxid"] = Dr["taxid"];
                             dstd1.Tables[0].Rows.Add(drNew1);
                             dtddd1 = dstd1.Tables[0];
 
@@ -239,8 +264,22 @@ namespace Billing.Accountsbootstrap
                 po.Update();
             }
         }
+        protected void ddlCompany_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataSet dsInvNo = objBs.BuyerOrderSalesInvwithcompany(YearCode, ddlCompany.SelectedValue);
+            string InvoiceNo = dsInvNo.Tables[0].Rows[0]["InvoiceNo"].ToString().PadLeft(4, '0');
 
-        protected void ddlPartyCode_OnSelectedIndexChanged(object sender, EventArgs e)
+            if (ddlCompany.SelectedItem.Text == "NANDHINI FASHIONS")
+            {
+                txtInvNo.Text = " N -  " + InvoiceNo + " / " + YearCode;
+            }
+            if (ddlCompany.SelectedItem.Text == "Nandhini Fab")
+            {
+                txtInvNo.Text = " P -  " + InvoiceNo + " / " + YearCode;
+            }
+            txtInvDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+        }
+            protected void ddlPartyCode_OnSelectedIndexChanged(object sender, EventArgs e)
         {
            
                 divexec.Visible = true;
@@ -261,7 +300,7 @@ namespace Billing.Accountsbootstrap
                     }
 
 
-                    DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue),Convert.ToInt32(rdbselect.SelectedValue));
+                    DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue),Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue));
                     if (dsExc.Tables[0].Rows.Count > 0)
                     {
                         chkExcNo.DataSource = dsExc;
@@ -336,10 +375,10 @@ namespace Billing.Accountsbootstrap
                 }
             }
 
-            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids,Convert.ToInt32(rdbselect.SelectedValue));
+            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids,Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue));
             if (dsExcStyle.Tables[0].Rows.Count > 0)
             {
-                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids, Convert.ToInt32(rdbselect.SelectedValue));
+                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids, Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue));
 
                 DataSet dstd = new DataSet();
                 DataTable dtddd = new DataTable();
@@ -406,14 +445,15 @@ namespace Billing.Accountsbootstrap
                     drNew["SGST"] = "0";
                     drNew["IGST"] = "0";
                     drNew["BeforeTAX"] = "0";
+                   // drNew["Rate"] = Dr["Rate"];
                     if (rdbselect.SelectedValue == "1")
                     {
-                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["StyleNo"] + "' and RowId='" + Dr["RowId"] + "' ");
+                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["StyleNo"] + "'   ");
                         drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
                     }
                     else
                     {
-                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["BuyerOrderMasterCuttingId"] + "' and RowId='" + Dr["RowId"] + "' ");
+                        DataRow[] RowsStyleQty = dsExcStyleRate.Tables[0].Select("BuyerOrderMasterCuttingId='" + Dr["BuyerOrderMasterCuttingId"] + "' and RowId='" + Dr["RowId"] + "'   ");
                         drNew["Rate"] = RowsStyleQty[0]["Rate"].ToString();
                     }
                     drNew["Amount"] = 0;
@@ -428,7 +468,7 @@ namespace Billing.Accountsbootstrap
                 GVItem.DataSource = dtddd;
                 GVItem.DataBind();
 
-                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids,Convert.ToInt32(rdbselect.SelectedValue));
+                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids,Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue));
 
                 DataSet dstd1 = new DataSet();
                 DataTable dtddd1 = new DataTable();
@@ -462,6 +502,8 @@ namespace Billing.Accountsbootstrap
                 dttt1.Columns.Add(dct1);
                 dct1 = new DataColumn("Rate");
                 dttt1.Columns.Add(dct1);
+                dct1 = new DataColumn("Taxid");
+                dttt1.Columns.Add(dct1);
                 dstd1.Tables.Add(dttt1);
 
                 foreach (DataRow Dr in dsExcStyleSize.Tables[0].Rows)
@@ -479,7 +521,8 @@ namespace Billing.Accountsbootstrap
                     drNew1["TransSizeId"] = Dr["TransSizeId"];
                     drNew1["Size"] = Dr["Size"];
                     drNew1["IssueQty"] = Dr["IssueQty"];
-                    drNew1["Rate"] = 0;
+                   drNew1["Rate"] = Dr["Rate"];
+                    drNew1["Taxid"] = Dr["Taxid"];
                     dstd1.Tables[0].Rows.Add(drNew1);
                     dtddd1 = dstd1.Tables[0];
 
@@ -513,7 +556,7 @@ namespace Billing.Accountsbootstrap
                     if (rdbselect.SelectedValue=="1")
                     {
                         DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
-                        DataRow[] RowsStyleQty = DTStyle.Select("styleno='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+                        DataRow[] RowsStyleQty = DTStyle.Select("styleno='" + Ids[0].ToString() + "' ");
                         AllID.Text = RowsStyleQty[0]["AllID"].ToString();
                         BuyerOrderMasterCuttingId.Text = RowsStyleQty[0]["BuyerOrderMasterCuttingId"].ToString();
                         RowId.Text = RowsStyleQty[0]["RowId"].ToString();
@@ -573,7 +616,7 @@ namespace Billing.Accountsbootstrap
 
                         DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
 
-                        DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "' and RowId='" + Ids[1].ToString() + "' ");
+                        DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + Ids[0].ToString() + "'  ");
 
                         for (int i = 0; i < RowsSizeQty.Length; i++)
                         {
@@ -681,7 +724,7 @@ namespace Billing.Accountsbootstrap
                             drNew1["TransSizeId"] = RowsSizeQty[i]["TransSizeId"].ToString();
                             drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
                             drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
-                            drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
+                            drNew1["Rate"] = RowsStyleQty[0]["Rate"].ToString();
                             dstd1.Tables[0].Rows.Add(drNew1);
                             dtddd1 = dstd1.Tables[0];
                         }
@@ -775,8 +818,10 @@ namespace Billing.Accountsbootstrap
                 {
                     HiddenField hdQty = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdQty");
                     TextBox txtIssueQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtIssueQty");
+                    Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
                     if (txtIssueQty.Text == "")
                         txtIssueQty.Text = "0";
+                   
 
                     if (Convert.ToInt32(hdQty.Value) < Convert.ToInt32(txtIssueQty.Text))
                     {
@@ -786,10 +831,12 @@ namespace Billing.Accountsbootstrap
                     }
                 }
 
+
+
                 #region CurrentTable Removed
 
                 DataTable DTStyle = (DataTable)ViewState["CurrentTable1"];
-                DataRow[] RowsStyleQty = DTStyle.Select("BuyerOrderMasterCuttingId='" + BuyerOrderMasterCuttingId.Text + "' and RowId='" + RowId.Text + "' ");
+                DataRow[] RowsStyleQty = DTStyle.Select("StyleNo='" + StyleNo.Text + "' and RowId='" + RowId.Text + "' ");
 
                 for (int i = 0; i < RowsStyleQty.Length; i++)
                     RowsStyleQty[i].Delete();
@@ -798,7 +845,7 @@ namespace Billing.Accountsbootstrap
                 ViewState["CurrentTable1"] = DTStyle;
 
                 DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
-                DataRow[] RowsSizeQty = DTSize.Select("BuyerOrderMasterCuttingId='" + BuyerOrderMasterCuttingId.Text + "' and RowId='" + RowId.Text + "' ");
+                DataRow[] RowsSizeQty = DTSize.Select("BuyerordermastercuttingId='" + StyleNo.Text  + "' and RowId='" + RowId.Text + "' ");
 
                 for (int i = 0; i < RowsSizeQty.Length; i++)
                     RowsSizeQty[i].Delete();
@@ -809,13 +856,29 @@ namespace Billing.Accountsbootstrap
                 #endregion
 
                 double IssueQty = 0;
+                double TotRate = 0;
                 for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
                 {
                     TextBox txtIssueQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtIssueQty");
                     if (txtIssueQty.Text == "")
                         txtIssueQty.Text = "0";
                     IssueQty += Convert.ToDouble(txtIssueQty.Text);
+                    Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
+                    //if (txtIssueQty.Text == "")
+                    //    txtIssueQty.Text = "0";
+                    TotRate += Convert.ToDouble(lblRate.Text) * Convert.ToDouble(txtIssueQty.Text);
                 }
+               
+
+                //for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
+                //{
+                //    TextBox txtIssueQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtIssueQty");
+                //    Label  lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
+                //    //if (txtIssueQty.Text == "")
+                //    //    txtIssueQty.Text = "0";
+                //    TotRate += Convert.ToDouble(lblRate.Text ) * Convert.ToDouble(txtIssueQty.Text );
+                //   // IssueQty += Convert.ToDouble(txtIssueQty.Text);
+                //}
 
                 double Totamount = 0;
                 double TotCGST = 0;
@@ -882,45 +945,85 @@ namespace Billing.Accountsbootstrap
                 drNew["Qty"] = Qty.Text;
                 drNew["RowId"] = RowId.Text;
                 drNew["IssueQty"] = IssueQty;
-                drNew["Rate"] = Rate.Text;
+               // drNew["Rate"] = Rate.Text;
+                drNew["Rate"] = TotRate;
 
                 drNew["HSNCode"] = HSNCode.Text;
                 drNew["Tax"] = Tax.Text;
                 drNew["TaxID"] = TaxID.Text;
+                /*  if (drpGSTType.SelectedValue == "1")
+                  {
+                      drNew["Amount"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text)) + (Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100))).ToString("f2");
+                      if (ddlProvince.SelectedValue == "1")
+                      {
+                          drNew["CGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
+                          drNew["SGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
+                          drNew["IGST"] = "0";
+                      }
+                      else
+                      {
+                          drNew["CGST"] = "0";
+                          drNew["SGST"] = "0";
+                          drNew["IGST"] = Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100).ToString("f2");
+                      }
+                      drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text))).ToString("f2");
+                  }
+                  else
+                  {
+                      drNew["Amount"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text))).ToString("f2");
+                      if (ddlProvince.SelectedValue == "1")
+                      {
+                          drNew["CGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
+                          drNew["SGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
+                          drNew["IGST"] = "0";
+                      }
+                      else
+                      {
+                          drNew["CGST"] = "0";
+                          drNew["SGST"] = "0";
+                          drNew["IGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text)))).ToString("f2");
+                      }
+                      drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text)) - (Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))))).ToString("f2");
+                  }*/
+
+
+
                 if (drpGSTType.SelectedValue == "1")
                 {
-                    drNew["Amount"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text)) + (Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100))).ToString("f2");
+                    //drNew["Amount"] = Convert.ToDouble(Convert.ToDouble( TotRate ) + (Convert.ToDouble((IssueQty * TotRate) * Convert.ToDouble(Tax.Text) / 100))).ToString("f2");
+                    drNew["Amount"] = Convert.ToDouble(Convert.ToDouble(TotRate) + (Convert.ToDouble((TotRate) * Convert.ToDouble(Tax.Text) / 100))).ToString("f2");
                     if (ddlProvince.SelectedValue == "1")
                     {
-                        drNew["CGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
-                        drNew["SGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
+                        drNew["CGST"] = Convert.ToDouble((( TotRate) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
+                        drNew["SGST"] = Convert.ToDouble((( TotRate) * Convert.ToDouble(Tax.Text) / 100) / 2).ToString("f2");
                         drNew["IGST"] = "0";
                     }
                     else
                     {
                         drNew["CGST"] = "0";
                         drNew["SGST"] = "0";
-                        drNew["IGST"] = Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / 100).ToString("f2");
+                        drNew["IGST"] = Convert.ToDouble(( TotRate) * Convert.ToDouble(Tax.Text) / 100).ToString("f2");
                     }
-                    drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text))).ToString("f2");
+                    drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble( TotRate)).ToString("f2");
                 }
                 else
                 {
-                    drNew["Amount"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text))).ToString("f2");
+                    drNew["Amount"] = Convert.ToDouble(Convert.ToDouble( TotRate)).ToString("f2");
                     if (ddlProvince.SelectedValue == "1")
                     {
-                        drNew["CGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
-                        drNew["SGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
+                        drNew["CGST"] = Convert.ToDouble((( TotRate) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
+                        drNew["SGST"] = Convert.ToDouble((( TotRate) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))) / 2).ToString("f2");
                         drNew["IGST"] = "0";
                     }
                     else
                     {
                         drNew["CGST"] = "0";
                         drNew["SGST"] = "0";
-                        drNew["IGST"] = Convert.ToDouble(((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text)))).ToString("f2");
+                        drNew["IGST"] = Convert.ToDouble((( TotRate) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text)))).ToString("f2");
                     }
-                    drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble(IssueQty * Convert.ToDouble(Rate.Text)) - (Convert.ToDouble((IssueQty * Convert.ToDouble(Rate.Text)) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))))).ToString("f2");
+                    drNew["BeforeTAX"] = Convert.ToDouble(Convert.ToDouble( TotRate) - (Convert.ToDouble(( TotRate) * Convert.ToDouble(Tax.Text) / (100 + Convert.ToDouble(Tax.Text))))).ToString("f2");
                 }
+
                 dstd.Tables[0].Rows.Add(drNew);
                 dtddd = dstd.Tables[0];
                 dtddd.Merge(dt);
@@ -1028,6 +1131,7 @@ namespace Billing.Accountsbootstrap
                     HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
 
                     TextBox txtIssueQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtIssueQty");
+                    Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
                     if (txtIssueQty.Text == "")
                         txtIssueQty.Text = "0";
 
@@ -1043,7 +1147,8 @@ namespace Billing.Accountsbootstrap
                     drNew1["TransSizeId"] = hdTransSizeId.Value;
                     drNew1["Size"] = hdSize.Value;
                     drNew1["IssueQty"] = txtIssueQty.Text;
-                    drNew1["Rate"] = Rate.Text;
+                   // drNew1["Rate"] = Rate.Text;
+                    drNew1["Rate"] = lblRate.Text ;
                     dstd1.Tables[0].Rows.Add(drNew1);
                     dtddd1 = dstd1.Tables[0];
 
@@ -1071,6 +1176,19 @@ namespace Billing.Accountsbootstrap
                 ddlPartyCode.Focus();
                 return;
             }
+            if (ddlCompany.SelectedValue == "" || ddlCompany.SelectedValue == "0" || ddlCompany.SelectedValue == "Select")
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select Stock From.')", true);
+                ddlCompany.Focus();
+                return;
+            }
+            if (ddlPayMode.SelectedValue == "" || ddlPayMode.SelectedValue == "0" || ddlPayMode.SelectedValue == "Select")
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select Paymode.')", true);
+                ddlCompany.Focus();
+                return;
+            }
+
             if (GVItem.Rows.Count == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Check The Data.')", true);
@@ -1120,7 +1238,7 @@ namespace Billing.Accountsbootstrap
 
             //
             //
-            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text), Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue), Convert.ToDouble(txtTotCGST.Text), Convert.ToDouble(txtTotSGST.Text), Convert.ToDouble(txtTotIGST.Text), Convert.ToDouble(txtTotBeforeTAX.Text), Convert.ToDouble(txtRoundoff.Text), Convert.ToInt32(rdbselect.SelectedValue));
+            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text), Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue), Convert.ToDouble(txtTotCGST.Text), Convert.ToDouble(txtTotSGST.Text), Convert.ToDouble(txtTotIGST.Text), Convert.ToDouble(txtTotBeforeTAX.Text), Convert.ToDouble(txtRoundoff.Text), Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue),ddlCompany.SelectedItem.Text );
 
 
             Response.Redirect("BuyerOrderSalesGrid.aspx");

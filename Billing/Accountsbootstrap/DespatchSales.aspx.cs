@@ -35,13 +35,17 @@ namespace Billing.Accountsbootstrap
             if (!IsPostBack)
             {
                 DataSet ds = objBs.getSalesInvoiceNo();
-               
+
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     ddlInvoiceno.DataSource = ds;
                     ddlInvoiceno.DataTextField = "FullInvoiceNo";
                     ddlInvoiceno.DataValueField = "BuyerOrderSalesId";
                     ddlInvoiceno.DataBind();
+                    ddlInvoiceno.Items.Insert(0, "Select");
+                }
+                else
+                {
                     ddlInvoiceno.Items.Insert(0, "Select");
                 }
                 if(Request.QueryString.Get("despatchid")!="")
@@ -52,6 +56,7 @@ namespace Billing.Accountsbootstrap
                     if (ds1.Tables[0].Rows.Count > 0)
                     {
                         ddlInvoiceno.SelectedValue = ds1.Tables[0].Rows[0]["Buyerordersalesid"].ToString();
+                       // ddlInvoiceno.SelectedItem.Text = ds1.Tables[0].Rows[0]["FullInvoiceNo"].ToString();
                         ddlInvoiceno.Enabled = false;
 
                         GVItem.DataSource = ds1;
@@ -94,11 +99,19 @@ namespace Billing.Accountsbootstrap
 
         protected void Add_Click(object sender, EventArgs e)
         {
-            DataSet ds = objBs.getSalesforgrid(Convert.ToInt32(ddlInvoiceno.SelectedValue));
-            if (ds.Tables[0].Rows.Count > 0)
+            if (ddlInvoiceno.SelectedItem.Text == "Select" || ddlInvoiceno.SelectedItem.Text=="" )
             {
-                GVItem.DataSource = ds;
-                GVItem.DataBind();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "myscript", "alert('Please Select Invoice No.Thank You!!!');", true);
+                return;
+            }
+            else
+            {
+                DataSet ds = objBs.getSalesforgrid(Convert.ToInt32(ddlInvoiceno.SelectedValue));
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    GVItem.DataSource = ds;
+                    GVItem.DataBind();
+                }
             }
             }
         protected void ddlInvoiceno_SelectedIndexChanged(object sender, EventArgs e)

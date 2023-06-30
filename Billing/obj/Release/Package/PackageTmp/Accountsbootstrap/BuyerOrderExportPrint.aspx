@@ -194,7 +194,7 @@
         {
             border-bottom: 1px solid black;
         }
-        #footer tr{
+        #footerline td{
              padding: 5px;
             border-left: 1px solid black;
             border-bottom: 1px solid black;
@@ -203,7 +203,7 @@
 </head>
 <body>
     <form id="form1" runat="server" width="100%">
-   <table  width="100%"  width="100%" id="MH" border="0" style="border: 0px solid black">
+   <table  width="100%" style="border: 0px solid black">
        <tr>
            <td><center><h3>INVOICE</h3></center></td>
        </tr>
@@ -214,19 +214,19 @@
 
 
    
-    <table width="100%"  id="Table3" border="0" style="border: 0px solid black">
+    <table width="100%"   border="0" style="border: 0px solid black">
         <tr>
-            <td style="width:30%; height:100%" >
-                <table id="MH1"  width="100%" ><tr id="footer"><td id="MH1" >
+            <td style="width:40%;height:100%" valign="top" >
+                <table  width="100%"  ><tr ><td style="border-bottom:solid 1px;border-right:solid 1px ;border-left:solid 1px;border-top:solid 1px">
 
                
                Exporter : <br /> <b>
                     <asp:Label ID="lblCoName" runat="server"></asp:Label></b><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               <asp:Label
                     ID="lblcoaddress" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               <asp:Label
                     ID="lblpincode" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               <asp:Label
                     ID="lblGSTINNO" runat="server"></asp:Label><br />
                &nbsp;<asp:Label
                     ID="lblgstno" runat="server"></asp:Label><br />
@@ -235,52 +235,52 @@
 
                     </tr>
                     <tr>
-                        <td>Consignee</td>
+                        <td style="border-bottom:solid 1px;border-right:solid 1px; border-left:solid 1px;">Consignee</td>
                     </tr>
-                    <tr><td>
-                         <asp:Label ID="lblcompanyname" runat="server"></asp:Label></b><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+                    <tr><td style="border-bottom:solid 1px;border-right:solid 1px; border-left:solid 1px;" >
+                         <b><asp:Label ID="lblcompanyname" runat="server"></asp:Label></b><br />
+               <asp:Label
                     ID="lbladdress" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               <asp:Label
                     ID="lblCityandPincode" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+                <asp:Label
                     ID="lblArea" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+              PH : <asp:Label
                     ID="lblphoneno" runat="server"></asp:Label><br />
                
                         </td></tr>
                     </table>
                 </td>
-            <td style="width:70%; height:100%" valign="top">
-                <table id="MH1"  width="100%">
-                    <tr ><td>
+            <td style="width:60%; height:100%" valign="top" >
+                <table   width="100%">
+                    <tr ><td style="border-bottom:solid 1px;border-right:solid 1px; border-top: solid 1px;">
                Invoice No:
                 <asp:Label ID="lblProcessOrderNo" runat="server"></asp:Label><br />
                 Invoice Date :
                 <asp:Label ID="lblOrderDate" runat="server"></asp:Label><br />
                         <br /><br /><br />
      </td>
- <td>Exporter Ref
+ <td style="border-bottom:solid 1px; border-right:solid 1px; border-top:solid 1px">Exporter Ref
                 <asp:Label ID="blexporterref" runat="server"></asp:Label><br />
             </td>
            
             </tr>
                    
-        <tr><td>
+        <tr><td colspan="2" style="border-bottom:solid 1px ; border-right:solid 1px">
             Buyer's Order No.& Date  <asp:Label ID="lblbuyerorderno" runat="server"></asp:Label>
 
             </td>
             </tr>
-                    <tr><td>
+                    <tr><td colspan="2" style="border-bottom:solid 1px ; border-right:solid 1px">
                         Buyer (If other than consignee)<br />
-                        <asp:Label ID="lblcompanyname1" runat="server"></asp:Label></b><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+                     <b>   <asp:Label ID="lblcompanyname1" runat="server"></asp:Label></b><br />
+               <asp:Label
                     ID="lbladdress1" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+                <asp:Label
                     ID="lblCityandPincode1" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               <asp:Label
                     ID="lblArea1" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               PH : <asp:Label
                     ID="lblphoneno1" runat="server"></asp:Label><br />
               
                         </td>
@@ -290,30 +290,32 @@
 </td></tr>
 <tr>
     <td style="width:30%; height:100%" valign="top">
-        <table id="MH1" width="100%">
-            <tr><td>
+        <table width="100%">
+            <tr><td style="border-bottom:solid 1px ; border-right:solid 1px ;border-left:solid 1px">
                 Pre Carrier by<br />
                 <asp:Label ID="lblprecarrierby" runat="server"></asp:Label>
-                </td><td>
+                </td><td style="border-bottom:solid 1px ; border-right:solid 1px">
                       Place of receipt of pre-carrier   <br />  <asp:Label ID="lblplaceofcarrier" runat="server"></asp:Label>
                      </td></tr>
             <tr>
-                <td>
+                <td style="border-bottom:solid 1px ; border-right:solid 1px; border-left:solid 1px">
                       Vessel/<asp:Label ID="lblvesseltype" runat="server"></asp:Label><br />
                     <asp:Label ID="type" runat="server"></asp:Label>
+                     <br /><br /><br />
               
                 </td>
-                <td>
+                <td style="border-bottom:solid 1px ; border-right:solid 1px">
                       Port of Loading<br />
                 <asp:Label ID="lblloadingport" runat="server"></asp:Label>
+                    <br /><br /><br />
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="border-bottom:solid 1px ; border-right:solid 1px;border-left:solid 1px">
                      Port of discharge<br />
                 <asp:Label ID="lbldischargeport" runat="server"></asp:Label>
                 </td>
-                <td> Place of delivery<br />
+                <td style="border-bottom:solid 1px ; border-right:solid 1px"> Place of delivery<br />
                 <asp:Label ID="lbldeliveryplace" runat="server"></asp:Label></td>
 
             </tr>
@@ -324,28 +326,28 @@
         
     </td>
 
-    <td style="width:70%; height:100%">
-        <table id="MH1" width="100%">
-            <tr><td>
+    <td style="width:70%; height:100%" >
+        <table  width="100%">
+            <tr><td style="border-bottom:solid 1px; border-right:solid 1px">
                   Country of origin<br />
                 <asp:Label ID="lblorigin" runat="server"></asp:Label>
 
                 </td>
-                <td>
+                <td style="border-bottom:solid 1px;border-right:solid 1px">
   Country of Final Destination<br />
                 <asp:Label ID="lbldestination" runat="server"></asp:Label>
                 </td>
 
             </tr>
-            <tr><td colspan="2">Terms of Delivery and Payment: - 100% ADVANCE</td></tr>
-            <tr><td colspan="2">
+            <tr><td colspan="2" style="border-bottom:solid 1px;border-right:solid 1px">Terms of Delivery and Payment: - 100% ADVANCE</td></tr>
+            <tr><td colspan="2" style="border-bottom:solid 1px;border-right:solid 1px" >
                 Our Banker's<br />
-                 <asp:Label ID="lblbankname" runat="server"></asp:Label></b><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+                <b> <asp:Label ID="lblbankname" runat="server"></asp:Label></b><br />
+              <asp:Label
                     ID="lblbankaddress" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+              Account Number: <asp:Label
                     ID="lblaccountnumer" runat="server"></asp:Label><br />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label
+               Swift Code<asp:Label
                     ID="lblswiftcode" runat="server"></asp:Label><br />
               
 
@@ -378,7 +380,7 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                          <asp:BoundField DataField="Description" Visible="true" HeaderText="Description" HeaderStyle-HorizontalAlign="Left" />
-                        <asp:BoundField DataField="Salesfortype" Visible="false" HeaderText="Exc No" HeaderStyle-HorizontalAlign="Left" />
+                        <asp:BoundField DataField="HSNcode" Visible="true" HeaderText="HSN Code" HeaderStyle-HorizontalAlign="Left" />
                          <asp:BoundField DataField="Styleno" Visible="true" HeaderText="Style" HeaderStyle-HorizontalAlign="Left" />
                          <asp:BoundField DataField="size" Visible="true" HeaderText="Size" HeaderStyle-HorizontalAlign="Left" />
                         <asp:BoundField DataField="Color" HeaderText="Color" FooterStyle-HorizontalAlign="Right"

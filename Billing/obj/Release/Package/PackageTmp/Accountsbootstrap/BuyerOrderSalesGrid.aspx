@@ -5,7 +5,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
-<head>
+<head runat="server">
     <style type="text/css">
         a img
         {
@@ -107,21 +107,50 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
+                    
                         <div class="col-lg-12" style="margin-top: 6px">
+                            <div class="row">
                             <div class="col-lg-2">
                                 <h1 class="page-header" style="text-align: center; color: #fe0002; font-size: 16px;
                                     font-weight: bold">
                                     BuyerOrder Sales
                                 </h1>
-                            </div>
+                            </div></div>
+                            <div class="row">
                             <div class="col-lg-3">
+                                <label>Search</label>
                                 <asp:TextBox CssClass="form-control" Enabled="true" onkeyup="Search_Gridview(this, 'GVItem')"
                                     ID="txtsearch" runat="server" placeholder="Enter Text to Search" Width="250px"></asp:TextBox>
                             </div>
-                            <div class="col-lg-1">
-                                <asp:Button ID="btnadd" runat="server" class="btn btn-primary" Text="Add New" OnClick="Add_Click"
-                                    Width="130px" />
+                             <div class="col-lg-3">
+                                 <label>From Date</label>
+                                <asp:TextBox CssClass="form-control" 
+                                    ID="txtfromDate" runat="server" placeholder="From Date" Width="250px"></asp:TextBox>
+                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender4" TargetControlID="txtfromDate" Format="dd/MM/yyyy"
+                                            runat="server" CssClass="cal">
+                                        </ajaxToolkit:CalendarExtender>
+                            </div>
+                             <div class="col-lg-3">
+                                 <label>To Date</label>
+                                <asp:TextBox CssClass="form-control" 
+                                    ID="txttodate" runat="server" placeholder="To Date" Width="250px"></asp:TextBox>
+                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender1" TargetControlID="txttodate" Format="dd/MM/yyyy"
+                                            runat="server" CssClass="cal">
+                                        </ajaxToolkit:CalendarExtender>
+                            </div>
+                              <div class="col-lg-3">
+                                 <label>Company</label>
+                               <asp:DropDownList ID="ddlcompany" runat="server" AutoPostBack="true" CssClass="form-control"></asp:DropDownList>
+                            </div>
+                                </div>
+                            <div class="row">
+                                <br />
+                            <div class="col-lg-12">
+                              <center> <asp:Button ID="btnadd" runat="server" class="btn btn-primary" Text="Add New" OnClick="Add_Click"
+                                    Width="130px" />&nbsp;&nbsp;&nbsp;
+                               
+                                <asp:Button ID="btnSearch" runat="server" class="btn btn-primary" Text="Search" OnClick="Search_Click"
+                                    Width="130px" /></center> </div>
                             </div>
                         </div>
                     </div>

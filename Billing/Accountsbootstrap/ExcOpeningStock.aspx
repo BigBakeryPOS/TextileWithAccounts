@@ -126,12 +126,12 @@
                                                     Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlStyle" ValueToCompare="Select Style"
                                                     Operator="NotEqual" Type="String" ErrorMessage="Please Select Style.">
                                                 </asp:CompareValidator>
-                                                <asp:DropDownList ID="ddlStyle" runat="server" CssClass="chzn-select" Style="height: 30px"
+                                                <asp:DropDownList ID="ddlStyle" runat="server" CssClass="chzn-select" OnSelectedIndexChanged="ddlStyle_OnSelectedIndexChanged" AutoPostBack="true" Style="height: 30px"
                                                     Width="100%">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-2" runat="server" visible="true">
                                             <div class="form-group">
                                                 <label>
                                                     Color:</label>
@@ -139,17 +139,17 @@
                                                     Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlColor" ValueToCompare="Select Color"
                                                     Operator="NotEqual" Type="String" ErrorMessage="Please Select Color.">
                                                 </asp:CompareValidator>
-                                                <asp:DropDownList ID="ddlColor" runat="server" CssClass="chzn-select" Style="height: 30px"
+                                                <asp:DropDownList ID="ddlColor" runat="server" Enabled="false" AutoPostBack="true" CssClass="chzn-select" Style="height: 30px"
                                                     Width="100%">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
-                                        <div class="col-lg-1">
+                                        <div class="col-lg-1" runat="server" visible="false">
                                             <div class="form-group">
                                                 <label>
                                                     Rate:</label>
-                                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtRate"
-                                                    ValidationGroup="val1" Text="*" ErrorMessage="Please Enter Rate." Style="color: Red" />
+                                              <%--  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtRate"
+                                                    ValidationGroup="val1" Text="*" ErrorMessage="Please Enter Rate." Style="color: Red" />--%>
                                                 <asp:TextBox ID="txtRate" runat="server" Width="100%" CssClass="form-control"></asp:TextBox>
                                                 <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender313d" runat="server"
                                                     TargetControlID="txtRate" ValidChars="." FilterType="Numbers,Custom" />
@@ -163,7 +163,7 @@
                                                     Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlSize" ValueToCompare="Select Size"
                                                     Operator="NotEqual" Type="String" ErrorMessage="Please Select Size.">
                                                 </asp:CompareValidator>
-                                                <asp:DropDownList ID="ddlSize" runat="server" CssClass="chzn-select" Style="height: 30px"
+                                                <asp:DropDownList ID="ddlSize" runat="server" Enabled="false" CssClass="chzn-select" Style="height: 30px"
                                                     Width="100%" AutoPostBack="true" OnSelectedIndexChanged="ddlSize_OnSelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
@@ -185,7 +185,14 @@
                                                             <asp:Label ID="lblSize" Height="30px" Width="100px" runat="server" Text='<%#Eval("Size")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Qty" HeaderStyle-Width="30px">
+                                                      <asp:TemplateField HeaderText="Rate" HeaderStyle-Width="100px" ItemStyle-Font-Size="Large"
+                                                        ItemStyle-Font-Bold="true">
+                                                        <ItemTemplate>
+                                                            <%--<asp:HiddenField ID="hdSize" runat="server" Value='<%#Eval("SizeId") %>' />--%>
+                                                            <asp:Label ID="lblRate" Height="30px" Width="100px" runat="server" Text='<%#Eval("Rate")%>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Qty"  HeaderStyle-Width="100px">
                                                         <ItemTemplate>
                                                             <asp:TextBox ID="txtQty" Height="30px" Width="100%" runat="server" Text='<%#Eval("Qty")%>'></asp:TextBox>
                                                             <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender312fff" runat="server"
@@ -237,14 +244,14 @@
                                 <asp:Label ID="lblDescription" runat="server" Text='<%#Eval("Description")  %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Color" HeaderStyle-Width="50px" ItemStyle-Width="50px"
+                        <asp:TemplateField HeaderText="Color" HeaderStyle-Width="50px" Visible="false" ItemStyle-Width="50px"
                             ItemStyle-Font-Size="Large" ItemStyle-Font-Bold="true">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hdColorId" runat="server" Value='<%#Eval("ColorId")  %>' />
                                 <asp:Label ID="lblColor" runat="server" Text='<%#Eval("Color")  %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Rate" HeaderStyle-Width="30px" ItemStyle-Width="30px"
+                        <asp:TemplateField HeaderText="Rate" HeaderStyle-Width="30px" Visible="false"  ItemStyle-Width="30px"
                             ItemStyle-Font-Size="Large" ItemStyle-Font-Bold="true">
                             <ItemTemplate>
                                 <asp:Label ID="lblRate" runat="server" Text='<%#Eval("Rate")  %>'></asp:Label>
@@ -267,7 +274,7 @@
                             HeaderStyle-Width="20px" ItemStyle-Width="20px">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hdRowId" runat="server" Value='<%#Eval("RowId")  %>' />
-                                <asp:LinkButton ID="btnedit" runat="server" CommandArgument='<%#Eval("RowId") %>'
+                                <asp:LinkButton ID="btnedit" runat="server" CommandArgument='<%#Eval("Stylenoid") %>'
                                     CommandName="Modify">
                                     <asp:Image ID="img" runat="server" ImageUrl="~/images/pen-checkbox-128.png" /></asp:LinkButton>
                             </ItemTemplate>
@@ -275,7 +282,7 @@
                         <asp:TemplateField HeaderText="View" ItemStyle-HorizontalAlign="Center" Visible="true"
                             HeaderStyle-Width="20px" ItemStyle-Width="20px">
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnView" runat="server" CommandArgument='<%#Eval("RowId") %>'
+                                <asp:LinkButton ID="btnView" runat="server" CommandArgument='<%#Eval("Stylenoid") %>'
                                     CommandName="View">
                                     <asp:Image ID="imgView" runat="server" ImageUrl="~/images/pen-checkbox-128.png" /></asp:LinkButton>
                             </ItemTemplate>
@@ -294,12 +301,20 @@
                                 <%#Container.DataItemIndex+1 %>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Size" HeaderStyle-Width="100px" ItemStyle-Font-Size="Large"
+                        <asp:TemplateField HeaderText="Size" HeaderStyle-Width="70px" ItemStyle-Font-Size="Large"
                             ItemStyle-Font-Bold="true">
                             <ItemTemplate>
                             
                                 <asp:HiddenField ID="hdSize" runat="server" Value='<%#Eval("SizeId") %>' />
-                                <asp:Label ID="lblSize" Height="30px" Width="150px" runat="server" Text='<%#Eval("Size")%>'></asp:Label>
+                                <asp:Label ID="lblSize" Height="30px" Width="70px" runat="server" Text='<%#Eval("Size")%>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                         <asp:TemplateField HeaderText="Rate" HeaderStyle-Width="100px" ItemStyle-Font-Size="Large"
+                            ItemStyle-Font-Bold="true">
+                            <ItemTemplate>
+                            
+                               <%-- <asp:HiddenField ID="hdSize" runat="server" Value='<%#Eval("SizeId") %>' />--%>
+                                <asp:Label ID="lblRate" Height="30px" Width="100px" runat="server" Text='<%#Eval("Rate")%>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Qty" HeaderStyle-Width="80px">

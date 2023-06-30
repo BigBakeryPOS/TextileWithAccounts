@@ -77,6 +77,8 @@ namespace Billing.Accountsbootstrap
 
                 #endregion
 
+                ddlColor.SelectedValue = "0";
+                txtRate.Text = "0";
                 string OPExcStockId = Request.QueryString.Get("OPExcStockId");
                 if (OPExcStockId != "" && OPExcStockId != null)
                 {
@@ -231,7 +233,40 @@ namespace Billing.Accountsbootstrap
                 GVSizes.DataBind();
             }
         }
-        protected void btnSubmit1_OnClick(object sender, EventArgs e)
+
+        protected void ddlStyle_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlColor.SelectedItem.Text = "N/A";
+            DataSet ds5 = objBs.getcolorid(ddlColor.SelectedItem.Text);
+            if (ds5.Tables[0].Rows.Count > 0)
+            {
+                ddlColor.SelectedValue = ds5.Tables[0].Rows[0]["colorid"].ToString();
+            }
+
+            DataSet dsrangestyle = objBs.getSizeRangeSizefromstyle(Convert.ToInt32(ddlStyle.SelectedValue));
+            if (dsrangestyle.Tables[0].Rows.Count>0)
+            {
+                
+                ddlSize.SelectedValue  = dsrangestyle.Tables[0].Rows[0]["rangeid"].ToString();
+                DataSet dsSizeRange = objBs.getSizeRangeSizenew(Convert.ToInt32(dsrangestyle.Tables[0].Rows[0]["rangeid"]), Convert.ToInt32(ddlStyle.SelectedValue));
+
+               // DataSet dsSizeRange = objBs.getSizeRangeSize(Convert.ToInt32(dsrangestyle.Tables[0].Rows[0]["rangeid"]));
+                if (dsSizeRange.Tables[0].Rows.Count > 0)
+                {
+                   
+                    GVSizes.DataSource = dsSizeRange;
+                    GVSizes.DataBind();
+                }
+                else
+                {
+                    GVSizes.DataSource = null;
+                    GVSizes.DataBind();
+                }
+            }
+           
+
+        }
+            protected void btnSubmit1_OnClick(object sender, EventArgs e)
         {
             #region Validations
 
@@ -241,12 +276,12 @@ namespace Billing.Accountsbootstrap
                 ddlStyle.Focus();
                 return;
             }
-            if (ddlColor.SelectedValue == "Color" || ddlColor.SelectedValue == "" || ddlColor.SelectedValue == "0")
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select Color.')", true);
-                ddlColor.Focus();
-                return;
-            }
+            //if (ddlColor.SelectedValue == "Color" || ddlColor.SelectedValue == "" || ddlColor.SelectedValue == "0")
+            //{
+            //    ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select Color.')", true);
+            //    ddlColor.Focus();
+            //    return;
+            //}
             if (ddlSize.SelectedValue == "Size" || ddlSize.SelectedValue == "" || ddlSize.SelectedValue == "0")
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select Size.')", true);
@@ -256,20 +291,23 @@ namespace Billing.Accountsbootstrap
 
             if (txtRate.Text == "")
                 txtRate.Text = "0";
-            if (Convert.ToDouble(txtRate.Text) == 0)
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Check Rate.')", true);
-                txtRate.Focus();
-                return;
-            }
+            //if (Convert.ToDouble(txtRate.Text) == 0)
+            //{
+            //    ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Check Rate.')", true);
+            //    txtRate.Focus();
+            //    return;
+            //}
 
             double TtlQty = 0;
+            double Rate = 0;
             for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
             {
+                Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
                 TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
                 if (txtQty.Text == "")
                     txtQty.Text = "0"; ;
                 TtlQty += Convert.ToDouble(txtQty.Text);
+                Rate = Convert.ToDouble(lblRate.Text);
 
             }
 
@@ -340,7 +378,10 @@ namespace Billing.Accountsbootstrap
                 drNew["Description"] = Style[1];
                 drNew["ColorId"] = ddlColor.SelectedValue;
                 drNew["Color"] = ddlColor.SelectedItem.Text;
-                drNew["Rate"] = txtRate.Text;
+                //drNew["ColorId"] = "0";
+                //drNew["Color"] = "";
+                // drNew["Rate"] = txtRate.Text;
+                drNew["Rate"] = Rate;
                 drNew["Qty"] = TtlQty;
                 drNew["RangeId"] = ddlSize.SelectedValue;
                 drNew["Size"] = ddlSize.SelectedItem.Text;
@@ -366,7 +407,10 @@ namespace Billing.Accountsbootstrap
                 drNew["Description"] = Style[1];
                 drNew["ColorId"] = ddlColor.SelectedValue;
                 drNew["Color"] = ddlColor.SelectedItem.Text;
-                drNew["Rate"] = txtRate.Text;
+                //drNew["ColorId"] ="0";
+                //drNew["Color"] = "";
+                //  drNew["Rate"] = txtRate.Text;
+                drNew["Rate"] = Rate;
                 drNew["Qty"] = TtlQty;
                 drNew["RangeId"] = ddlSize.SelectedValue;
                 drNew["Size"] = ddlSize.SelectedItem.Text;
@@ -420,7 +464,7 @@ namespace Billing.Accountsbootstrap
                 {
                     HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
                     Label lblSize = (Label)GVSizes.Rows[vLoop].FindControl("lblSize");
-
+                    Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
                     TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
                     if (txtQty.Text == "")
                         txtQty.Text = "0";
@@ -435,7 +479,8 @@ namespace Billing.Accountsbootstrap
                     drNew1["SizeId"] = hdSize.Value;
                     drNew1["Size"] = lblSize.Text;
                     drNew1["Qty"] = txtQty.Text;
-                    drNew1["Rate"] = txtRate.Text;
+                    // drNew1["Rate"] = txtRate.Text;
+                    drNew1["Rate"] = lblRate.Text;
 
                     dstd1.Tables[0].Rows.Add(drNew1);
                     dtddd1 = dstd1.Tables[0];
@@ -451,6 +496,7 @@ namespace Billing.Accountsbootstrap
                 {
                     HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
                     Label lblSize = (Label)GVSizes.Rows[vLoop].FindControl("lblSize");
+                    Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
 
                     TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
                     if (txtQty.Text == "")
@@ -463,12 +509,13 @@ namespace Billing.Accountsbootstrap
                     drNew1["RowId"] = HttpCookieValue;
 
                     drNew1["StyleNoId"] = ddlStyle.SelectedValue;
-                    drNew1["ColorId"] = ddlColor.SelectedValue;
-
+                   drNew1["ColorId"] = ddlColor.SelectedValue;
+                   // drNew1["ColorId"] = "0";
                     drNew1["SizeId"] = hdSize.Value;
                     drNew1["Size"] = lblSize.Text;
                     drNew1["Qty"] = txtQty.Text;
-                    drNew1["Rate"] = txtRate.Text;
+                    // drNew1["Rate"] = txtRate.Text;
+                    drNew1["Rate"] = lblRate.Text;
 
                     dstd1.Tables[0].Rows.Add(drNew1);
                     dtddd1 = dstd1.Tables[0];
@@ -502,11 +549,11 @@ namespace Billing.Accountsbootstrap
 
                     DataTable DTGVSizeDetails = (DataTable)ViewState["CurrentTable1"];
 
-                    DataRow[] RowsGVSizeDetails = DTGVSizeDetails.Select("RowId='" + e.CommandArgument.ToString() + "'");
+                    DataRow[] RowsGVSizeDetails = DTGVSizeDetails.Select("stylenoId='" + e.CommandArgument.ToString() + "'");
 
                     ddlStyle.SelectedValue = RowsGVSizeDetails[0]["StyleNoId"].ToString();
                     ddlColor.SelectedValue = RowsGVSizeDetails[0]["ColorId"].ToString();
-                    txtRate.Text = RowsGVSizeDetails[0]["Rate"].ToString();
+                 //   txtRate.Text = RowsGVSizeDetails[0]["Rate"].ToString();
 
                     ddlSize.SelectedValue = RowsGVSizeDetails[0]["RangeId"].ToString();
 
@@ -539,7 +586,7 @@ namespace Billing.Accountsbootstrap
                     dstd1.Tables.Add(dttt1);
 
                     DataTable DTGVSizeQty = (DataTable)ViewState["CurrentTable2"];
-                    DataRow[] RowsGVSizeQty = DTGVSizeQty.Select("RowId='" + e.CommandArgument.ToString() + "'");
+                    DataRow[] RowsGVSizeQty = DTGVSizeQty.Select("stylenoId='" + e.CommandArgument.ToString() + "'");
 
                     for (int i = 0; i < RowsGVSizeQty.Length; i++)
                     {
@@ -548,8 +595,8 @@ namespace Billing.Accountsbootstrap
                         drNew1["RowId"] = RowsGVSizeQty[i]["RowId"].ToString();
 
                         drNew1["StyleNoId"] = RowsGVSizeQty[i]["StyleNoId"].ToString();
+                        //drNew1["ColorId"] = RowsGVSizeQty[i]["ColorId"].ToString();
                         drNew1["ColorId"] = RowsGVSizeQty[i]["ColorId"].ToString();
-
                         drNew1["SizeId"] = RowsGVSizeQty[i]["SizeId"].ToString();
                         drNew1["Size"] = RowsGVSizeQty[i]["Size"].ToString();
                         drNew1["Qty"] = RowsGVSizeQty[i]["Qty"].ToString();
@@ -606,13 +653,15 @@ namespace Billing.Accountsbootstrap
                     dttt1.Columns.Add(dct1);
                     dct1 = new DataColumn("Size");
                     dttt1.Columns.Add(dct1);
+                    dct1 = new DataColumn("Rate");
+                    dttt1.Columns.Add(dct1);
                     dct1 = new DataColumn("Qty");
                     dttt1.Columns.Add(dct1);
 
                     dstd1.Tables.Add(dttt1);
 
                     DataTable DTGVSizeQty = (DataTable)ViewState["CurrentTable2"];
-                    DataRow[] RowsGVSizeQty = DTGVSizeQty.Select("RowId='" + e.CommandArgument.ToString() + "'");
+                    DataRow[] RowsGVSizeQty = DTGVSizeQty.Select("stylenoId='" + e.CommandArgument.ToString() + "'");
 
                     for (int i = 0; i < RowsGVSizeQty.Length; i++)
                     {
@@ -621,6 +670,7 @@ namespace Billing.Accountsbootstrap
                         drNew1["RowId"] = RowsGVSizeQty[i]["RowId"].ToString();
                         drNew1["SizeId"] = RowsGVSizeQty[i]["SizeId"].ToString();
                         drNew1["Size"] = RowsGVSizeQty[i]["Size"].ToString();
+                        drNew1["Rate"] = RowsGVSizeQty[i]["Rate"].ToString();
                         drNew1["Qty"] = RowsGVSizeQty[i]["Qty"].ToString();
 
                         dstd1.Tables[0].Rows.Add(drNew1);

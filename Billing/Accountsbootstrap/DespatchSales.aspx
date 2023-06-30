@@ -96,7 +96,7 @@
     <asp:Label runat="server" ID="lblUser" ForeColor="White" CssClass="label">Welcome: </asp:Label>
     <asp:Label runat="server" ID="lblUserID" ForeColor="White" CssClass="label" Visible="false"> </asp:Label>
     <form runat="server" id="form1">
-    <asp:ValidationSummary runat="server" HeaderText="Validation Messages" ValidationGroup="val1"
+    <asp:ValidationSummary runat="server" HeaderText="Validation Messages" ValidationGroup="Validation"
         ID="val1" ShowMessageBox="true" ShowSummary="false" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
@@ -191,6 +191,8 @@
                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="LR Date">
                                                <ItemTemplate><asp:TextBox ID="txtLRdate" runat="server"></asp:TextBox>
+                                                    <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator45" ControlToValidate="txtLRdate"
+                                        ValidationGroup="Validation1" Text="*" ErrorMessage="Please Enter LRDate" Style="color: Red" />
                                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender4" TargetControlID="txtLRdate" Format="dd/MM/yyyy"
                                             runat="server" CssClass="cal">
                                         </ajaxToolkit:CalendarExtender>

@@ -112,13 +112,23 @@ namespace Billing.Accountsbootstrap
                     ddlCostCurrency.DataValueField = "CurrencyId";
                     ddlCostCurrency.DataBind();
                 }
-                DataSet dssize = objBs.selectsize();
-                if (dssize.Tables[0].Rows.Count > 0)
+                //DataSet dssize = objBs.selectsize();
+                //if (dssize.Tables[0].Rows.Count > 0)
+                //{
+                //    ddlSize.DataSource = dssize.Tables[0];
+                //    ddlSize.DataTextField = "Size";
+                //    ddlSize.DataValueField = "SizeId";
+                //    ddlSize.DataBind();
+                //}
+
+                DataSet dsSizeRange = objBs.gridSizeRange();
+                if (dsSizeRange.Tables[0].Rows.Count > 0)
                 {
-                    ddlSize.DataSource = dssize.Tables[0];
-                    ddlSize.DataTextField = "Size";
-                    ddlSize.DataValueField = "SizeId";
+                    ddlSize.DataSource = dsSizeRange.Tables[0];
+                    ddlSize.DataTextField = "Range";
+                    ddlSize.DataValueField = "RangeId";
                     ddlSize.DataBind();
+                    ddlSize.Items.Insert(0, "Select Size");
                 }
                 #endregion
 
@@ -956,6 +966,61 @@ namespace Billing.Accountsbootstrap
                     }
 
                     #endregion
+                }
+
+                DataSet ds6 = objBs.getiTransSamplingandCostingRate(Convert.ToInt32(ddlapprovalStyles.SelectedValue));
+                if (ds6.Tables[0].Rows.Count > 0)
+                {
+                    #region
+
+                    if (ds6.Tables[0].Rows.Count > 0)
+                    {
+
+                        DataTable dtt11;
+                        DataRow drNew11;
+                        DataColumn dct11;
+                        DataSet dstd11 = new DataSet();
+                        dtt11 = new DataTable();
+
+                        dct11 = new DataColumn("Size");
+                        dtt11.Columns.Add(dct11);
+                        dct11 = new DataColumn("SizeId");
+                        dtt11.Columns.Add(dct11);
+
+                        dct11 = new DataColumn("Rate");
+                        dtt11.Columns.Add(dct11);
+
+
+                        //dct1 = new DataColumn("Color");
+                        //dtt1.Columns.Add(dct1);
+                        //dct1 = new DataColumn("ColorId");
+                        //dtt1.Columns.Add(dct1);
+
+                        //dct1 = new DataColumn("partytype");
+                        //dtt1.Columns.Add(dct1);
+                        //dct1 = new DataColumn("supplierid");
+                        //dtt1.Columns.Add(dct1);
+                        dstd11.Tables.Add(dtt11);
+
+                        foreach (DataRow Dr11 in ds6.Tables[0].Rows)
+                        {
+                            drNew11 = dtt11.NewRow();
+
+                            drNew11["Size"] = Dr11["Size"];
+                            drNew11["SizeId"] = Dr11["SizeId"];
+
+                            drNew11["Rate"] = Dr11["Rate"];
+
+
+                            dstd11.Tables[0].Rows.Add(drNew11);
+                        }
+
+                        GVSizes.DataSource = dstd11;
+                        GVSizes.DataBind();
+                        GVSizes.Visible = true;
+                    }
+                    #endregion
+
                 }
             }
         }
@@ -1944,7 +2009,7 @@ namespace Billing.Accountsbootstrap
                     int iapprovaestatus = objBs.Iapprovestatus(ddlapprovalStyles.SelectedValue, status, lblUser.Text, narration, CurDate);
 
 
-                    int iStatus = objBs.UpdateSamplingandCosting(txtStyleNo.Text, Convert.ToInt32(ddlBuyerCode.SelectedValue), txtDescription.Text, Convert.ToInt32(ddlSize.SelectedValue), Convert.ToDouble(txtFabricationCost.Text), Convert.ToDouble(txtEmbroideryMachineCost.Text), Convert.ToDouble(txtEmbroideryHandCost.Text), Convert.ToDouble(txtPieceProcessCost.Text), Convert.ToDouble(txtFinishingandPackingCost.Text), Date, Convert.ToDouble(txtRejection.Text), Convert.ToDouble(txtExtraMargin.Text), Convert.ToDouble(txtSmpCostPerPiece.Text), Convert.ToDouble(txtPrdCostPerPiece.Text), Convert.ToDouble(txtTotalSmpCostINR.Text), Convert.ToDouble(txtTotalPrdCostINR.Text), Convert.ToInt32(ddlCostCurrency.SelectedValue), Convert.ToDouble(CostCurrency[1].ToString()), Convert.ToDouble(txtTotalSmpCost.Text), Convert.ToDouble(txtTotalPrdCost.Text), lblFile_Path.Text, Convert.ToInt32(SamplingCostingId), txtBuyerPrintStyle.Text, Convert.ToDouble(lblItemSmpCost.Text), Convert.ToDouble(lblItemPrdCost.Text), Convert.ToDouble(txtLogisticsCost.Text), "", 0);
+                    int iStatus = objBs.UpdateSamplingandCosting(txtStyleNo.Text, Convert.ToInt32(ddlBuyerCode.SelectedValue), txtDescription.Text, Convert.ToInt32(ddlSize.SelectedValue), Convert.ToDouble(txtFabricationCost.Text), Convert.ToDouble(txtEmbroideryMachineCost.Text), Convert.ToDouble(txtEmbroideryHandCost.Text), Convert.ToDouble(txtPieceProcessCost.Text), Convert.ToDouble(txtFinishingandPackingCost.Text), Date, Convert.ToDouble(txtRejection.Text), Convert.ToDouble(txtExtraMargin.Text), Convert.ToDouble(txtSmpCostPerPiece.Text), Convert.ToDouble(txtPrdCostPerPiece.Text), Convert.ToDouble(txtTotalSmpCostINR.Text), Convert.ToDouble(txtTotalPrdCostINR.Text), Convert.ToInt32(ddlCostCurrency.SelectedValue), Convert.ToDouble(CostCurrency[1].ToString()), Convert.ToDouble(txtTotalSmpCost.Text), Convert.ToDouble(txtTotalPrdCost.Text), lblFile_Path.Text, Convert.ToInt32(SamplingCostingId), txtBuyerPrintStyle.Text, Convert.ToDouble(lblItemSmpCost.Text), Convert.ToDouble(lblItemPrdCost.Text), Convert.ToDouble(txtLogisticsCost.Text),  txtHSNCode.Text, Convert.ToInt32(ddltax.SelectedValue));
 
 
 
@@ -2020,6 +2085,26 @@ namespace Billing.Accountsbootstrap
                         Label lblpid = (Label)gvPcsProcessDetails.Rows[vLoop].FindControl("lblpid");
 
                         int TRansSamplingProcess = objBs.InsertSamplingProcess(Convert.ToInt32(SamplingCostingId), lblpid.Text);
+                    }
+
+                    for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
+                    {
+                        HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
+                        Label lblSize = (Label)GVSizes.Rows[vLoop].FindControl("lblSize");
+
+                        TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
+
+                        if (txtQty.Text == "")
+                        {
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Enter Rate the Size for '" + lblSize.Text + "'.')", true);
+                            txtQty.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            int TRansSamplingRate = objBs.InsertSamplingandCostingRate(Convert.ToInt32(SamplingCostingId), Convert.ToInt32(ddlSize.SelectedValue), Convert.ToInt32(hdSize.Value), Convert.ToDouble(txtQty.Text));
+                        }
+
                     }
 
 

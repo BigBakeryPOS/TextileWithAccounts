@@ -12,6 +12,7 @@ using System.Globalization;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Security.Cryptography;
 
 namespace Billing.Accountsbootstrap
 {
@@ -115,13 +116,24 @@ namespace Billing.Accountsbootstrap
                     ddlCostCurrency.DataValueField = "CurrencyId";
                     ddlCostCurrency.DataBind();
                 }
-                DataSet dssize = objBs.selectsize();
-                if (dssize.Tables[0].Rows.Count > 0)
+                //DataSet dssize = objBs.selectsize();
+                //if (dssize.Tables[0].Rows.Count > 0)
+                //{
+                //    ddlSize.DataSource = dssize.Tables[0];
+                //    ddlSize.DataTextField = "Size";
+                //    ddlSize.DataValueField = "SizeId";
+                //    ddlSize.DataBind();
+                //}
+
+
+                DataSet dsSizeRange = objBs.gridSizeRange();
+                if (dsSizeRange.Tables[0].Rows.Count > 0)
                 {
-                    ddlSize.DataSource = dssize.Tables[0];
-                    ddlSize.DataTextField = "Size";
-                    ddlSize.DataValueField = "SizeId";
+                    ddlSize.DataSource = dsSizeRange.Tables[0];
+                    ddlSize.DataTextField = "Range";
+                    ddlSize.DataValueField = "RangeId";
                     ddlSize.DataBind();
+                    ddlSize.Items.Insert(0, "Select Size");
                 }
                 #endregion
 
@@ -146,7 +158,7 @@ namespace Billing.Accountsbootstrap
                         txtBuyerPrintStyle.Text = dsItemMaster.Tables[0].Rows[0]["BuyerPrintStyle"].ToString();
 
                         txtDescription.Text = dsItemMaster.Tables[0].Rows[0]["Description"].ToString();
-                        ddlSize.SelectedValue = dsItemMaster.Tables[0].Rows[0]["SizeId"].ToString();
+                        ddlSize.SelectedValue = dsItemMaster.Tables[0].Rows[0]["sizeId"].ToString();
 
                         txtFabricationCost.Text = Convert.ToDouble(dsItemMaster.Tables[0].Rows[0]["FabricationCost"]).ToString("f2");
                         txtEmbroideryMachineCost.Text = Convert.ToDouble(dsItemMaster.Tables[0].Rows[0]["EmbroideryMachineCost"]).ToString("f2");
@@ -473,11 +485,83 @@ namespace Billing.Accountsbootstrap
 
                         #endregion
                     }
+                    //getiTransSamplingandCostingRate
+
+                    DataSet ds6 = objBs.getiTransSamplingandCostingRate(Convert.ToInt32(SamplingCostingId));
+                    if (ds6.Tables[0].Rows.Count > 0)
+                    {
+                        #region
+
+                        if (ds6.Tables[0].Rows.Count > 0)
+                        {
+
+                            DataTable dtt11;
+                            DataRow drNew11;
+                            DataColumn dct11;
+                            DataSet dstd11 = new DataSet();
+                            dtt11 = new DataTable();
+
+                            dct11 = new DataColumn("Size");
+                            dtt11.Columns.Add(dct11);
+                            dct11 = new DataColumn("SizeId");
+                            dtt11.Columns.Add(dct11);
+
+                            dct11 = new DataColumn("Rate");
+                            dtt11.Columns.Add(dct11);
+
+
+                            //dct1 = new DataColumn("Color");
+                            //dtt1.Columns.Add(dct1);
+                            //dct1 = new DataColumn("ColorId");
+                            //dtt1.Columns.Add(dct1);
+
+                            //dct1 = new DataColumn("partytype");
+                            //dtt1.Columns.Add(dct1);
+                            //dct1 = new DataColumn("supplierid");
+                            //dtt1.Columns.Add(dct1);
+                            dstd11.Tables.Add(dtt11);
+
+                            foreach (DataRow Dr11 in ds6.Tables[0].Rows)
+                            {
+                                drNew11 = dtt11.NewRow();
+
+                                drNew11["Size"] = Dr11["Size"];
+                                drNew11["SizeId"] = Dr11["SizeId"];
+
+                                drNew11["Rate"] = Dr11["Rate"];
+
+
+                                dstd11.Tables[0].Rows.Add(drNew11);
+                            }
+
+                            GVSizes.DataSource = dstd11;
+                            GVSizes.DataBind();
+                            GVSizes.Visible = true;
+                        }
+
+
+                    }
+
+                    #endregion
                 }
             }
         }
+       
 
-
+        protected void ddlSize_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataSet dsSizeRange = objBs.getSizeRangeSizenew(Convert.ToInt32(ddlSize.SelectedValue));
+            if (dsSizeRange.Tables[0].Rows.Count > 0)
+            {
+                GVSizes.DataSource = dsSizeRange;
+                GVSizes.DataBind();
+            }
+            else
+            {
+                GVSizes.DataSource = null;
+                GVSizes.DataBind();
+            }
+        }
         protected void Pcsnew_process_Click(object sender, EventArgs e)
         {
 
@@ -824,7 +908,63 @@ namespace Billing.Accountsbootstrap
 
                     #endregion
                 }
-            }
+
+                DataSet ds6 = objBs.getiTransSamplingandCostingRate(Convert.ToInt32(ddlStyles.SelectedValue));
+                if (ds6.Tables[0].Rows.Count > 0)
+                {
+                    #region
+
+                    if (ds6.Tables[0].Rows.Count > 0)
+                    {
+
+                        DataTable dtt11;
+                        DataRow drNew11;
+                        DataColumn dct11;
+                        DataSet dstd11 = new DataSet();
+                        dtt11 = new DataTable();
+
+                        dct11 = new DataColumn("Size");
+                        dtt11.Columns.Add(dct11);
+                        dct11 = new DataColumn("SizeId");
+                        dtt11.Columns.Add(dct11);
+
+                        dct11 = new DataColumn("Rate");
+                        dtt11.Columns.Add(dct11);
+
+
+                        //dct1 = new DataColumn("Color");
+                        //dtt1.Columns.Add(dct1);
+                        //dct1 = new DataColumn("ColorId");
+                        //dtt1.Columns.Add(dct1);
+
+                        //dct1 = new DataColumn("partytype");
+                        //dtt1.Columns.Add(dct1);
+                        //dct1 = new DataColumn("supplierid");
+                        //dtt1.Columns.Add(dct1);
+                        dstd11.Tables.Add(dtt11);
+
+                        foreach (DataRow Dr11 in ds6.Tables[0].Rows)
+                        {
+                            drNew11 = dtt11.NewRow();
+
+                            drNew11["Size"] = Dr11["Size"];
+                            drNew11["SizeId"] = Dr11["SizeId"];
+
+                            drNew11["Rate"] = Dr11["Rate"];
+
+
+                            dstd11.Tables[0].Rows.Add(drNew11);
+                        }
+
+                        GVSizes.DataSource = dstd11;
+                        GVSizes.DataBind();
+                        GVSizes.Visible = true;
+                    }
+                    #endregion
+
+                }
+           
+        }
         }
 
         protected void ddlItems_OnSelectedIndexChanged(object sender, EventArgs e)
@@ -2097,6 +2237,27 @@ namespace Billing.Accountsbootstrap
                         int TRansSamplingProcess = objBs.InsertSamplingProcess(SamplingCostingId, lblpid.Text);
                     }
 
+                    for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
+                    {
+                        HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
+                        Label lblSize = (Label)GVSizes.Rows[vLoop].FindControl("lblSize");
+
+                        TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
+
+                        if (txtQty.Text == "")
+                        {
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Enter Rate the Size for '" + lblSize.Text + "'.')", true);
+                            txtQty.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            int TRansSamplingRate = objBs.InsertSamplingandCostingRate(Convert.ToInt32(SamplingCostingId), Convert.ToInt32(ddlSize.SelectedValue), Convert.ToInt32(hdSize.Value), Convert.ToDouble(txtQty.Text));
+                        }
+
+                    }
+
+
                     Response.Redirect("SamplingandCostingGrid.aspx");
                 }
             }
@@ -2189,8 +2350,28 @@ namespace Billing.Accountsbootstrap
                         int TRansSamplingProcess = objBs.InsertSamplingProcess(Convert.ToInt32(SamplingCostingId), lblpid.Text);
                     }
 
+                    for (int vLoop = 0; vLoop < GVSizes.Rows.Count; vLoop++)
+                    {
+                        HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
+                        Label lblSize = (Label)GVSizes.Rows[vLoop].FindControl("lblSize");
 
-                    Response.Redirect("SamplingandCostingGrid.aspx");
+                        TextBox txtQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtQty");
+
+                        if (txtQty.Text == "")
+                        {
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Enter Rate the Size for '"+lblSize.Text+"'.')", true);
+                            txtQty.Focus();
+                            return;
+                        }
+                        else
+                        {
+                            int TRansSamplingRate = objBs.InsertSamplingandCostingRate(Convert.ToInt32(SamplingCostingId), Convert.ToInt32(ddlSize.SelectedValue), Convert.ToInt32(hdSize.Value), Convert.ToDouble(txtQty.Text));
+                        }
+
+                    }
+
+
+                        Response.Redirect("SamplingandCostingGrid.aspx");
                 }
 
             }

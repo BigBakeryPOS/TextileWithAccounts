@@ -194,7 +194,7 @@
 
                                             <asp:BoundField HeaderText="LedgerName" DataField="LedgerName" />
                                             <asp:BoundField HeaderText="CompanyCode" DataField="CompanyCode" />
-                                            <asp:BoundField HeaderText="Size" DataField="Size" />
+                                            <asp:BoundField HeaderText="Size Range" DataField="Range" />
                                             <asp:BoundField HeaderText="Date" DataField="Date" DataFormatString="{0:dd/MM/yyyy}" />
                                             <asp:BoundField HeaderText="Is Approved" DataField="Smpstatus" />
                                          

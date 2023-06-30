@@ -280,7 +280,7 @@ namespace Billing.Accountsbootstrap
                     }
 
 
-                    DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue),Convert.ToInt32(rdbselect.SelectedValue));
+                    DataSet dsExc = objBs.BuyerOrderSalesExc(Convert.ToInt32(ddlPartyCode.SelectedValue),Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32("1"));
                     if (dsExc.Tables[0].Rows.Count > 0)
                     {
                         chkExcNo.DataSource = dsExc;
@@ -355,10 +355,10 @@ namespace Billing.Accountsbootstrap
                 }
             }
 
-            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids,Convert.ToInt32(rdbselect.SelectedValue));
+            DataSet dsExcStyle = objBs.BuyerOrderSalesStyles(Ids,Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32("1"));
             if (dsExcStyle.Tables[0].Rows.Count > 0)
             {
-                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids, Convert.ToInt32(rdbselect.SelectedValue));
+                DataSet dsExcStyleRate = objBs.BuyerOrderSalesStylesRate(Ids, Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32("1"));
 
                 DataSet dstd = new DataSet();
                 DataTable dtddd = new DataTable();
@@ -447,7 +447,7 @@ namespace Billing.Accountsbootstrap
                 GVItem.DataSource = dtddd;
                 GVItem.DataBind();
 
-                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids,Convert.ToInt32(rdbselect.SelectedValue));
+                DataSet dsExcStyleSize = objBs.BuyerOrderSalesStylesSize(Ids,Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32("1"));
 
                 DataSet dstd1 = new DataSet();
                 DataTable dtddd1 = new DataTable();

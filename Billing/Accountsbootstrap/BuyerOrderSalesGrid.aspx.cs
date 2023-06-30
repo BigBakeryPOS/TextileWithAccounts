@@ -33,7 +33,19 @@ namespace Billing.Accountsbootstrap
 
             if (!IsPostBack)
             {
-                DataSet ds = objBs.GetBuyerOrderSalesInv();
+                DataSet dsCompany = objBs.GetCompanyDetails();
+                if (dsCompany.Tables[0].Rows.Count > 0)
+                {
+                    ddlcompany.DataSource = dsCompany.Tables[0];
+                    ddlcompany.DataTextField = "CompanyName";
+                    ddlcompany.DataValueField = "ComapanyID";
+                    ddlcompany.DataBind();
+                    ddlcompany.Items.Insert(0, "All");
+                }
+                txtfromDate.Text = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                txttodate.Text = DateTime.Now.Date.ToString("dd/MM/yyyy");
+                //DataSet ds = objBs.GetBuyerOrderSalesInv(ddlcompany.SelectedValue,txtfromDate.Text,txttodate.Text );
+                DataSet ds = objBs.GetBuyerOrderSalesInvwithCompany(ddlcompany.SelectedValue,Convert.ToDateTime(txtfromDate.Text), Convert.ToDateTime(txttodate.Text));
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     GVItem.DataSource = ds;
@@ -52,8 +64,22 @@ namespace Billing.Accountsbootstrap
         {
             Response.Redirect("BuyerOrderSales.aspx");
         }
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            DataSet ds = objBs.GetBuyerOrderSalesInvwithCompany(ddlcompany.SelectedValue, Convert.ToDateTime(txtfromDate.Text), Convert.ToDateTime(txttodate.Text));
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                GVItem.DataSource = ds;
+                GVItem.DataBind();
+            }
 
-        protected void GVItem_RowCommand(object sender, GridViewCommandEventArgs e)
+            else
+            {
+                GVItem.DataSource = null;
+                GVItem.DataBind();
+            }
+        }
+            protected void GVItem_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "edit")
             {

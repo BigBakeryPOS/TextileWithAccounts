@@ -116,17 +116,17 @@
                                 <asp:TextBox CssClass="form-control" ID="txtaddress" MaxLength="150" runat="server"></asp:TextBox>
                             </div>
                            
-                          
-
-                        </div>
-                      
-                        <div class="col-lg-3">
                              <div class="form-group">
                                 <label>
                                     Area</label>
                                 <%-- <asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="area" controltovalidate="txtarea" Text="*"  errormessage="Please enter Area" style="color:Red" />--%>
                                 <asp:TextBox CssClass="form-control" ID="txtarea" MaxLength="30" runat="server"></asp:TextBox>
                             </div>
+
+                        </div>
+                      
+                        <div class="col-lg-3">
+                          
                             <div class="form-group">
                                 <label>
                                     Country</label>
@@ -181,12 +181,6 @@
                                 <asp:TextBox CssClass="form-control" ID="txtpincode" MaxLength="6" runat="server"></asp:TextBox>
                             </div>
                            
-
-                               
-
-                        </div>
-                        <!-- /.col-lg-6 (nested) -->
-                        <div class="col-lg-3">
                              <div class="form-group">
                                 <label>
                                     E-mail</label>
@@ -196,6 +190,12 @@
                                 <asp:TextBox CssClass="form-control" ID="txtemail" placeholder="For Ex: test@gmail.com"
                                     runat="server"></asp:TextBox>
                             </div>
+                               
+
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+                        <div class="col-lg-3">
+                            
                              <div class="form-group">
                                 <label>
                                     BankName</label>
@@ -213,6 +213,12 @@
                                     Account Number</label>
                                 <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
                                 <asp:TextBox CssClass="form-control" ID="txtaccountnumber" runat="server"></asp:TextBox>
+                            </div>
+                             <div class="form-group">
+                                <label>
+                                    IFSC Code</label>
+                                <%--<asp:RequiredFieldValidator runat="server" ValidationGroup="val1" id="address" controltovalidate="txtaddress" Text="*"  errormessage="Please enter Address" style="color:Red" />--%>
+                                <asp:TextBox CssClass="form-control" ID="txtIFSCCode"  runat="server"></asp:TextBox>
                             </div>
                              <div class="form-group">
                                 <label>

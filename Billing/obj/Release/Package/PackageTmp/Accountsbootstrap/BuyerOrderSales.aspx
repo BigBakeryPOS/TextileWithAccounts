@@ -107,6 +107,8 @@
     <asp:Label runat="server" ID="lblContactTypeId" ForeColor="White" CssClass="label"
         Visible="false" Text="1"> </asp:Label>
     <form id="Form1" runat="server">
+         <asp:ValidationSummary runat="server" HeaderText="Validation Messages" ValidationGroup="val1"
+        ID="val1" ShowMessageBox="true" ShowSummary="false" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     <div class="row" style="margin-top: -2px">
@@ -128,6 +130,18 @@
 
                                     </asp:RadioButtonList>
                                     </div>
+
+                                 <div class="form-group">
+                                    <label>
+                                       Exc Opening Stock from:</label>
+                                    <asp:DropDownList ID="ddlCompany" runat="server" OnSelectedIndexChanged="ddlCompany_SelectedIndexChanged" AutoPostBack="true" CssClass="chzn-select" Style="height: 30px;
+                                        color: Black" Width="150px">
+                                    </asp:DropDownList>
+                                        <asp:CompareValidator ID="CompareValidator2" runat="server" ValidationGroup="val1"
+                                        Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlCompany"
+                                        ValueToCompare="Select" Operator="NotEqual" Type="String" ErrorMessage="Please Select Stock From."></asp:CompareValidator>
+                             </div>
+
                                  <div class="form-group">
                                     <label>
                                         Inv. No. :</label>
@@ -135,11 +149,10 @@
                                         ValidationGroup="val1" Text="*" ErrorMessage="Please Enter Inv. No." Style="color: Red" />
                                     <asp:TextBox ID="txtInvNo" runat="server" CssClass="form-control center-block" Enabled="false"></asp:TextBox>
                                 </div>
-                              
+                             
                                 </div>
                              <div class="col-lg-2">
-                                <div class="form-group" runat="server" visible="true">
-                                      <div class="form-group">
+                                   <div class="form-group">
                                     <label>
                                         Inv. Date:</label>
                                     <asp:TextBox ID="txtInvDate" runat="server" CssClass="form-control"></asp:TextBox>
@@ -147,6 +160,8 @@
                                         EnabledOnClient="true" Format="dd/MM/yyyy" runat="server" CssClass="cal_Theme1">
                                     </ajaxToolkit:CalendarExtender>
                                 </div>
+                                <div class="form-group" runat="server" visible="true">
+                                     
                                     <label>
                                         Province</label>
                                     <asp:CompareValidator ID="CompareValidator7" runat="server" ValidationGroup="val1"
@@ -159,12 +174,8 @@
                                         <asp:ListItem Text="Outer" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                          
-                           
-                                 </div>
-                             <div class="col-lg-2">
-                                 
-                                <div class="form-group">
+                                  
+                           <div class="form-group">
                                     <label>
                                         Party Code:</label>
                                     <asp:CompareValidator ID="CompareValidator3" runat="server" ValidationGroup="val1"
@@ -174,6 +185,10 @@
                                         Width="100%" AutoPostBack="true" OnSelectedIndexChanged="ddlPartyCode_OnSelectedIndexChanged">
                                     </asp:DropDownList>
                                 </div>
+                           
+                                 </div>
+                             <div class="col-lg-2">
+                                
                                 <div class="form-group">
 
                                     <label>
@@ -185,10 +200,7 @@
                                         Text="*" Style="color: Red" InitialValue="0" ControlToValidate="ddlPayMode"
                                         ValueToCompare="Select Paymode" Operator="NotEqual" Type="String" ErrorMessage="Please Select Pay Code."></asp:CompareValidator>
                                 </div>
-                               
-                            </div>
-                            <div class="col-lg-2"  >
-                                 <div class="form-group">
+                                <div class="form-group">
                                     <label>
                                         GST Type</label>
                                     <asp:DropDownList ID="drpGSTType" AutoPostBack="true" runat="server" CssClass="form-control">
@@ -196,6 +208,12 @@
                                         <asp:ListItem Text="Inclusive" Value="2"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
+                                  <div class="form-group">
+
+                                      </div>
+                            </div>
+                            <div class="col-lg-2"  >
+                                
                                 <div  id="divexec" runat="server" visible="false">
                                 <div class="form-group">
                                     <asp:TextBox ID="txtExcNo" runat="server" Width="100%" AutoComplete="off" placeholder="Find ExcNo"
@@ -262,9 +280,9 @@
                                             <asp:HiddenField ID="hdIssueQty" runat="server" Value='<%#Eval("IssueQty") %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:BoundField DataField="ExcNo" HeaderText="ExcNo" HeaderStyle-Width="12%" />
+                                    <asp:BoundField DataField="ExcNo" HeaderText="ExcNo"  HeaderStyle-Width="12%" />
                                     <asp:BoundField DataField="StyleNo" HeaderText="StyleNo" HeaderStyle-Width="25%" />
-                                    <asp:BoundField DataField="Color" HeaderText="Color" HeaderStyle-Width="25%" />
+                                    <asp:BoundField DataField="Color" HeaderText="Color"  HeaderStyle-Width="25%" />
                                     <asp:BoundField DataField="Range" HeaderText="Range" HeaderStyle-Width="10%" />
                                     <asp:BoundField DataField="HSNCode" HeaderText="HSNCode" HeaderStyle-Width="10%" />
                                     <asp:BoundField DataField="TaxID" HeaderText="TaxID" HeaderStyle-Width="10%" />
@@ -354,6 +372,11 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField HeaderText="Size" DataField="Size" />
+                                <asp:TemplateField HeaderText="Rate">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblRate" runat="server" Text='<%#Eval("Rate") %>'
+></asp:Label>                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:BoundField HeaderText="Qty" DataField="Qty" />
                                 <asp:TemplateField HeaderText="IssueQty" HeaderStyle-Width="50px">
                                     <ItemTemplate>

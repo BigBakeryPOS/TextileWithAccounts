@@ -612,6 +612,8 @@ namespace Billing.Accountsbootstrap
                         dttt1.Columns.Add(dct1);
                         dct1 = new DataColumn("Rate");
                         dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Taxid");
+                        dttt1.Columns.Add(dct1);
                         dstd1.Tables.Add(dttt1);
 
                         DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
@@ -633,6 +635,7 @@ namespace Billing.Accountsbootstrap
                             drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
                             drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
                             drNew1["Rate"] = RowsSizeQty[i]["Rate"].ToString();
+                            drNew1["Taxid"] = RowsSizeQty[i]["Taxid"].ToString();
                             dstd1.Tables[0].Rows.Add(drNew1);
                             dtddd1 = dstd1.Tables[0];
                         }
@@ -704,6 +707,8 @@ namespace Billing.Accountsbootstrap
                         dttt1.Columns.Add(dct1);
                         dct1 = new DataColumn("Rate");
                         dttt1.Columns.Add(dct1);
+                        dct1 = new DataColumn("Taxid");
+                        dttt1.Columns.Add(dct1);
                         dstd1.Tables.Add(dttt1);
 
                         DataTable DTSize = (DataTable)ViewState["CurrentTable2"];
@@ -725,6 +730,7 @@ namespace Billing.Accountsbootstrap
                             drNew1["Size"] = RowsSizeQty[i]["Size"].ToString();
                             drNew1["IssueQty"] = RowsSizeQty[i]["IssueQty"].ToString();
                             drNew1["Rate"] = RowsStyleQty[0]["Rate"].ToString();
+                            drNew1["Taxid"] = RowsSizeQty[0]["Taxid"].ToString();
                             dstd1.Tables[0].Rows.Add(drNew1);
                             dtddd1 = dstd1.Tables[0];
                         }
@@ -1113,6 +1119,8 @@ namespace Billing.Accountsbootstrap
                 dttt1.Columns.Add(dct1);
                 dct1 = new DataColumn("Rate");
                 dttt1.Columns.Add(dct1);
+                dct1 = new DataColumn("Taxid");
+                dttt1.Columns.Add(dct1);
                 dstd1.Tables.Add(dttt1);
 
                 DataTable dt1 = (DataTable)ViewState["CurrentTable2"];
@@ -1129,7 +1137,7 @@ namespace Billing.Accountsbootstrap
                     HiddenField hdRowId = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdRowId");
                     HiddenField hdTransSizeId = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdTransSizeId");
                     HiddenField hdSize = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdSize");
-
+                    HiddenField hdTaxID = (HiddenField)GVSizes.Rows[vLoop].FindControl("hdTaxID");
                     TextBox txtIssueQty = (TextBox)GVSizes.Rows[vLoop].FindControl("txtIssueQty");
                     Label lblRate = (Label)GVSizes.Rows[vLoop].FindControl("lblRate");
                     if (txtIssueQty.Text == "")
@@ -1149,6 +1157,7 @@ namespace Billing.Accountsbootstrap
                     drNew1["IssueQty"] = txtIssueQty.Text;
                    // drNew1["Rate"] = Rate.Text;
                     drNew1["Rate"] = lblRate.Text ;
+                    drNew1["TaxId"] = hdTaxID.Value;
                     dstd1.Tables[0].Rows.Add(drNew1);
                     dtddd1 = dstd1.Tables[0];
 

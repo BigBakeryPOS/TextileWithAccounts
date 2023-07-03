@@ -147,7 +147,7 @@
                                         Inv. No. :</label>
                                     <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator5" ControlToValidate="txtInvNo"
                                         ValidationGroup="val1" Text="*" ErrorMessage="Please Enter Inv. No." Style="color: Red" />
-                                    <asp:TextBox ID="txtInvNo" runat="server" CssClass="form-control center-block" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtInvNo" runat="server" CssClass="form-control center-block" Enabled="true"></asp:TextBox>
                                 </div>
                              
                                 </div>
@@ -216,7 +216,7 @@
                                 
                                 <div  id="divexec" runat="server" visible="false">
                                 <div class="form-group">
-                                    <asp:TextBox ID="txtExcNo" runat="server" Width="100%" AutoComplete="off" placeholder="Find ExcNo"
+                                    <asp:TextBox ID="txtExcNo" runat="server" Width="100%" AutoComplete="off" placeholder="Find StyleNo"
                                         onkeyup="SearchEmployees(this,'#chkExcNo');"></asp:TextBox>
                                     <div style="overflow-y: scroll; height: 100px">
                                         <div class="panel panel-default" style="width: 350px">
@@ -369,6 +369,7 @@
                                         <asp:HiddenField ID="hdTransSizeId" runat="server" Value='<%#Eval("TransSizeId") %>' />
                                         <asp:HiddenField ID="hdRate" runat="server" Value='<%#Eval("Rate") %>' />
                                         <asp:HiddenField ID="hdSize" runat="server" Value='<%#Eval("Size") %>' />
+                                         <asp:HiddenField ID="hdTaxID" runat="server" Value='<%#Eval("TaxID") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField HeaderText="Size" DataField="Size" />

@@ -468,7 +468,7 @@
                                         <asp:TemplateField HeaderText="GST" ItemStyle-HorizontalAlign="Right" ItemStyle-Width="8%">
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPer" runat="server" Text='<%#Eval("GST") %>' Style="text-align: Center;"></asp:Label><br />
-                                                <asp:Label ID="lbltax" runat="server" Text='<%#Eval("taxid","{0:n2}") %>'  Style="text-align: Center;"></asp:Label>
+                                                <asp:Label ID="lbltax" runat="server" Visible="false" Text='<%#Eval("tax","{0:n2}") %>'  Style="text-align: Center;"></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                        

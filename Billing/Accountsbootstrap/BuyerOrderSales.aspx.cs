@@ -268,14 +268,17 @@ namespace Billing.Accountsbootstrap
         {
             DataSet dsInvNo = objBs.BuyerOrderSalesInvwithcompany(YearCode, ddlCompany.SelectedValue);
             string InvoiceNo = dsInvNo.Tables[0].Rows[0]["InvoiceNo"].ToString().PadLeft(4, '0');
+            txtBillNo.Text = InvoiceNo.ToString();
 
             if (ddlCompany.SelectedItem.Text == "NANDHINI FASHIONS")
             {
-                txtInvNo.Text = " N -  " + InvoiceNo + " / " + YearCode;
+                // txtInvNo.Text = " N -  " + InvoiceNo + " / " + YearCode;
+                txtInvNo.Text = " N -  " + txtBillNo.Text + " / " + YearCode;
             }
             if (ddlCompany.SelectedItem.Text == "Nandhini Fab")
             {
-                txtInvNo.Text = " P -  " + InvoiceNo + " / " + YearCode;
+                //txtInvNo.Text = " P -  " + InvoiceNo + " / " + YearCode;
+                txtInvNo.Text = " P -  " + txtBillNo.Text + " / " + YearCode;
             }
             txtInvDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
@@ -1179,6 +1182,28 @@ namespace Billing.Accountsbootstrap
         protected void btnSave_OnClick(object sender, EventArgs e)
         {
             #region Validations
+            if(txtBillNo.Text == "" || txtBillNo.Text == "0")
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Enter BillNo.')", true);
+                txtBillNo.Focus();
+                return;
+            }
+
+            if (txtInvNo.Text == "" || txtInvNo.Text == "0")
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Enter InvoiceNo.')", true);
+                txtInvNo.Focus();
+                return;
+            }
+
+            DataSet dsDetails = objBs.CheckBuyerOrderSalesFullBillNo(txtInvNo.Text);
+            if (dsDetails.Tables[0].Rows.Count > 0)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('FullInvoiceNo Already Exists.')", true);
+                txtInvNo.Focus();
+                return;
+            }
+
             if (ddlPartyCode.SelectedValue == "" || ddlPartyCode.SelectedValue == "0" || ddlPartyCode.SelectedValue == "PartyCode")
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), Guid.NewGuid().ToString(), "alert('Please Select PartyCode.')", true);
@@ -1247,7 +1272,7 @@ namespace Billing.Accountsbootstrap
 
             //
             //
-            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text), Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue), Convert.ToDouble(txtTotCGST.Text), Convert.ToDouble(txtTotSGST.Text), Convert.ToDouble(txtTotIGST.Text), Convert.ToDouble(txtTotBeforeTAX.Text), Convert.ToDouble(txtRoundoff.Text), Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue),ddlCompany.SelectedItem.Text );
+            int TransHistoryId = objBs.InsertBuyerOrderSalesStyles(YearCode, InvDate, Convert.ToInt32(ddlPartyCode.SelectedValue), txtNarration.Text, DTSizes, sTableName, Convert.ToInt32(ddlPayMode.SelectedValue), Id, txtCheque.Text, Convert.ToInt32(ddlPartyCode.SelectedValue), "tblDaybook_" + sTableName, Convert.ToDouble(txtGrandTotal.Text), Convert.ToInt32(ddlProvince.SelectedValue), Convert.ToInt32(drpGSTType.SelectedValue), Convert.ToDouble(txtTotCGST.Text), Convert.ToDouble(txtTotSGST.Text), Convert.ToDouble(txtTotIGST.Text), Convert.ToDouble(txtTotBeforeTAX.Text), Convert.ToDouble(txtRoundoff.Text), Convert.ToInt32(rdbselect.SelectedValue),Convert.ToInt32(ddlCompany.SelectedValue),ddlCompany.SelectedItem.Text,txtBillNo.Text, txtInvNo.Text);
 
 
             Response.Redirect("BuyerOrderSalesGrid.aspx");
@@ -1255,6 +1280,22 @@ namespace Billing.Accountsbootstrap
         protected void btnExit_OnClick(object sender, EventArgs e)
         {
             Response.Redirect("BuyerOrderSalesGrid.aspx");
+        }
+
+        protected void txtBillNo_TextChanged(object sender, EventArgs e)
+        {
+            // txtBillNo.Text = InvoiceNo.ToString();
+            string InvoiceNo = txtBillNo.Text;
+            if (ddlCompany.SelectedItem.Text == "NANDHINI FASHIONS")
+            {
+                // txtInvNo.Text = " N -  " + InvoiceNo + " / " + YearCode;
+                txtInvNo.Text = " N -  " + InvoiceNo.ToString().PadLeft(4, '0') + " / " + YearCode;
+            }
+            if (ddlCompany.SelectedItem.Text == "Nandhini Fab")
+            {
+                //txtInvNo.Text = " P -  " + InvoiceNo + " / " + YearCode;
+                txtInvNo.Text = " P -  " + InvoiceNo.ToString().PadLeft(4, '0') + " / " + YearCode;
+            }
         }
     }
 }
